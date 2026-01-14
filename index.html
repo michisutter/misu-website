@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="misu - Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich. Crestron-zertifiziert.  Kontakt: hello@heymisu.ch" />
+    <meta name="keywords"
+        content="misu, heymisu, hey misu, Crestron, Crestron Programmierung, AV Technik Zürich, Multimedia Zürich, Eventtechnik Schweiz, Audio Video Installation, Konferenztechnik Zürich, Medientechnik, AV Support Zürich" />
+    <meta name="author" content="Michael Sutter" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og: title" content="misu - Partner für multimediale Konzepte und Steuerungen" />
+    <meta property="og:description"
+        content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
+    <meta property="og:type" content="website" />
+    <meta property="og: url" content="https://heymisu.ch" />
+    <meta property="og:site_name" content="misu" />
+    <meta property="og:locale" content="de_CH" />
+    <meta property="og: image" content="https://heymisu.ch/assets/img/og-image.jpg" />
+    <meta property="og:image: width" content="1200" />
+    <meta property="og: image: height" content="630" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="misu - Partner für multimediale Konzepte und Steuerungen" />
+    <meta name="twitter: description"
+        content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
+    <meta name="twitter:image" content="https://heymisu.ch/assets/img/og-image.jpg" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://heymisu.ch" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
+
+    <title>misu | Partner für multimediale Konzepte und Steuerungen</title>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name":  "misu - Michael Sutter",
+        "description": "Partner für multimediale Konzepte und Steuerungen",
+        "url": "https://heymisu.ch",
+        "telephone": "+41795712508",
+        "email": "hello@heymisu.ch",
+        "address": {
+            "@type":  "PostalAddress",
+            "streetAddress": "Idaplatz 8",
+            "addressLocality": "Zürich",
+            "postalCode": "8003",
+            "addressCountry": "CH"
+        }
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Project Data -->
+    <script src="projects.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'misu-purple': '#6B4462',
+                        'misu-mint': '#5FD4A5',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-line {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .animate-line:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .animate-line:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        .animate-line:nth-child(3) {
+            animation-delay: 2.5s;
+        }
+
+        .animate-line:nth-child(4) {
+            animation-delay: 3.5s;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        /* Header hide/show transition */
+        header {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="bg-white font-sans">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#home" class="block">
+                <img src="assets/img/misu_Signatur1.png" alt="misu Logo" class="h-12 md:h-16">
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="lg:hidden text-misu-purple">
+                <span class="material-icons text-3xl">menu</span>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex gap-8">
+                <a href="#kompetenzen"
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Kompetenzen</a>
+                <a href="#referenzen"
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Referenzen</a>
+                <a href="#ueber-mich" class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Über
+                    mich</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <nav id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100">
+            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="#kompetenzen"
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium mobile-menu-link">Kompetenzen</a>
+                <a href="#referenzen"
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium mobile-menu-link">Referenzen</a>
+                <a href="#ueber-mich"
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium mobile-menu-link">Über
+                    mich</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Animation Section -->
+    <section id="home"
+        class="min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-white via-gray-50 to-white">
+        <div class="max-w-4xl w-full text-center space-y-6">
+            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-gray-800 animate-line">
+                Hey – verirrt im AV‑Dschungel?
+            </p>
+            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-gray-800 animate-line">
+                Zu viel Technik - zu wenig Spass?
+            </p>
+            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-misu-purple animate-line">
+                Keine Sorge, wir holen dich da raus.
+            </p>
+            <p class="text-3xl md:text-5xl lg:text-6xl font-bold text-misu-mint animate-line">
+                Mit Technik, die begeistert.
+            </p>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <span class="material-icons text-4xl text-misu-mint">expand_more</span>
+        </div>
+    </section>
+
+    <!-- About Section - TECHNIK, DIE BEWEGT -->
+    <section class="py-20 px-6 bg-white">
+        <div class="container mx-auto max-w-5xl">
+            <!-- Main Title -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-misu-purple mb-12 text-center">
+                TECHNIK, DIE BEWEGT.
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-2xl md:text-3xl lg:text-4xl font-light text-gray-800 mb-16 text-center leading-relaxed">
+                Dein Partner für multimediale Konzepte und Steuerungen,<br>
+                die begeistern und dir das Leben erleichtern.
+            </p>
+
+            <!-- Content Paragraphs -->
+            <div class="space-y-8 text-xl md:text-2xl text-gray-700 leading-relaxed text-center">
+                <p>
+                    Wir sind MISU – als Full-Service-Partner für moderne, flexible und stabile
+                    Multimediatechnik bieten wir Lösungen, die einfach Spaß machen.
+                </p>
+
+                <p>
+                    Von spannenden Konzepten über professionelle Planung bis hin zu
+                    durchdachten Steuerungen übernehmen wir das Ruder und führen dich sicher
+                    durch den AV‑Dschungel.
+                </p>
+
+                <p>
+                    Egal, ob du Unterstützung bei einem grundsätzlichen AV‑Konzept brauchst,
+                    jemanden suchst, der dein Projekt professionell plant, die Qualität der
+                    Umsetzung überwacht oder eine stabile und benutzerfreundliche
+                    Mediensteuerung möchtest – bei uns bist du genau richtig.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kompetenzen Section -->
+    <section id="kompetenzen" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+            <!-- Section Title -->
+            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
+                Kompetenzen
+            </h2>
+
+            <!-- Section Claim -->
+            <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
+                Hey, wir sind auf deiner Seite, vom Konzept bis zur Nutzung
+            </p>
+
+            <!-- Competencies List -->
+            <div class="space-y-16">
+
+                <!-- Konzepte -->
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="aspect-video bg-gradient-to-br from-misu-mint to-misu-purple rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80" 
+                             alt="Konzepte" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Konzepte</h3>
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            Wir erstellen für dich Grundlagenkonzepte sowie erste Kostenschätzungen, damit du perfekt
+                            vorbereitet bist, um mit Integratoren in den Austausch zu gehen.<br><br>
+                            Klar, verständlich und praxisnah – damit deine Idee von Anfang an auf stabilen Füßen steht.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Fachplanung nach SIA -->
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="aspect-video bg-gradient-to-br from-misu-purple to-misu-mint rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" 
+                             alt="Fachplanung nach SIA" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Fachplanung nach SIA</h3>
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen und
+                            umzusetzen.<br><br>
+                            Im direkten Austausch mit allen relevanten Gewerken sorgen wir für einen möglichst
+                            reibungslosen Ablauf.<br><br>
+                            Wir zeichnen Pläne, erstellen Schemata, evaluieren Produkte und finden herstellerunabhängig
+                            die beste Lösung für dich.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Inbetriebnahme -->
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="aspect-video bg-gradient-to-br from-misu-mint to-misu-purple rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" 
+                             alt="Inbetriebnahme" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Inbetriebnahme</h3>
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines Systems
+                            und stellen sicher, dass alles so umgesetzt wird, wie es geplant und gewünscht ist. Auf
+                            Wunsch übernehmen wir die Konfiguration deiner AV Geräte. Gerade im Audiobereich können wir
+                            alle gängigen DSP‑Systeme einrichten und das komplette Systemtuning übernehmen – für ein
+                            sauberes, ausgewogenes und zuverlässiges Ergebnis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Programmierung -->
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="aspect-video bg-gradient-to-br from-misu-purple to-misu-mint rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" 
+                             alt="Programmierung" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Programmierung</h3>
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            Damit am Ende wirklich alles so läuft, wie du es dir vorstellst, braucht es eine präzise und
+                            sauber durchdachte Programmierung der Mediensteuerung und der Benutzeroberflächen.<br><br>
+                            Mit unserer langjährigen Erfahrung aus Eventtechnik, AV‑Technik, Planung und intuitivem
+                            UI‑Design sorgen wir dafür, dass deine Anlage stabil, logisch aufgebaut und für alle leicht
+                            verständlich ist – und im Alltag wirklich Spaß macht.<br><br>
+                            Wir setzen deine Anlage dabei mit dem jeweils passenden Steuerungssystem um, damit immer das
+                            bestmögliche Ergebnis im Vordergrund steht – unabhängig vom Hersteller.<br><br>
+                            Zwar sind wir für verschiedene Systeme zertifiziert, aber eines möchten wir besonders
+                            hervorheben:<br>
+                            Wir sind Crestron Service Provider und Crestron Master Certified Programmer. Für dich
+                            bedeutet das vor allem eines: Ein Partner, der komplexe Crestron‑Projekte souverän,
+                            zuverlässig und zukunftssicher umsetzt.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Qualitätskontrolle -->
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="aspect-video bg-gradient-to-br from-misu-mint to-misu-purple rounded-lg overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" 
+                             alt="Qualitätskontrolle" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Qualitätskontrolle</h3>
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            Du möchtest sicherstellen, dass der Integrator die Arbeiten wirklich nach deinen
+                            Anforderungen ausführt?<br><br>
+                            Gerne übernehmen wir die Qualitätskontrolle und prüfen in allen Projektphasen die
+                            entscheidenden Schritte – damit dein Projekt exakt so umgesetzt wird, wie du es brauchst.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Referenzen Section -->
+    <section id="referenzen" class="py-20 px-6 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <!-- Section Title -->
+            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-16 text-center">
+                Referenzen
+            </h2>
+
+            <!-- Carousel Container -->
+            <div class="relative">
+                <!-- Left Arrow -->
+                <button id="carousel-prev"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 bg-white rounded-full shadow-lg p-3 text-misu-purple hover:bg-misu-mint hover:text-white transition-colors">
+                    <span class="material-icons text-3xl">chevron_left</span>
+                </button>
+
+                <!-- Carousel -->
+                <div class="overflow-hidden">
+                    <div id="carousel" class="flex transition-transform duration-500 ease-out">
+                        <!-- Projects will be inserted here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Right Arrow -->
+                <button id="carousel-next"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 bg-white rounded-full shadow-lg p-3 text-misu-purple hover:bg-misu-mint hover:text-white transition-colors">
+                    <span class="material-icons text-3xl">chevron_right</span>
+                </button>
+            </div>
+
+            <!-- Dots Indicator -->
+            <div id="carousel-dots" class="flex justify-center gap-2 mt-8">
+                <!-- Dots will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <!-- Close Button -->
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
+                <span class="material-icons text-4xl">close</span>
+            </button>
+
+            <!-- Modal Content -->
+            <div id="modal-content">
+                <!-- Content will be inserted by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Über mich Section -->
+    <section id="ueber-mich" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+            <!-- Section Title -->
+            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
+                Über mich
+            </h2>
+
+            <!-- Section Claim -->
+            <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
+                Erfahrung, die man spürt. Projekte, die bleiben.
+            </p>
+
+            <!-- Content -->
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Image -->
+                <div class="order-2 md:order-1">
+                    <div class="aspect-square rounded-lg overflow-hidden shadow-xl">
+                        <img src="assets/img/michael-sutter.PNG" alt="Michael Sutter"
+                            class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="order-1 md:order-2 space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed">
+                    <p class="font-bold text-2xl md:text-3xl text-misu-purple">
+                        Hey, wer steckt denn hinter MISU?
+                    </p>
+
+                    <p>
+                        MISU wurde 2026 von Michael Sutter gegründet.
+                    </p>
+
+                    <p>
+                        Auch wenn MISU als Unternehmen frisch unterwegs ist – die Erfahrung dahinter ist es nicht.
+                    </p>
+
+                    <p>
+                        Ich bin seit rund 20 Jahren in der AV‑Welt zuhause: zuerst als Tontechniker auf Events, später
+                        viele Jahre in einem der renommiertesten Planungsbüros der Schweiz.
+                    </p>
+
+                    <p>
+                        In dieser Zeit habe ich unzählige Räume, Anforderungen und Menschen kennengelernt – und dabei
+                        gelernt, wie man Technik so plant und steuert, dass sie nicht nervt, sondern begeistert.
+                    </p>
+
+                    <p>
+                        Ich habe Projekte begleitet, Lösungen entwickelt, Probleme aus dem Weg geräumt, Systeme
+                        verbessert, wieder angepasst und immer weiter verfeinert. Jede Herausforderung hat mich
+                        weitergebracht – fachlich und menschlich – und mein Verständnis dafür geschärft, was gute
+                        AV‑Technik wirklich ausmacht.
+                    </p>
+
+                    <p class="font-semibold text-misu-purple">
+                        Ich kenne die Branche – und ihre Tücken – aus nächster Nähe.
+                    </p>
+
+                    <p>
+                        Mit MISU bringe ich all diese Erfahrung in ein flexibles, modernes Unternehmen ein – mit klarer
+                        Vision und dem Anspruch, Technik so zu planen und umzusetzen, dass es Spass macht.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Impressum Modal -->
+    <div id="impressum-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <!-- Close Button -->
+            <button id="close-impressum" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
+                <span class="material-icons text-4xl">close</span>
+            </button>
+
+            <!-- Modal Content -->
+            <div class="p-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-8">Impressum</h2>
+
+                <div class="space-y-6 text-gray-700">
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">Kontaktadresse</h3>
+                        <p>misu - Michael Sutter<br>
+                            Idaplatz 8<br>
+                            CH-8003 Zürich<br>
+                            Schweiz</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">Kontakt</h3>
+                        <p>Telefon: +41 79 571 25 08<br>
+                            E-Mail: hello@heymisu.ch<br>
+                            Website: www.heymisu.ch<br>
+                            MwSt-Nummer: CHE-114.698.619 MWST</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">Verantwortlich für den Inhalt</h3>
+                        <p>Michael Sutter<br>
+                            Idaplatz 8<br>
+                            CH-8003 Zürich</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">Haftungsausschluss</h3>
+                        <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit,
+                            Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen
+                            den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der
+                            Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der
+                            Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">Haftung für Links</h3>
+                        <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es
+                            wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung
+                            solcher Webseiten erfolgen auf eigene Gefahr des Nutzers oder der Nutzerin.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">Urheberrechte</h3>
+                        <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf der
+                            Website gehören ausschliesslich der Firma misu oder den speziell genannten Rechtsinhabern.
+                            Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der
+                            Urheberrechtsträger im Voraus einzuholen.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">Webdesign</h3>
+                        <p>© 2026 Webdesign by misu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datenschutz Modal -->
+    <div id="datenschutz-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
+        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <!-- Close Button -->
+            <button id="close-datenschutz" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
+                <span class="material-icons text-4xl">close</span>
+            </button>
+
+            <!-- Modal Content -->
+            <div class="p-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-8">Datenschutzerklärung</h2>
+
+                <div class="space-y-6 text-gray-700">
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">1. Allgemeines</h3>
+                        <p class="mb-3">Diese Datenschutzerklärung informiert Sie über die Bearbeitung von Personendaten
+                            durch misu Michael Sutter (nachfolgend «wir» oder «uns») im Zusammenhang mit der Nutzung
+                            unserer Website www.heymisu.ch sowie unseren weiteren Dienstleistungen.</p>
+                        <p class="font-semibold mb-1">Verantwortliche Stelle für die Datenbearbeitung:</p>
+                        <p>misu - Michael Sutter<br>
+                            Idaplatz 8<br>
+                            CH-8003 Zürich<br>
+                            E-Mail: michael@heymisu.ch</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">2. Erhebung und Bearbeitung von
+                            Personendaten</h3>
+                        <p class="mb-3">Wir erheben und bearbeiten Personendaten, die Sie uns freiwillig zur Verfügung
+                            stellen, insbesondere wenn Sie:</p>
+                        <ul class="list-disc list-inside mb-3 space-y-1">
+                            <li>Unsere Website besuchen</li>
+                            <li>Unser Kontaktformular nutzen</li>
+                            <li>Per E-Mail oder Telefon mit uns in Kontakt treten</li>
+                            <li>Unsere Dienstleistungen in Anspruch nehmen</li>
+                        </ul>
+                        <p>Dabei können folgende Daten erhoben werden: Name, E-Mail-Adresse, Telefonnummer, Adresse,
+                            Nachrichteninhalte sowie technische Daten wie IP-Adresse, Browsertyp und Zugriffszeiten.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">3. Zweck der Datenbearbeitung</h3>
+                        <p class="mb-2">Wir bearbeiten Ihre Personendaten für folgende Zwecke:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Bearbeitung von Anfragen und Kommunikation mit Ihnen</li>
+                            <li>Erbringung unserer Dienstleistungen</li>
+                            <li>Verbesserung unserer Website und Dienstleistungen</li>
+                            <li>Erfüllung gesetzlicher Pflichten</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">4. Weitergabe von Daten</h3>
+                        <p class="mb-3">Wir geben Ihre Personendaten nur weiter, wenn dies für die Erbringung unserer
+                            Dienstleistungen erforderlich ist, Sie eingewilligt haben oder wir gesetzlich dazu
+                            verpflichtet sind. Dabei können folgende Empfänger in Frage kommen:</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>IT-Dienstleister für Hosting und Wartung</li>
+                            <li>E-Mail-Dienstleister für den Versand von Nachrichten (Resend)</li>
+                            <li>Behörden bei gesetzlicher Verpflichtung</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">5. Cookies und Tracking</h3>
+                        <p>Unsere Website verwendet technisch notwendige Cookies, um die Funktionalität der Website zu
+                            gewährleisten. Diese Cookies werden automatisch gelöscht, wenn Sie Ihren Browser schliessen.
+                            Wir verwenden derzeit keine Tracking- oder Analyse-Tools von Drittanbietern.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">6. Datensicherheit</h3>
+                        <p>Wir treffen angemessene technische und organisatorische Sicherheitsmassnahmen, um Ihre
+                            Personendaten vor unbefugtem Zugriff, Verlust oder Missbrauch zu schützen. Der Zugang zu
+                            Ihren Daten ist auf Personen beschränkt, die diese für die Erfüllung ihrer Aufgaben
+                            benötigen.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">7. Aufbewahrungsdauer</h3>
+                        <p>Wir bewahren Ihre Personendaten nur so lange auf, wie dies für die Erfüllung der genannten
+                            Zwecke erforderlich ist oder wie es gesetzliche Aufbewahrungspflichten vorsehen. Danach
+                            werden Ihre Daten gelöscht oder anonymisiert.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">8. Ihre Rechte</h3>
+                        <p class="mb-2">Gemäss dem Schweizer Datenschutzgesetz (DSG) haben Sie folgende Rechte:</p>
+                        <ul class="list-disc list-inside mb-3 space-y-1">
+                            <li>Recht auf Auskunft über Ihre gespeicherten Daten</li>
+                            <li>Recht auf Berichtigung unrichtiger Daten</li>
+                            <li>Recht auf Löschung Ihrer Daten</li>
+                            <li>Recht auf Datenübertragbarkeit</li>
+                            <li>Recht auf Widerspruch gegen die Datenbearbeitung</li>
+                        </ul>
+                        <p>Um Ihre Rechte auszuüben, kontaktieren Sie uns bitte unter: michael@heymisu.ch</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">9. Änderungen dieser Datenschutzerklärung
+                        </h3>
+                        <p>Wir behalten uns vor, diese Datenschutzerklärung jederzeit anzupassen. Die aktuelle Version
+                            ist auf unserer Website verfügbar. Wir empfehlen Ihnen, diese Seite regelmässig zu besuchen.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-misu-purple mb-2">10. Kontakt</h3>
+                        <p class="mb-3">Bei Fragen zum Datenschutz können Sie sich jederzeit an uns wenden:</p>
+                        <p>misu - Michael Sutter<br>
+                            Idaplatz 8<br>
+                            CH-8003 Zürich<br>
+                            E-Mail: michael@heymisu.ch<br>
+                            Telefon: +41 79 571 25 08</p>
+                        <p class="mt-3 text-sm text-gray-500">Stand: Januar 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+
+                <!-- Company Info -->
+                <div>
+                    <a href="#home" class="block">
+                        <img src="assets/img/misu_Signatur2.png" alt="misu" class="h-16 md:h-20 mb-4">
+                    </a>
+                    <p class="text-gray-300 mb-4">
+                        Partner für multimediale Konzepte und Steuerungen.
+                    </p>
+                    <p class="text-gray-400 text-sm">
+                        Michael Sutter<br>
+                        Idaplatz 8<br>
+                        Zürich<br>
+                        Schweiz
+                    </p>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Kontakt</h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>
+                            <a href="mailto:hello@heymisu.ch"
+                                class="hover:text-misu-mint transition-colors flex items-center gap-2">
+                                <span class="material-icons text-xl">email</span>
+                                hello@heymisu.ch
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:+41795712508"
+                                class="hover:text-misu-mint transition-colors flex items-center gap-2">
+                                <span class="material-icons text-xl">phone</span>
+                                +41 79 571 25 08
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/heymisu.ch" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-misu-mint transition-colors flex items-center gap-2">
+                                <span class="material-icons text-xl">photo_camera</span>
+                                @heymisu.ch
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li>
+                            <a href="#kompetenzen" class="hover:text-misu-mint transition-colors">Kompetenzen</a>
+                        </li>
+                        <li>
+                            <a href="#referenzen" class="hover:text-misu-mint transition-colors">Referenzen</a>
+                        </li>
+                        <li>
+                            <a href="#ueber-mich" class="hover:text-misu-mint transition-colors">Über mich</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-700 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
+                    <p>&copy; 2026 misu - Michael Sutter. Alle Rechte vorbehalten.</p>
+                    <div class="flex gap-6">
+                        <a href="#impressum" class="hover:text-misu-mint transition-colors">Impressum</a>
+                        <a href="#datenschutz" class="hover:text-misu-mint transition-colors">Datenschutz</a>
+                        <a href="https://heymisu.ch" class="hover:text-misu-mint transition-colors">heymisu.ch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="main.js"></script>
+
+</body>
+
+</html>
