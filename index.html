@@ -60,14 +60,47 @@
     }
     </script>
 
+    <style>
+        /* Ultralight for light weights */
+        @font-face {
+            font-family: 'PPTelegraf';
+            src: url('assets/fonts/telegraf/PPTelegraf-Ultralight.woff2') format('woff2');
+            font-weight: 200 300;
+            /* Covers font-light (300) */
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Regular for normal/medium weights */
+        @font-face {
+            font-family: 'PPTelegraf';
+            src: url('assets/fonts/telegraf/PPTelegraf-Regular.woff2') format('woff2');
+            font-weight: 400 600;
+            /* Covers font-normal (400), font-medium (500), font-semibold (600) */
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Ultrabold for bold weights */
+        @font-face {
+            font-family: 'PPTelegraf';
+            src: url('assets/fonts/telegraf/PPTelegraf-Ultrabold.woff2') format('woff2');
+            font-weight: 700 900;
+            /* Covers font-bold (700) and heavier */
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts -->
+    <!--
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+    -->
     <!-- Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -83,7 +116,7 @@
                         'misu-mint': '#5FD4A5',
                     },
                     fontFamily: {
-                        'sans': ['Inter', 'sans-serif'],
+                        'sans': ['PPTelegraf', 'sans-serif'],
                     }
                 }
             }
@@ -125,15 +158,167 @@
             animation-delay: 3.5s;
         }
 
+        /* Stacked scroll-reveal layout (Vitamin2-inspired) */
+        #projects-stack {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 150vh;
+            /* Extra height for scroll */
+        }
+
+        .project-stack-card {
+            position: sticky;
+            top: 20vh;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            aspect-ratio: 1 / 1;
+            /* Square */
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .project-stack-card.visible {
+            opacity: 1;
+        }
+
+        /* Varying sizes for creative look */
+        .project-stack-card:nth-child(1) {
+            max-width: 500px;
+        }
+
+        .project-stack-card:nth-child(2) {
+            max-width: 640px;
+        }
+
+        .project-stack-card:nth-child(3) {
+            max-width: 560px;
+        }
+
+        .project-stack-card:nth-child(4) {
+            max-width: 620px;
+        }
+
+        .project-stack-card:nth-child(5) {
+            max-width: 520px;
+        }
+
+        .project-stack-card:nth-child(6) {
+            max-width: 600px;
+        }
+
+        .project-stack-card:nth-child(7) {
+            max-width: 580px;
+        }
+
+        .project-stack-card:nth-child(8) {
+            max-width: 630px;
+        }
+
+        .project-stack-card:nth-child(9) {
+            max-width: 540px;
+        }
+
+        .project-stack-card:nth-child(10) {
+            max-width: 610px;
+        }
+
+        .project-stack-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 0;
+            /* Sharp edges */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            /* Rotation will be controlled by JavaScript based on scroll */
+        }
+
+        .project-stack-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-stack-card:hover .project-stack-inner {
+            transform: rotate(0deg) scale(1.05) !important;
+        }
+
+        .project-stack-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-stack-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            pointer-events: none;
+        }
+
+        .project-stack-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* New Kompetenzen scroll-reveal animations */
+        .kompetenz-item {
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .kompetenz-item.visible {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        .project-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(107, 68, 98, 0.9), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+        }
+
+        .project-grid-card:hover .project-grid-overlay {
+            opacity: 1;
+        }
+
+        .project-grid-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .project-grid-card:hover .project-grid-title {
+            transform: translateY(0);
+        }
+
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px;
+            scroll-padding-top: 0px;
         }
 
         /* Header hide/show transition */
         header {
             transition: transform 0.3s ease-in-out;
+        }
+
+        /* TEMPORARY: Test all-white background */
+        section {
+            background: white !important;
         }
     </style>
 </head>
@@ -158,7 +343,7 @@
                 <a href="#kompetenzen"
                     class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Kompetenzen</a>
                 <a href="#referenzen"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Referenzen</a>
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Arbeiten</a>
                 <a href="#ueber-mich" class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Über
                     mich</a>
             </nav>
@@ -166,13 +351,13 @@
 
         <!-- Mobile Menu -->
         <nav id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100">
-            <div class="container mx-auto px-6 py-4 flex flex-col gap-4">
+            <div class="container mx-auto px-6 py-6 flex flex-col gap-6 items-end">
                 <a href="#kompetenzen"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium mobile-menu-link">Kompetenzen</a>
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-semibold text-xl mobile-menu-link">Kompetenzen</a>
                 <a href="#referenzen"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium mobile-menu-link">Referenzen</a>
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-semibold text-xl mobile-menu-link">Arbeiten</a>
                 <a href="#ueber-mich"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium mobile-menu-link">Über
+                    class="text-gray-700 hover:text-misu-mint transition-colors font-semibold text-xl mobile-menu-link">Über
                     mich</a>
             </div>
         </nav>
@@ -207,7 +392,8 @@
         <div class="container mx-auto max-w-5xl">
             <!-- Main Title -->
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-misu-purple mb-12 text-center">
-                TECHNIK, DIE BEWEGT.
+                <!-- TECHNIK, DIE BEWEGT.-->
+                TECHNIK MIT SPASSFAKTOR!
             </h1>
 
             <!-- Subtitle -->
@@ -240,7 +426,7 @@
     </section>
 
     <!-- Kompetenzen Section -->
-    <section id="kompetenzen" class="py-20 px-6 bg-gray-50">
+    <section id="kompetenzen" class="py-20 px-6 bg-white relative overflow-hidden">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
             <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
@@ -248,110 +434,120 @@
             </h2>
 
             <!-- Section Claim -->
-            <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
+            <p class="text-2xl md:text-3xl font-light text-gray-700 mb-20 text-center">
                 Hey, wir sind auf deiner Seite, vom Konzept bis zur Nutzung
             </p>
 
-            <!-- Competencies List -->
-            <div class="space-y-16">
+            <!-- Center line decoration -->
+            <div class="absolute left-1/2 top-40 bottom-0 w-px bg-gradient-to-b from-misu-mint via-misu-purple to-misu-mint opacity-20 hidden md:block"></div>
 
-                <!-- Konzepte -->
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div class="aspect-video bg-gradient-to-br from-misu-mint to-misu-purple rounded-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80" 
-                             alt="Konzepte" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Konzepte</h3>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            Wir erstellen für dich Grundlagenkonzepte sowie erste Kostenschätzungen, damit du perfekt
-                            vorbereitet bist, um mit Integratoren in den Austausch zu gehen.<br><br>
-                            Klar, verständlich und praxisnah – damit deine Idee von Anfang an auf stabilen Füßen steht.
-                        </p>
+            <!-- Competencies List (Alternating) -->
+            <div class="space-y-32 relative">
+
+                <!-- Konzepte (LEFT) -->
+                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="text-right space-y-4">
+                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Konzepte</h3>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Wir erstellen für dich Grundlagenkonzepte sowie erste Kostenschätzungen, damit du perfekt
+                                vorbereitet bist, um mit Integratoren in den Austausch zu gehen.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Klar, verständlich und praxisnah – damit deine Idee von Anfang an auf stabilen Füßen steht.
+                            </p>
+                        </div>
+                        <div class="hidden md:block"></div>
                     </div>
                 </div>
 
-                <!-- Fachplanung nach SIA -->
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div class="aspect-video bg-gradient-to-br from-misu-purple to-misu-mint rounded-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" 
-                             alt="Fachplanung nach SIA" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Fachplanung nach SIA</h3>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen und
-                            umzusetzen.<br><br>
-                            Im direkten Austausch mit allen relevanten Gewerken sorgen wir für einen möglichst
-                            reibungslosen Ablauf.<br><br>
-                            Wir zeichnen Pläne, erstellen Schemata, evaluieren Produkte und finden herstellerunabhängig
-                            die beste Lösung für dich.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Inbetriebnahme -->
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div class="aspect-video bg-gradient-to-br from-misu-mint to-misu-purple rounded-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" 
-                             alt="Inbetriebnahme" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Inbetriebnahme</h3>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines Systems
-                            und stellen sicher, dass alles so umgesetzt wird, wie es geplant und gewünscht ist. Auf
-                            Wunsch übernehmen wir die Konfiguration deiner AV Geräte. Gerade im Audiobereich können wir
-                            alle gängigen DSP‑Systeme einrichten und das komplette Systemtuning übernehmen – für ein
-                            sauberes, ausgewogenes und zuverlässiges Ergebnis.
-                        </p>
+                <!-- Fachplanung (RIGHT) -->
+                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="right">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="hidden md:block"></div>
+                        <div class="space-y-4">
+                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Fachplanung</h3>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen und
+                                umzusetzen.
+                                Im direkten Austausch mit allen relevanten Gewerken sorgen wir für einen möglichst
+                                reibungslosen Ablauf.
+                                Wir zeichnen Pläne, erstellen Schemata, evaluieren Produkte und finden herstellerunabhängig
+                                die beste Lösung für dich.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                So stellst du sicher, dass dein Projekt von Anfang an auf solidem Fundament steht.
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Programmierung -->
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div class="aspect-video bg-gradient-to-br from-misu-purple to-misu-mint rounded-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80" 
-                             alt="Programmierung" 
-                             class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Programmierung</h3>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            Damit am Ende wirklich alles so läuft, wie du es dir vorstellst, braucht es eine präzise und
-                            sauber durchdachte Programmierung der Mediensteuerung und der Benutzeroberflächen.<br><br>
-                            Mit unserer langjährigen Erfahrung aus Eventtechnik, AV‑Technik, Planung und intuitivem
-                            UI‑Design sorgen wir dafür, dass deine Anlage stabil, logisch aufgebaut und für alle leicht
-                            verständlich ist – und im Alltag wirklich Spaß macht.<br><br>
-                            Wir setzen deine Anlage dabei mit dem jeweils passenden Steuerungssystem um, damit immer das
-                            bestmögliche Ergebnis im Vordergrund steht – unabhängig vom Hersteller.<br><br>
-                            Zwar sind wir für verschiedene Systeme zertifiziert, aber eines möchten wir besonders
-                            hervorheben:<br>
-                            Wir sind Crestron Service Provider und Crestron Master Certified Programmer. Für dich
-                            bedeutet das vor allem eines: Ein Partner, der komplexe Crestron‑Projekte souverän,
-                            zuverlässig und zukunftssicher umsetzt.
-                        </p>
+                <!-- Inbetriebnahme (LEFT) -->
+                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="text-right space-y-4">
+                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Inbetriebnahme</h3>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines Systems
+                                und stellen sicher, dass alles so umgesetzt wird, wie es geplant und gewünscht ist. Auf
+                                Wunsch übernehmen wir die Konfiguration deiner AV Geräte. Gerade im Audiobereich können wir
+                                alle gängigen DSP‑Systeme einrichten und das komplette Systemtuning übernehmen.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Für ein sauberes, ausgewogenes und zuverlässiges Ergebnis.
+                            </p>
+                        </div>
+                        <div class="hidden md:block"></div>
                     </div>
                 </div>
 
-                <!-- Qualitätskontrolle -->
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div class="aspect-video bg-gradient-to-br from-misu-mint to-misu-purple rounded-lg overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" 
-                             alt="Qualitätskontrolle" 
-                             class="w-full h-full object-cover">
+                <!-- Programmierung (RIGHT) -->
+                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="right">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="hidden md:block"></div>
+                        <div class="space-y-4">
+                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Programmierung</h3>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Damit am Ende wirklich alles so läuft, wie du es dir vorstellst, braucht es eine präzise und
+                                sauber durchdachte Programmierung der Mediensteuerung und der Benutzeroberflächen.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Mit unserer langjährigen Erfahrung aus Eventtechnik, AV‑Technik, Planung und intuitivem
+                                UI‑Design sorgen wir dafür, dass deine Anlage stabil, logisch aufgebaut und für alle leicht
+                                verständlich ist – und im Alltag wirklich Spaß macht.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Wir setzen deine Anlage dabei mit dem jeweils passenden Steuerungssystem um, damit immer das
+                                bestmögliche Ergebnis im Vordergrund steht – unabhängig vom Hersteller.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Zwar sind wir für verschiedene Systeme zertifiziert, aber eines möchten wir besonders
+                                hervorheben:
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Wir sind Crestron Service Provider und Crestron Master Certified Programmer. Für dich
+                                bedeutet das vor allem eines: Ein Partner, der komplexe Crestron‑Projekte souverän,
+                                zuverlässig und zukunftssicher umsetzt.
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Qualitätskontrolle</h3>
-                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                            Du möchtest sicherstellen, dass der Integrator die Arbeiten wirklich nach deinen
-                            Anforderungen ausführt?<br><br>
-                            Gerne übernehmen wir die Qualitätskontrolle und prüfen in allen Projektphasen die
-                            entscheidenden Schritte – damit dein Projekt exakt so umgesetzt wird, wie du es brauchst.
-                        </p>
+                </div>
+
+                <!-- Qualitätskontrolle (LEFT) -->
+                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="text-right space-y-4">
+                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Qualitätskontrolle</h3>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Du möchtest sicherstellen, dass der Integrator die Arbeiten wirklich nach deinen
+                                Anforderungen ausführt?
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Gerne übernehmen wir die Qualitätskontrolle und prüfen in allen Projektphasen die
+                                entscheidenden Schritte – damit dein Projekt exakt so umgesetzt wird, wie du es brauchst.
+                            </p>
+                        </div>
+                        <div class="hidden md:block"></div>
                     </div>
                 </div>
 
@@ -359,13 +555,35 @@
         </div>
     </section>
 
-    <!-- Referenzen Section -->
-    <section id="referenzen" class="py-20 px-6 bg-white">
+    <!-- Referenzen Stacked Section -->
+    <section id="referenzen" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto max-w-7xl">
+            <!-- Section Title -->
+            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
+                Arbeiten
+            </h2>
+
+            <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
+                Projekte, die bewegen - in den letzten 10 Jahren bei ehemaligen Arbeitgebern realisiert. Seit 2026 unter eigenen Namen.
+            </p>
+
+            <!-- Projects Stack (scroll-reveal) -->
+            <div id="projects-stack">
+                <!-- Projects will be stacked here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Referenzen Section (OLD CAROUSEL VERSION) -->
+    <section id="referenzen-old" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
-            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-16 text-center">
-                Referenzen
-            </h2>
+<!--             <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-16 text-center">
+                und viele mehr....
+            </h2> -->
+              <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
+                und viele mehr....
+            </p>
 
             <!-- Carousel Container -->
             <div class="relative">
@@ -398,7 +616,7 @@
 
     <!-- Project Modal -->
     <div id="project-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
-        <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+        <div class="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
             <!-- Close Button -->
             <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
                 <span class="material-icons text-4xl">close</span>
@@ -412,7 +630,7 @@
     </div>
 
     <!-- Über mich Section -->
-    <section id="ueber-mich" class="py-20 px-6 bg-gray-50">
+    <section id="ueber-mich" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
             <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
@@ -425,17 +643,13 @@
             </p>
 
             <!-- Content -->
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Image -->
-                <div class="order-2 md:order-1">
-                    <div class="aspect-square rounded-lg overflow-hidden shadow-xl">
-                        <img src="assets/img/michael-sutter.PNG" alt="Michael Sutter"
-                            class="w-full h-full object-cover">
-                    </div>
-                </div>
+            <div class="max-w-5xl mx-auto">
+                <!-- Image floats on the left on desktop -->
+                <img src="assets/img/michael-sutter.PNG" alt="Michael Sutter"
+                    class="w-full md:w-[400px] md:float-left md:mr-8 mb-8 aspect-square object-cover shadow-xl">
 
                 <!-- Text Content -->
-                <div class="order-1 md:order-2 space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed">
+                <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
                     <p class="font-bold text-2xl md:text-3xl text-misu-purple">
                         Hey, wer steckt denn hinter MISU?
                     </p>
@@ -489,7 +703,7 @@
             <div class="p-8">
                 <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-8">Impressum</h2>
 
-                <div class="space-y-6 text-gray-700">
+                <div class="space-y-4 text-gray-700">
                     <div>
                         <h3 class="text-xl font-bold text-misu-purple mb-2">Kontaktadresse</h3>
                         <p>misu - Michael Sutter<br>
@@ -558,7 +772,7 @@
             <div class="p-8">
                 <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-8">Datenschutzerklärung</h2>
 
-                <div class="space-y-6 text-gray-700">
+                <div class="space-y-4 text-gray-700">
                     <div>
                         <h3 class="text-xl font-bold text-misu-purple mb-2">1. Allgemeines</h3>
                         <p class="mb-3">Diese Datenschutzerklärung informiert Sie über die Bearbeitung von Personendaten

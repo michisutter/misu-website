@@ -18,6 +18,23 @@ mobileMenuLinks.forEach(link => {
 let lastScrollTop = 0;
 const header = document.querySelector('header');
 let scrollTimeout;
+let navClickActive = false; // Flag to prevent scroll listener from showing header after nav click
+
+// Auto-hide header when clicking navigation links (both desktop and mobile)
+const allNavLinks = document.querySelectorAll('a[href^="#"]:not([href="#impressum"]):not([href="#datenschutz"]):not([href="#agb"]):not([href="#home"])');
+allNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navClickActive = true;
+        // Hide header after scroll animation starts
+        setTimeout(() => {
+            header.style.transform = 'translateY(-100%)';
+        }, 300);
+        // Re-enable scroll listener after smooth scroll completes
+        setTimeout(() => {
+            navClickActive = false;
+        }, 1500);
+    });
+});
 
 window.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
@@ -28,6 +45,11 @@ window.addEventListener('scroll', () => {
         // Don't hide on hero section
         if (scrollTop < 100) {
             header.style.transform = 'translateY(0)';
+            return;
+        }
+
+        // Don't show header if navigation click is still active
+        if (navClickActive) {
             return;
         }
 
@@ -53,24 +75,53 @@ const prevBtn = document.getElementById('carousel-prev');
 const nextBtn = document.getElementById('carousel-next');
 const dotsContainer = document.getElementById('carousel-dots');
 
+// Load projects into carousel - ONLY PROJECTS 6-10
+const carouselProjects = projects.slice(5); // Get projects from index 5 onwards
+
 let currentPage = 0;
-const itemsPerPage = 3;
-const totalPages = Math.ceil(projects.length / itemsPerPage);
+let itemsPerPage = 3;
+let totalPages = Math.ceil(carouselProjects.length / itemsPerPage);
+
+// Function to get current items per page based on screen size
+function getItemsPerPage() {
+    if (window.innerWidth < 768) return 1;      // Mobile
+    if (window.innerWidth < 1024) return 2;     // Tablet
+    return 3;                                    // Desktop
+}
+
+// Update carousel configuration on resize
+function updateCarouselConfig() {
+    itemsPerPage = getItemsPerPage();
+    totalPages = Math.ceil(carouselProjects.length / itemsPerPage);
+    
+    // Adjust current page if it's now out of bounds
+    if (currentPage >= totalPages) {
+        currentPage = totalPages - 1;
+    }
+    
+    // Recreate dots
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'w-3 h-3 rounded-full transition-colors';
+        dot.addEventListener('click', () => goToPage(i));
+        dotsContainer.appendChild(dot);
+    }
+    
+    updateCarousel();
+}
 
 // Load projects into carousel
-projects.forEach(project => {
+carouselProjects.forEach(project => {
     const projectCard = document.createElement('div');
     projectCard.className = 'w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3';
     projectCard.innerHTML = `
         <div class="cursor-pointer group">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                <div class="aspect-video overflow-hidden">
-                    <img src="${project.image}" alt="${project.title}" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-misu-purple mb-2">${project.title}</h3>
-                    <p class="text-gray-600 text-sm line-clamp-2">${project.description}</p>
+            <div class="relative aspect-square overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+                <img src="${project.image}" alt="${project.title}" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+                    <h3 class="text-xl md:text-2xl font-bold text-white">${project.title}</h3>
                 </div>
             </div>
         </div>
@@ -80,13 +131,17 @@ projects.forEach(project => {
     carousel.appendChild(projectCard);
 });
 
-// Create dots
-for (let i = 0; i < totalPages; i++) {
-    const dot = document.createElement('button');
-    dot.className = 'w-3 h-3 rounded-full transition-colors';
-    dot.addEventListener('click', () => goToPage(i));
-    dotsContainer.appendChild(dot);
-}
+// Initialize carousel
+updateCarouselConfig();
+
+// Listen for window resize to adjust carousel
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        updateCarouselConfig();
+    }, 200);
+});
 
 // Update carousel position
 function updateCarousel() {
@@ -141,11 +196,23 @@ function openModal(project) {
             <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">${project.title}</h2>
             <p class="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">${project.description}</p>
             <div class="flex flex-wrap gap-3">
-                ${project.tags.map(tag => `
-                    <span class="px-4 py-2 bg-misu-mint/20 text-misu-purple rounded-full text-sm font-medium">
-                        ${tag}
-                    </span>
-                `).join('')}
+                ${project.tags.map(tag => {
+                    // Check if tag is an object with text and link
+                    if (typeof tag === 'object' && tag.text && tag.link) {
+                        return `
+                            <a href="${tag.link}" target="_blank" class="px-4 py-2 bg-misu-mint/20 text-misu-purple text-sm font-medium hover:bg-misu-mint/40 transition-colors">
+                                ${tag.text}
+                            </a>
+                        `;
+                    } else {
+                        // Plain text tag
+                        return `
+                            <span class="px-4 py-2 bg-misu-mint/20 text-misu-purple text-sm font-medium">
+                                ${tag}
+                            </span>
+                        `;
+                    }
+                }).join('')}
             </div>
         </div>
     `;
@@ -216,3 +283,91 @@ datenschutzModal.addEventListener('click', (e) => {
         document.body.style.overflow = 'auto';
     }
 });
+
+
+// ============================================
+// STACKED SCROLL-REVEAL REFERENCES
+// ============================================
+
+const projectsStack = document.getElementById('projects-stack');
+
+if (projectsStack) {
+    // Create stacked cards - ONLY FIRST 5 PROJECTS
+    const stackProjects = projects.slice(0, 5);
+    stackProjects.forEach((project, index) => {
+        const stackCard = document.createElement('div');
+        stackCard.className = 'project-stack-card';
+        stackCard.dataset.index = index; // Store index for rotation calculation
+        stackCard.innerHTML = `
+            <div class="project-stack-inner">
+                <img src="${project.image}" alt="${project.title}">
+                <div class="project-stack-overlay">
+                    <h3 class="project-stack-title">${project.title}</h3>
+                </div>
+            </div>
+        `;
+        
+        // Click to open modal
+        stackCard.addEventListener('click', () => openModal(project));
+        projectsStack.appendChild(stackCard);
+    });
+
+    // Scroll-based rotation and reveal
+    const stackCards = projectsStack.querySelectorAll('.project-stack-card');
+    
+    function updateStackOnScroll() {
+        stackCards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const cardTop = cardRect.top;
+            
+            // Calculate progress (0 = entering viewport, 1 = fully visible)
+            const scrollProgress = Math.max(0, Math.min(1, (windowHeight - cardTop) / windowHeight));
+            
+            // Determine target angle (odd = -12deg, even = +12deg)
+            const isOdd = index % 2 === 0;
+            const targetAngle = isOdd ? -12 : 12;
+            const startAngle = -targetAngle; // Start from opposite
+            
+            // Calculate current angle based on scroll progress
+            const currentAngle = startAngle + (targetAngle - startAngle) * scrollProgress;
+            
+            // Apply transforms
+            const inner = card.querySelector('.project-stack-inner');
+            inner.style.transform = `rotate(${currentAngle}deg)`;
+            
+            // Fade in/out based on visibility
+            if (scrollProgress > 0.2) {
+                card.classList.add('visible');
+            } else {
+                card.classList.remove('visible');
+            }
+        });
+    }
+    
+    // Run on scroll and initial load
+    window.addEventListener('scroll', updateStackOnScroll);
+    updateStackOnScroll();
+}
+
+// Scroll-reveal animation for new Kompetenzen section
+const kompetenzItems = document.querySelectorAll('.kompetenz-item');
+
+if (kompetenzItems.length > 0) {
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const kompetenzObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    kompetenzItems.forEach(item => {
+        kompetenzObserver.observe(item);
+    });
+}
