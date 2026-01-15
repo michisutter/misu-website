@@ -185,6 +185,36 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
+// Touch swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+carousel.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+    const swipeThreshold = 50; // minimum distance for swipe
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0 && currentPage < totalPages - 1) {
+            // Swiped left - go to next
+            currentPage++;
+            updateCarousel();
+        } else if (diff < 0 && currentPage > 0) {
+            // Swiped right - go to previous
+            currentPage--;
+            updateCarousel();
+        }
+    }
+}
+
 // Initialize
 updateCarousel();
 
