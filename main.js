@@ -118,7 +118,7 @@ carouselProjects.forEach(project => {
     projectCard.innerHTML = `
         <div class="cursor-pointer group">
             <div class="relative aspect-square overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                <img src="${project.image}" alt="${project.title}" 
+                <img src="${project.image}" alt="${project.title}" loading="lazy"
                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
                     <h3 class="text-xl md:text-2xl font-bold text-white">${project.title}</h3>
@@ -300,7 +300,7 @@ if (projectsStack) {
         stackCard.dataset.index = index; // Store index for rotation calculation
         stackCard.innerHTML = `
             <div class="project-stack-inner">
-                <img src="${project.image}" alt="${project.title}">
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
                 <div class="project-stack-overlay">
                     <h3 class="project-stack-title">${project.title}</h3>
                 </div>
