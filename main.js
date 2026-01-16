@@ -1,70 +1,87 @@
-// Mobile menu toggle
+// Custom cursor (only on non-touch devices)
+const customCursor = document.getElementById('custom-cursor');
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+if (!isTouchDevice) {
+    document.addEventListener('mousemove', (e) => {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
+        
+        // Check if cursor is over clickable element
+        const elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
+        if (elementUnderCursor) {
+            const clickable = elementUnderCursor.closest('a, button, .project-card, .project-stack-card, .kompetenz-toggle, [onclick], #crestron-badge, #loudspeaker-badge, #scroll-circle, .carousel-item, .cursor-pointer, #prev-btn, #next-btn');
+            if (clickable) {
+                customCursor.classList.add('cursor-hover');
+            } else {
+                customCursor.classList.remove('cursor-hover');
+            }
+        }
+    });
+}
+
+// Fullscreen menu toggle
 const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+const menuClose = document.getElementById('menu-close');
+const fullscreenMenu = document.getElementById('fullscreen-menu');
+const menuLinks = document.querySelectorAll('.menu-link');
 
 menuToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
+    openMenu();
 });
 
-// Close mobile menu when clicking a link
-mobileMenuLinks.forEach(link => {
+menuClose.addEventListener('click', () => {
+    closeMenu();
+});
+
+function openMenu() {
+    fullscreenMenu.classList.add('menu-open');
+}
+
+function closeMenu() {
+    fullscreenMenu.classList.remove('menu-open');
+    fullscreenMenu.classList.add('menu-closing');
+    
+    // Remove menu-closing class after animation completes
+    setTimeout(() => {
+        fullscreenMenu.classList.remove('menu-closing');
+    }, 400);
+}
+
+// Close menu when clicking a link
+menuLinks.forEach(link => {
     link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
+        closeMenu();
     });
 });
 
-// Hide/Show header on scroll
-let lastScrollTop = 0;
-const header = document.querySelector('header');
-let scrollTimeout;
-let navClickActive = false; // Flag to prevent scroll listener from showing header after nav click
-
-// Auto-hide header when clicking navigation links (both desktop and mobile)
-const allNavLinks = document.querySelectorAll('a[href^="#"]:not([href="#impressum"]):not([href="#datenschutz"]):not([href="#agb"]):not([href="#home"])');
-allNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navClickActive = true;
-        // Hide header after scroll animation starts
-        setTimeout(() => {
-            header.style.transform = 'translateY(-100%)';
-        }, 300);
-        // Re-enable scroll listener after smooth scroll completes
-        setTimeout(() => {
-            navClickActive = false;
-        }, 1500);
+// Rotating circle scroll to footer
+const scrollCircle = document.getElementById('scroll-circle');
+if (scrollCircle) {
+    scrollCircle.addEventListener('click', () => {
+        const footer = document.querySelector('footer');
+        if (footer) {
+            footer.scrollIntoView({ behavior: 'smooth' });
+        }
     });
-});
 
-window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-
-    scrollTimeout = setTimeout(() => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        // Don't hide on hero section
-        if (scrollTop < 100) {
-            header.style.transform = 'translateY(0)';
-            return;
-        }
-
-        // Don't show header if navigation click is still active
-        if (navClickActive) {
-            return;
-        }
-
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            // Scrolling up
-            header.style.transform = 'translateY(0)';
-        }
-
-        lastScrollTop = scrollTop;
-    }, 10);
-});
-
+    // Move circle left when reaching footer
+    const footer = document.querySelector('footer');
+    if (footer) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    scrollCircle.classList.add('at-footer');
+                } else {
+                    scrollCircle.classList.remove('at-footer');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        observer.observe(footer);
+    }
+}
 
 // Referenzen - Carousel with navigation
 const carousel = document.getElementById('carousel');
@@ -401,3 +418,145 @@ if (kompetenzItems.length > 0) {
         kompetenzObserver.observe(item);
     });
 }
+
+// Crestron Badge - Position in Programmierung section
+const crestronBadge = document.getElementById('crestron-badge');
+const crestronPopup = document.getElementById('crestron-popup');
+const closeCrestronPopup = document.getElementById('close-crestron-popup');
+let isPopupOpen = false;
+
+// Find the Programmierung wrapper and move badge and popup into it
+const programmierungWrapper = document.querySelector('.programmierung-wrapper');
+if (programmierungWrapper && crestronBadge) {
+    // Insert badge at the beginning of the wrapper (before the h3)
+    programmierungWrapper.insertBefore(crestronBadge, programmierungWrapper.firstChild);
+    // Also append popup to wrapper so it's positioned relative to it
+    if (crestronPopup) {
+        programmierungWrapper.appendChild(crestronPopup);
+    }
+}
+
+// Find the Programmierung section (4th kompetenz-item) to monitor scrolling
+const programmierungSection = document.querySelectorAll('.kompetenz-item')[3]; // Index 3 = 4th item
+
+if (programmierungSection) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Start wiggling animation when section comes into view
+                crestronBadge.classList.add('wiggling');
+            } else {
+                // Stop wiggling when out of view
+                crestronBadge.classList.remove('wiggling');
+                // Close popup when scrolling away from section
+                if (isPopupOpen) {
+                    isPopupOpen = false;
+                    crestronPopup.classList.remove('open');
+                }
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    sectionObserver.observe(programmierungSection);
+}
+
+// Toggle popup on badge click
+crestronBadge.addEventListener('click', () => {
+    isPopupOpen = !isPopupOpen;
+    
+    if (isPopupOpen) {
+        crestronPopup.classList.add('open');
+    } else {
+        crestronPopup.classList.remove('open');
+    }
+});
+
+// Close popup button
+closeCrestronPopup.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isPopupOpen = false;
+    crestronPopup.classList.remove('open');
+});
+
+// Close popup when clicking outside
+document.addEventListener('click', (e) => {
+    if (isPopupOpen && 
+        !crestronPopup.contains(e.target) && 
+        !crestronBadge.contains(e.target)) {
+        isPopupOpen = false;
+        crestronPopup.classList.remove('open');
+    }
+});
+
+// Loudspeaker Badge - Position in Inbetriebnahme section
+const loudspeakerBadge = document.getElementById('loudspeaker-badge');
+const loudspeakerPopup = document.getElementById('loudspeaker-popup');
+const closeLoudspeakerPopup = document.getElementById('close-loudspeaker-popup');
+let isLoudspeakerPopupOpen = false;
+
+// Find the Inbetriebnahme wrapper and move badge and popup into it
+const inbetriebnahmeWrapper = document.querySelector('.inbetriebnahme-wrapper');
+if (inbetriebnahmeWrapper && loudspeakerBadge) {
+    // Append badge after the h3
+    inbetriebnahmeWrapper.appendChild(loudspeakerBadge);
+    // Also append popup to wrapper so it's positioned relative to it
+    if (loudspeakerPopup) {
+        inbetriebnahmeWrapper.appendChild(loudspeakerPopup);
+    }
+}
+
+// Find the Inbetriebnahme section (3rd kompetenz-item) to monitor scrolling
+const inbetriebnahmeSection = document.querySelectorAll('.kompetenz-item')[2]; // Index 2 = 3rd item
+
+if (inbetriebnahmeSection) {
+    const loudspeakerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Start wiggling animation when section comes into view
+                loudspeakerBadge.classList.add('wiggling');
+            } else {
+                // Stop wiggling when out of view
+                loudspeakerBadge.classList.remove('wiggling');
+                // Close popup when scrolling away from section
+                if (isLoudspeakerPopupOpen) {
+                    isLoudspeakerPopupOpen = false;
+                    loudspeakerPopup.classList.remove('open');
+                }
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    loudspeakerObserver.observe(inbetriebnahmeSection);
+}
+
+// Toggle popup on badge click
+loudspeakerBadge.addEventListener('click', () => {
+    isLoudspeakerPopupOpen = !isLoudspeakerPopupOpen;
+    
+    if (isLoudspeakerPopupOpen) {
+        loudspeakerPopup.classList.add('open');
+    } else {
+        loudspeakerPopup.classList.remove('open');
+    }
+});
+
+// Close popup button
+closeLoudspeakerPopup.addEventListener('click', (e) => {
+    e.stopPropagation();
+    isLoudspeakerPopupOpen = false;
+    loudspeakerPopup.classList.remove('open');
+});
+
+// Close popup when clicking outside
+document.addEventListener('click', (e) => {
+    if (isLoudspeakerPopupOpen && 
+        !loudspeakerPopup.contains(e.target) && 
+        !loudspeakerBadge.contains(e.target)) {
+        isLoudspeakerPopupOpen = false;
+        loudspeakerPopup.classList.remove('open');
+    }
+});

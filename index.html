@@ -112,8 +112,8 @@
             theme: {
                 extend: {
                     colors: {
-                        'misu-purple': '#6B4462',
-                        'misu-mint': '#5FD4A5',
+                        'misu-purple': '#842e60',
+                        'misu-mint': '#59d49b',
                     },
                     fontFamily: {
                         'sans': ['PPTelegraf', 'sans-serif'],
@@ -206,6 +206,8 @@
             cursor: pointer;
             opacity: 0;
             transition: opacity 0.6s ease, transform 0.6s ease;
+            will-change: opacity, transform;
+            transform: translateZ(0);
         }
 
         .project-stack-card.visible {
@@ -332,15 +334,362 @@
             transform: translateY(0);
         }
 
+        /* Custom Cursor */
+        * {
+            cursor: none !important;
+        }
+
+        #custom-cursor {
+            width: 12px;
+            height: 12px;
+            background-color: #842e60;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        #custom-cursor.cursor-hover {
+            transform: translate(-50%, -50%) scale(2.5);
+        }
+
+        /* Hide custom cursor on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            * {
+                cursor: auto !important;
+            }
+
+            #custom-cursor {
+                display: none;
+            }
+        }
+
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 0px;
+            scroll-padding-top: 50px;
         }
 
         /* Header hide/show transition */
         header {
             transition: transform 0.3s ease-in-out;
+        }
+
+        /* Fullscreen menu transitions */
+        @keyframes menuSlideDown {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            70% {
+                transform: translateY(24px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes menuSlideUp {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        #fullscreen-menu {
+            transform: translateY(-100%);
+        }
+
+        #fullscreen-menu.menu-open {
+            animation: menuSlideDown 700ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        #fullscreen-menu.menu-closing {
+            animation: menuSlideUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Rotating circle button */
+        @keyframes rotateCircle {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes fadeInCircle {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #scroll-circle {
+            position: fixed;
+            right: -70px;
+            bottom: 100px;
+            width: 140px;
+            height: 140px;
+            cursor: pointer;
+            z-index: 30;
+            transition: right 0.3s ease, bottom 0.6s ease;
+            opacity: 0;
+            animation: fadeInCircle 1s ease-in-out 5.5s forwards;
+            will-change: right, bottom;
+            transform: translateZ(0);
+        }
+
+        #scroll-circle::before {
+            content: '';
+            position: absolute;
+            left: -150px;
+            top: -30px;
+            right: -30px;
+            bottom: -30px;
+            pointer-events: auto;
+        }
+
+        #scroll-circle:hover {
+            right: 30px;
+        }
+
+        #scroll-circle:active {
+            right: 30px;
+        }
+
+        #scroll-circle.at-footer {
+            bottom: 100px;
+        }
+
+        #scroll-circle svg {
+            animation: rotateCircle 15s linear infinite;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        /* Crestron Badge */
+        @keyframes badgeWiggle {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            2% {
+                transform: rotate(-15deg);
+            }
+
+            4% {
+                transform: rotate(15deg);
+            }
+
+            6% {
+                transform: rotate(-15deg);
+            }
+
+            8% {
+                transform: rotate(15deg);
+            }
+
+            10% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .programmierung-wrapper {
+            position: relative;
+        }
+
+        #crestron-badge {
+            position: absolute;
+            left: -160px;
+            top: 0;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            z-index: 30;
+        }
+
+        #crestron-badge.wiggling {
+            animation: badgeWiggle 5s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            #crestron-badge {
+                position: static;
+                display: inline-block;
+                width: 80px;
+                height: 80px;
+                margin-right: 12px;
+                vertical-align: middle;
+            }
+        }
+
+        /* Crestron Popup */
+        #crestron-popup {
+            position: absolute;
+            left: 120px;
+            top: 50%;
+            transform: translateY(-50%) scale(0.8);
+            width: 400px;
+            background: white;
+            border: 3px solid #842e60;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 31;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #crestron-popup::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-right: 12px solid #842e60;
+        }
+
+        #crestron-popup.open {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+            pointer-events: auto;
+        }
+
+        @media (max-width: 768px) {
+            #crestron-popup {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%) scale(0.8);
+                width: 90%;
+                max-width: 400px;
+            }
+
+            #crestron-popup::before {
+                display: none;
+            }
+
+            #crestron-popup.open {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Loudspeaker Badge */
+        .inbetriebnahme-wrapper {
+            position: relative;
+        }
+
+        #loudspeaker-badge {
+            position: absolute;
+            right: -160px;
+            top: 0;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #59d49b;
+            border-radius: 50%;
+        }
+
+        #loudspeaker-badge .material-icons {
+            font-size: 64px;
+            color: #842e60;
+        }
+
+        #loudspeaker-badge.wiggling {
+            animation: badgeWiggle 5s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            #loudspeaker-badge {
+                position: static;
+                display: inline-flex;
+                width: 80px;
+                height: 80px;
+                margin-left: 12px;
+                vertical-align: middle;
+            }
+
+            #loudspeaker-badge .material-icons {
+                font-size: 48px;
+            }
+        }
+
+        /* Loudspeaker Popup */
+        #loudspeaker-popup {
+            position: absolute;
+            right: 120px;
+            top: 50%;
+            transform: translateY(-50%) scale(0.8);
+            width: 400px;
+            background: white;
+            border: 3px solid #59d49b;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 31;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #loudspeaker-popup::before {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 12px solid #59d49b;
+        }
+
+        #loudspeaker-popup.open {
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+            pointer-events: auto;
+        }
+
+        @media (max-width: 768px) {
+            #loudspeaker-popup {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%) scale(0.8);
+                width: 90%;
+                max-width: 400px;
+            }
+
+            #loudspeaker-popup::before {
+                display: none;
+            }
+
+            #loudspeaker-popup.open {
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
 
         /* TEMPORARY: Test all-white background */
@@ -352,43 +701,129 @@
 
 <body class="bg-white font-sans">
 
+    <!-- Custom Cursor -->
+    <div id="custom-cursor"></div>
+
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <header class="fixed top-0 left-0 right-0 z-40">
+        <div class="w-full px-8 py-4 flex justify-between items-center">
             <!-- Logo -->
             <a href="#home" class="block">
-                <img src="assets/img/misu_Signatur1.png" alt="misu Logo" class="h-12 md:h-16">
+                <img id="header-logo" src="assets/img/misu_Signatur1.png" alt="misu Logo" class="h-12 md:h-16">
             </a>
 
-            <!-- Mobile Menu Button -->
-            <button id="menu-toggle" class="lg:hidden text-misu-purple">
+            <!-- Menu Button (both mobile and desktop) -->
+            <button id="menu-toggle" class="text-misu-purple">
                 <span class="material-icons text-3xl">menu</span>
             </button>
+        </div>
+    </header>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden lg:flex gap-8">
-                <a href="#kompetenzen"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Kompetenzen</a>
-                <a href="#referenzen"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Arbeiten</a>
-                <a href="#ueber-mich" class="text-gray-700 hover:text-misu-mint transition-colors font-medium">Über
-                    mich</a>
-            </nav>
+    <!-- Fullscreen Menu Overlay -->
+    <nav id="fullscreen-menu"
+        class="fixed top-0 left-0 w-screen h-screen bg-misu-mint z-50 flex items-center justify-center">
+        <!-- Header bar in menu with logo and close button -->
+        <div class="fixed top-0 left-0 right-0">
+            <div class="w-full px-8 py-4 flex justify-between items-center">
+                <a href="#home" class="block">
+                    <img src="assets/img/misu_Signatur1.png" alt="misu Logo" class="h-12 md:h-16 object-contain">
+                </a>
+                <button id="menu-close" class="text-misu-purple -ml-8 md:ml-0 md:mr-4">
+                    <span class="material-icons text-3xl">close</span>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <nav id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100">
-            <div class="container mx-auto px-6 py-6 flex flex-col gap-6 items-end">
-                <a href="#kompetenzen"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-semibold text-xl mobile-menu-link">Kompetenzen</a>
-                <a href="#referenzen"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-semibold text-xl mobile-menu-link">Arbeiten</a>
-                <a href="#ueber-mich"
-                    class="text-gray-700 hover:text-misu-mint transition-colors font-semibold text-xl mobile-menu-link">Über
-                    mich</a>
-            </div>
-        </nav>
-    </header>
+        <!-- Menu Links -->
+        <div class="flex flex-col gap-12 items-center">
+            <a href="#kompetenzen"
+                class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Kompetenzen</a>
+            <a href="#referenzen"
+                class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Arbeiten</a>
+            <a href="#ueber-mich"
+                class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Über
+                mich</a>
+            <a href="#netzwerk"
+                class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Netzwerk</a>
+        </div>
+    </nav>
+
+    <!-- Rotating Circle Button -->
+    <div id="scroll-circle">
+        <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- Donut circle -->
+            <circle cx="70" cy="70" r="60" fill="none" stroke="#59d49b" stroke-width="45" />
+
+            <!-- Curved text path -->
+            <defs>
+                <path id="circlePath" d="M 70,70 m -51,0 a 51,51 0 1,1 102,0 a 51,51 0 1,1 -102,0" />
+            </defs>
+
+            <!-- Text following the path -->
+            <text font-size="18" font-weight="500" fill="#000000" letter-spacing="0.5">
+                <textPath href="#circlePath" startOffset="0%">
+                    hey, lass uns in Kontakt treten. -😘-
+                </textPath>
+            </text>
+        </svg>
+    </div>
+
+    <!-- Crestron Badge -->
+    <div id="crestron-badge">
+        <img src="assets/img/crestron-master-badge.png" alt="Crestron Master Certified"
+            class="w-full h-full object-contain">
+    </div>
+
+    <!-- Crestron Popup -->
+    <div id="crestron-popup">
+        <button id="close-crestron-popup" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
+            <span class="material-icons text-xl">close</span>
+        </button>
+        <div class="space-y-3 text-gray-700 text-sm leading-relaxed">
+            <p>
+                Wir arbeiten grundsätzlich herstellerunabhängig und setzen jedes Projekt mit dem Steuerungssystem um,
+                das technisch und funktional am besten zu deinen Anforderungen passt.
+            </p>
+            <p class="font-semibold text-misu-purple">
+                Gleichzeitig möchten wir eine Spezialisierung hervorheben, auf die wir besonders stolz sind:
+                Wir sind Crestron Service Provider und Crestron Master Certified Programmer – und bringen damit echte
+                Spitzenkompetenz für anspruchsvolle Crestron‑Projekte mit
+            </p>
+            <p>
+                Für dich bedeutet das: ein Partner, der komplexe Systeme souverän, zuverlässig und zukunftssicher
+                realisiert.
+            </p>
+        </div>
+    </div>
+
+    <!-- Loudspeaker Badge -->
+    <div id="loudspeaker-badge">
+        <span class="material-icons">volume_up</span>
+    </div>
+
+    <!-- Loudspeaker Popup -->
+    <div id="loudspeaker-popup">
+        <button id="close-loudspeaker-popup" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
+            <span class="material-icons text-xl">close</span>
+        </button>
+        <div class="space-y-3 text-gray-700 text-sm leading-relaxed">
+            <p>
+                misu besitzt im Bereich Audio eine besondere Expertise. Als langjähriger Tontechniker mit
+                eidgenössischem Fachausweis sind wir in diesem Bereich spezialisiert und wissen genau, worauf es
+                ankommt.
+                Wir planen Audiosysteme, die nicht nur funktionieren, sondern wirklich hörenswert sind – und sind dein
+                Spezialist für gut klingende Lautsprechersysteme.
+            <p>Zudem richten wir alle gängigen DSP‑Systeme ein und übernehmen das komplette System‑Tuning.
+                Dank unserer Dante Level 3 Zertifizierung sorgen wir dabei für eine zuverlässige, saubere und
+                professionell strukturierte Audio‑Netzwerkarchitektur.</p>
+            </p>
+        </div>
+    </div>
+
+    <!-- Fixed gradient overlay to fade content under transparent header -->
+    <div
+        class="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/90 to-transparent pointer-events-none z-30">
+    </div>
 
     <!-- Hero Animation Section -->
     <section id="home"
@@ -409,8 +844,8 @@
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <span class="material-icons text-4xl text-misu-mint">expand_more</span>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <span class="material-icons text-4xl text-misu-mint animate-bounce">expand_more</span>
         </div>
     </section>
 
@@ -418,13 +853,13 @@
     <section class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
             <!-- Main Title -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-misu-purple mb-12 text-center">
-                <!-- TECHNIK, DIE BEWEGT.-->
-                TECHNIK MIT SPASSFAKTOR!
-            </h1>
+            <!-- <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-misu-purple mb-12 text-center">
+                TECHNIK, DIE BEWEGT.
+                TECHNIK MIT SPASSFAKTOR.
+            </h1> -->
 
             <!-- Subtitle -->
-            <p class="text-2xl md:text-3xl lg:text-4xl font-light text-gray-800 mb-16 text-center leading-relaxed">
+            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-misu-purple mb-16 text-center leading-relaxed">
                 Dein Partner für multimediale Konzepte und Steuerungen,<br>
                 die begeistern und dir das Leben erleichtern.
             </p>
@@ -432,8 +867,8 @@
             <!-- Content Paragraphs -->
             <div class="space-y-8 text-xl md:text-2xl text-gray-700 leading-relaxed text-center">
                 <p>
-                    Wir sind MISU – als Full-Service-Partner für moderne, flexible und stabile
-                    Multimediatechnik bieten wir Lösungen, die einfach Spaß machen.
+                    Wir sind misu – als Spezialist für moderne, flexible und stabile
+                    Multimediatechnik bieten wir Lösungen, die einfach Spass machen.
                 </p>
 
                 <p>
@@ -443,10 +878,14 @@
                 </p>
 
                 <p>
-                    Egal, ob du Unterstützung bei einem grundsätzlichen AV‑Konzept brauchst,
+                    Egal, ob du Unterstützung bei einem AV‑Konzept brauchst,
                     jemanden suchst, der dein Projekt professionell plant, die Qualität der
                     Umsetzung überwacht oder eine stabile und benutzerfreundliche
                     Mediensteuerung möchtest – bei uns bist du genau richtig.
+                </p>
+                <p>
+                    Und hey, falls du dich wunderst, was AV eigentlich sein soll: Du bist damit nicht alleine. AV steht
+                    für audiovisuell – also Technik, die Bild und Ton verbindet und für multimediale Erlebnisse sorgt.
                 </p>
             </div>
         </div>
@@ -456,7 +895,7 @@
     <section id="kompetenzen" class="py-20 px-6 bg-white relative overflow-hidden">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
-            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-semibold text-misu-purple mb-6 text-center">
                 Kompetenzen
             </h2>
 
@@ -466,7 +905,9 @@
             </p>
 
             <!-- Center line decoration -->
-            <div class="absolute left-1/2 top-40 bottom-0 w-px bg-gradient-to-b from-misu-mint via-misu-purple to-misu-mint opacity-20 hidden md:block"></div>
+            <div
+                class="absolute left-1/2 top-40 bottom-0 w-px bg-gradient-to-b from-misu-mint via-misu-purple to-misu-mint opacity-20 hidden md:block">
+            </div>
 
             <!-- Competencies List (Alternating) -->
             <div class="space-y-32 relative">
@@ -475,13 +916,15 @@
                 <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-right space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Konzepte</h3>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Wir erstellen für dich Grundlagenkonzepte sowie erste Kostenschätzungen, damit du perfekt
-                                vorbereitet bist, um mit Integratoren in den Austausch zu gehen.
+                            <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Konzepte</h3>
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                                Wir erstellen für dich Grundlagenkonzepte sowie erste Kostenschätzungen, damit du
+                                perfekt
+                                vorbereitet bist, um mit deinem Technikpartner in den Austausch zu gehen.
                             </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Klar, verständlich und praxisnah – damit deine Idee von Anfang an auf stabilen Füßen steht.
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                                Klar, verständlich und praxisnah – damit deine Idee von Anfang an auf stabilen Füssen
+                                steht.
                             </p>
                         </div>
                         <div class="hidden md:block"></div>
@@ -493,16 +936,18 @@
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="hidden md:block"></div>
                         <div class="space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Fachplanung</h3>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen und
+                            <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Fachplanung</h3>
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                                Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen
+                                und
                                 umzusetzen.
                                 Im direkten Austausch mit allen relevanten Gewerken sorgen wir für einen möglichst
                                 reibungslosen Ablauf.
-                                Wir zeichnen Pläne, erstellen Schemata, evaluieren Produkte und finden herstellerunabhängig
+                                Wir zeichnen Pläne, erstellen Schemata, evaluieren Produkte und finden
+                                herstellerunabhängig
                                 die beste Lösung für dich.
                             </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 So stellst du sicher, dass dein Projekt von Anfang an auf solidem Fundament steht.
                             </p>
                         </div>
@@ -513,15 +958,19 @@
                 <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-right space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Inbetriebnahme</h3>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines Systems
-                                und stellen sicher, dass alles so umgesetzt wird, wie es geplant und gewünscht ist. Auf
-                                Wunsch übernehmen wir die Konfiguration deiner AV Geräte. Gerade im Audiobereich können wir
-                                alle gängigen DSP‑Systeme einrichten und das komplette Systemtuning übernehmen.
+                            <div class="inbetriebnahme-wrapper">
+                                <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Inbetriebnahme</h3>
+                            </div>
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                                Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines
+                                Systems
+                                und stellen sicher, dass alles so umgesetzt wird, wie es geplant und gewünscht ist.
+                                Gerne
+                                übernehmen wir die komplette Konfiguration deiner AV Geräte.
                             </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Für ein sauberes, ausgewogenes und zuverlässiges Ergebnis.
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                                Für ein präzise eingerichtetes und optimal abgestimmtes System, das genau so
+                                funktioniert, wie es soll.
                             </p>
                         </div>
                         <div class="hidden md:block"></div>
@@ -533,28 +982,19 @@
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="hidden md:block"></div>
                         <div class="space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Programmierung</h3>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Damit am Ende wirklich alles so läuft, wie du es dir vorstellst, braucht es eine präzise und
+                            <div class="programmierung-wrapper">
+                                <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Programmierung</h3>
+                            </div>
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                                Damit am Ende wirklich alles so läuft, wie du es dir vorstellst, braucht es eine präzise
+                                und
                                 sauber durchdachte Programmierung der Mediensteuerung und der Benutzeroberflächen.
                             </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 Mit unserer langjährigen Erfahrung aus Eventtechnik, AV‑Technik, Planung und intuitivem
-                                UI‑Design sorgen wir dafür, dass deine Anlage stabil, logisch aufgebaut und für alle leicht
-                                verständlich ist – und im Alltag wirklich Spaß macht.
-                            </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Wir setzen deine Anlage dabei mit dem jeweils passenden Steuerungssystem um, damit immer das
-                                bestmögliche Ergebnis im Vordergrund steht – unabhängig vom Hersteller.
-                            </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Zwar sind wir für verschiedene Systeme zertifiziert, aber eines möchten wir besonders
-                                hervorheben:
-                            </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Wir sind Crestron Service Provider und Crestron Master Certified Programmer. Für dich
-                                bedeutet das vor allem eines: Ein Partner, der komplexe Crestron‑Projekte souverän,
-                                zuverlässig und zukunftssicher umsetzt.
+                                UI‑Design sorgen wir dafür, dass deine Anlage stabil, logisch aufgebaut und für alle
+                                leicht
+                                verständlich ist – und im Alltag wirklich Spass macht.
                             </p>
                         </div>
                     </div>
@@ -564,14 +1004,15 @@
                 <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-right space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">Qualitätskontrolle</h3>
-                            <p class="text-lg text-gray-700 leading-relaxed">
+                            <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Qualitätskontrolle</h3>
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 Du möchtest sicherstellen, dass der Integrator die Arbeiten wirklich nach deinen
                                 Anforderungen ausführt?
                             </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 Gerne übernehmen wir die Qualitätskontrolle und prüfen in allen Projektphasen die
-                                entscheidenden Schritte – damit dein Projekt exakt so umgesetzt wird, wie du es brauchst.
+                                entscheidenden Schritte – damit dein Projekt exakt so umgesetzt wird, wie du es
+                                brauchst.
                             </p>
                         </div>
                         <div class="hidden md:block"></div>
@@ -586,12 +1027,13 @@
     <section id="referenzen" class="py-20 px-6 bg-gray-50">
         <div class="container mx-auto max-w-7xl">
             <!-- Section Title -->
-            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-semibold text-misu-purple mb-6 text-center">
                 Arbeiten
             </h2>
 
             <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
-                Projekte, die bewegen - in den letzten 10 Jahren bei ehemaligen Arbeitgebern realisiert. Seit 2026 unter eigenen Namen.
+                Projekte, die bewegen - in den letzten 10 Jahren bei ehemaligen Arbeitgebern realisiert. Seit 2026 unter
+                eigenen Namen.
             </p>
 
             <!-- Projects Stack (scroll-reveal) -->
@@ -605,10 +1047,10 @@
     <section id="referenzen-old" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
-<!--             <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-16 text-center">
+            <!--             <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-16 text-center">
                 und viele mehr....
             </h2> -->
-              <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
+            <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
                 und viele mehr....
             </p>
 
@@ -642,7 +1084,7 @@
     </section>
 
     <!-- Project Modal -->
-    <div id="project-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
+    <div id="project-modal" class="hidden fixed inset-0 bg-misu-mint/95 z-50 flex items-center justify-center p-6">
         <div class="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
             <!-- Close Button -->
             <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
@@ -660,7 +1102,7 @@
     <section id="ueber-mich" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
-            <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-semibold text-misu-purple mb-6 text-center">
                 Über mich
             </h2>
 
@@ -677,16 +1119,16 @@
 
                 <!-- Text Content -->
                 <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
-                    <p class="font-bold text-2xl md:text-3xl text-misu-purple">
-                        Hey, wer steckt denn hinter MISU?
+                    <p class="font-medium text-2xl md:text-3xl text-misu-purple">
+                        Hey, wer steckt denn hinter misu?
                     </p>
 
                     <p>
-                        MISU wurde 2026 von Michael Sutter gegründet.
+                        misu wurde 2026 von Michael Sutter gegründet.
                     </p>
 
                     <p>
-                        Auch wenn MISU als Unternehmen frisch unterwegs ist – die Erfahrung dahinter ist es nicht.
+                        Auch wenn misu als Unternehmen frisch unterwegs ist – die Erfahrung dahinter ist es nicht.
                     </p>
 
                     <p>
@@ -711,13 +1153,60 @@
                     </p>
 
                     <p>
-                        Mit MISU bringe ich all diese Erfahrung in ein flexibles, modernes Unternehmen ein – mit klarer
+                        Mit misu bringe ich all diese Erfahrung in ein flexibles, modernes Unternehmen ein – mit klarer
                         Vision und dem Anspruch, Technik so zu planen und umzusetzen, dass es Spass macht.
                     </p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Netzwerk Section -->
+    <section id="netzwerk" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+            <!-- Section Title -->
+            <h2 class="text-4xl md:text-6xl font-semibold text-misu-purple mb-6 text-center">
+                Netzwerk
+            </h2>
+
+            <!-- Section Claim -->
+            <p class="text-2xl md:text-3xl font-light text-gray-700 mb-12 text-center">
+                Es geht nicht ohne andere
+            </p>
+
+            <!-- Content -->
+            <div class="max-w-4xl mx-auto mb-16">
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+                    Damit bei deinen Projekten alles rund läuft, arbeitet misu mit ausgewählten Firmen zusammen.
+                    So kombinieren wir genau die richtigen Kompetenzen und sorgen dafür, dass du immer das bestmögliche
+                    Ergebnis bekommst.
+                </p>
+            </div>
+
+            <!-- Partner Logos -->
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+                <a href="https://www.neroplan.ch" target="_blank" rel="noopener noreferrer"
+                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                    <img src="assets/img/network/logo-neroplan.png" alt="Neroplan" class="h-12 md:h-16 object-contain">
+                </a>
+                <a href="https://www.tingo.ch" target="_blank" rel="noopener noreferrer"
+                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                    <img src="assets/img/network/logo-tingo.svg" alt="Tingo" class="h-12 md:h-16 object-contain">
+                </a>
+                <a href="https://www.nike.com" target="_blank" rel="noopener noreferrer"
+                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike"
+                        class="h-12 md:h-16 object-contain">
+                </a>
+                <a href="https://www.coca-cola.com" target="_blank" rel="noopener noreferrer"
+                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" alt="Coca-Cola"
+                        class="h-12 md:h-16 object-contain">
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Impressum Modal -->
     <div id="impressum-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
         <div class="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
@@ -914,11 +1403,11 @@
 
                 <!-- Company Info -->
                 <div>
-                    <a href="#home" class="block">
+                    <!--<a href="#home" class="block">
                         <img src="assets/img/misu_Signatur2.png" alt="misu" class="h-16 md:h-20 mb-4">
-                    </a>
+                    </a>-->
                     <p class="text-gray-300 mb-4">
-                        Partner für multimediale Konzepte und Steuerungen.
+                        misu <br> Partner für multimediale Konzepte und Steuerungen.
                     </p>
                     <p class="text-gray-400 text-sm">
                         Michael Sutter<br>
