@@ -13,7 +13,8 @@
 
     <!-- Open Graph Tags for Social Sharing -->
     <meta property="og:title" content="misu - Partner für multimediale Konzepte und Steuerungen" />
-    <meta property="og:description" content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
+    <meta property="og:description"
+        content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://heymisu.ch" />
     <meta property="og:site_name" content="misu" />
@@ -25,7 +26,8 @@
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="misu - Partner für multimediale Konzepte und Steuerungen" />
-    <meta name="twitter:description" content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
+    <meta name="twitter:description"
+        content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
     <meta name="twitter:image" content="https://heymisu.ch/assets/img/og-image.jpg" />
 
     <!-- Canonical URL -->
@@ -103,7 +105,7 @@
             }
 
             /* Use a large centered panel with a small top/bottom gap instead of fixed 100vh */
-            #project-modal > div {
+            #project-modal>div {
                 position: relative;
                 margin: 8px 0;
                 width: 100%;
@@ -112,8 +114,8 @@
                 border-radius: 12px;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
-                box-shadow: 0 18px 50px rgba(0,0,0,0.25);
-                border: 1px solid rgba(0,0,0,0.04);
+                box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+                border: 1px solid rgba(0, 0, 0, 0.04);
                 background: white;
             }
 
@@ -127,10 +129,10 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                background: rgba(0,0,0,0.6);
+                background: rgba(0, 0, 0, 0.6);
                 color: #ffffff;
                 border-radius: 9999px;
-                box-shadow: 0 8px 26px rgba(0,0,0,0.25);
+                box-shadow: 0 8px 26px rgba(0, 0, 0, 0.25);
                 border: none;
                 padding: 0;
             }
@@ -143,11 +145,11 @@
     </style>
 
     <script>
-    // Ensure scroll position is always at the top on reload or navigation
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
+        // Ensure scroll position is always at the top on reload or navigation
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
     </script>
 
     <!-- Tailwind CSS -->
@@ -427,7 +429,41 @@
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 50px;
+            scroll-padding-top: 0px;
+        }
+
+        section {
+            scroll-margin-top: 50px;
+        }
+
+
+        /* =========================================================
+   MOBILE FIXES
+   - Prevent horizontal "page panning"
+   - iOS-safe scroll locking for fullscreen overlays/modals
+   ========================================================= */
+
+        /* 1) Stop horizontal swipe/pan caused by overflow */
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* 2) iOS-safe scroll lock (used by JS via .no-scroll) */
+        html.no-scroll,
+        body.no-scroll {
+            overflow: hidden !important;
+            height: 100% !important;
+        }
+
+        /* Position fixed prevents iOS background scroll bleed */
+        body.no-scroll {
+            position: fixed !important;
+            left: 0;
+            right: 0;
+            width: 100%;
         }
 
         /* Header hide/show transition */
@@ -769,8 +805,6 @@
         section {
             background: white !important;
         }
-
-
     </style>
 </head>
 
@@ -896,8 +930,7 @@
     </div>
 
     <!-- Fixed gradient overlay to fade content under transparent header -->
-    <div
-        id="header-gradient-overlay"
+    <div id="header-gradient-overlay"
         class="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/90 to-transparent pointer-events-none z-30">
     </div>
 
@@ -1547,62 +1580,63 @@
 
 
 
-        <script>
-            // Make header white and fade out overlay when footer reaches the bottom of the overlay (with 5px offset)
-            document.addEventListener('DOMContentLoaded', function() {
-                const overlay = document.getElementById('header-gradient-overlay');
-                const footer = document.querySelector('footer');
-                const header = document.querySelector('header');
-                if (!overlay || !footer || !header) return;
-                // Duration must match the CSS transition for .header-white (0.25s = 250ms)
-                const HEADER_TRANSITION_MS = 250;
-                function checkFooterInView() {
-                    const overlayEl = document.getElementById('header-gradient-overlay');
-                    if (!overlayEl) return;
-                    const overlayRect = overlayEl.getBoundingClientRect();
-                    const overlayBottom = overlayRect.bottom;
-                    const footerRect = footer.getBoundingClientRect();
-                    // When the top of the footer is within 5px of the overlay's bottom, trigger the effect
-                    if (footerRect.top <= overlayBottom + 5) {
-                        if (!header.classList.contains('header-white')) {
-                            header.classList.add('header-white');
-                            // Wait for header background transition to finish, then fade out overlay
-                            setTimeout(() => {
-                                overlayEl.classList.add('overlay-inactive');
-                                overlayEl.style.transition = 'opacity 0.25s';
-                            }, HEADER_TRANSITION_MS);
-                        }
-                    } else {
-                        // When scrolling up, fade in overlay first, then remove white header after header transition
-                        if (header.classList.contains('header-white')) {
-                            overlayEl.classList.remove('overlay-inactive');
-                            overlayEl.style.transition = 'none';
-                            setTimeout(() => {
-                                header.classList.remove('header-white');
-                            }, HEADER_TRANSITION_MS);
-                        }
+    <script>
+        // Make header white and fade out overlay when footer reaches the bottom of the overlay (with 5px offset)
+        document.addEventListener('DOMContentLoaded', function () {
+            const overlay = document.getElementById('header-gradient-overlay');
+            const footer = document.querySelector('footer');
+            const header = document.querySelector('header');
+            if (!overlay || !footer || !header) return;
+            // Duration must match the CSS transition for .header-white (0.25s = 250ms)
+            const HEADER_TRANSITION_MS = 250;
+            function checkFooterInView() {
+                const overlayEl = document.getElementById('header-gradient-overlay');
+                if (!overlayEl) return;
+                const overlayRect = overlayEl.getBoundingClientRect();
+                const overlayBottom = overlayRect.bottom;
+                const footerRect = footer.getBoundingClientRect();
+                // When the top of the footer is within 5px of the overlay's bottom, trigger the effect
+                if (footerRect.top <= overlayBottom + 5) {
+                    if (!header.classList.contains('header-white')) {
+                        header.classList.add('header-white');
+                        // Wait for header background transition to finish, then fade out overlay
+                        setTimeout(() => {
+                            overlayEl.classList.add('overlay-inactive');
+                            overlayEl.style.transition = 'opacity 0.25s';
+                        }, HEADER_TRANSITION_MS);
+                    }
+                } else {
+                    // When scrolling up, fade in overlay first, then remove white header after header transition
+                    if (header.classList.contains('header-white')) {
+                        overlayEl.classList.remove('overlay-inactive');
+                        overlayEl.style.transition = 'none';
+                        setTimeout(() => {
+                            header.classList.remove('header-white');
+                        }, HEADER_TRANSITION_MS);
                     }
                 }
-                window.addEventListener('scroll', checkFooterInView);
-                window.addEventListener('resize', checkFooterInView);
-                checkFooterInView();
-            });
-        </script>
-        <style>
-            .header-white {
-                background: white !important;
-                box-shadow: none !important;
-                transition: background 0.25s, box-shadow 0.25s;
             }
-            #header-gradient-overlay {
-                transition: opacity 0.25s;
-            }
-            #header-gradient-overlay.overlay-inactive {
-                opacity: 0 !important;
-                pointer-events: none !important;
-            }
-        </style>
+            window.addEventListener('scroll', checkFooterInView);
+            window.addEventListener('resize', checkFooterInView);
+            checkFooterInView();
+        });
+    </script>
+    <style>
+        .header-white {
+            background: white !important;
+            box-shadow: none !important;
+            transition: background 0.25s, box-shadow 0.25s;
+        }
 
-</script>
+        #header-gradient-overlay {
+            transition: opacity 0.25s;
+        }
+
+        #header-gradient-overlay.overlay-inactive {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+    </style>
+
+    </script>
 </body>
-

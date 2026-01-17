@@ -36,27 +36,6 @@ if (!isTouchDevice) {
     });
 }
 
-// ============================================
-// iOS-safe scroll lock (prevents background scroll/pan)
-// ============================================
-let __scrollY = 0;
-
-function lockScroll() {
-  __scrollY = window.scrollY || 0;
-  document.documentElement.classList.add('no-scroll');
-  document.body.classList.add('no-scroll');
-  document.body.style.top = `-${__scrollY}px`;
-}
-
-function unlockScroll() {
-  document.documentElement.classList.remove('no-scroll');
-  document.body.classList.remove('no-scroll');
-  const top = document.body.style.top;
-  document.body.style.top = '';
-  const y = top ? Math.abs(parseInt(top, 10)) : __scrollY;
-  window.scrollTo(0, y);
-}
-
 // Fullscreen menu toggle
 const menuToggle = document.getElementById('menu-toggle');
 const menuClose = document.getElementById('menu-close');
@@ -71,49 +50,26 @@ menuClose.addEventListener('click', () => {
     closeMenu();
 });
 
-
 function openMenu() {
-  lockScroll();
-  fullscreenMenu.classList.add('menu-open');
+    fullscreenMenu.classList.add('menu-open');
 }
 
 function closeMenu() {
-  fullscreenMenu.classList.remove('menu-open');
-  fullscreenMenu.classList.add('menu-closing');
-
-  // keep your animation timing, unlock AFTER it finishes
-  setTimeout(() => {
-    fullscreenMenu.classList.remove('menu-closing');
-    unlockScroll();
-  }, 400);
+    fullscreenMenu.classList.remove('menu-open');
+    fullscreenMenu.classList.add('menu-closing');
+    
+    // Remove menu-closing class after animation completes
+    setTimeout(() => {
+        fullscreenMenu.classList.remove('menu-closing');
+    }, 400);
 }
 
-
-// Close menu when clicking a link (and scroll AFTER unlock)
+// Close menu when clicking a link
 menuLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute('href');
-
-    // Only intercept in-page anchor links
-    if (href && href.startsWith('#')) {
-      e.preventDefault();
-
-      closeMenu(); // unlockScroll() happens inside closeMenu after 400ms
-
-      // Scroll AFTER the menu close animation + unlock has finished
-      setTimeout(() => {
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 420); // a little > 400ms to be safe
-    } else {
-      // external links behave normally
-      closeMenu();
-    }
-  });
+    link.addEventListener('click', () => {
+        closeMenu();
+    });
 });
-
 
 // Rotating circle scroll to footer
 const scrollCircle = document.getElementById('scroll-circle');
@@ -339,20 +295,20 @@ function openModal(project) {
         </div>
     `;
     modal.classList.remove('hidden');
-    lockScroll();
+    document.body.style.overflow = 'hidden';
 }
 
 // Close modal
 closeModal.addEventListener('click', () => {
     modal.classList.add('hidden');
-    unlockScroll();
+    document.body.style.overflow = 'auto';
 });
 
 // Close modal when clicking outside
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.classList.add('hidden');
-        unlockScroll();
+        document.body.style.overflow = 'auto';
     }
 });
 
@@ -367,19 +323,19 @@ impressumLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         impressumModal.classList.remove('hidden');
-        lockScroll();
+        document.body.style.overflow = 'hidden';
     });
 });
 
 closeImpressum.addEventListener('click', () => {
     impressumModal.classList.add('hidden');
-    unlockScroll();
+    document.body.style.overflow = 'auto';
 });
 
 impressumModal.addEventListener('click', (e) => {
     if (e.target === impressumModal) {
         impressumModal.classList.add('hidden');
-        unlockScroll();
+        document.body.style.overflow = 'auto';
     }
 });
 
@@ -392,19 +348,19 @@ datenschutzLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         datenschutzModal.classList.remove('hidden');
-        lockScroll();
+        document.body.style.overflow = 'hidden';
     });
 });
 
 closeDatenschutz.addEventListener('click', () => {
     datenschutzModal.classList.add('hidden');
-    unlockScroll();
+    document.body.style.overflow = 'auto';
 });
 
 datenschutzModal.addEventListener('click', (e) => {
     if (e.target === datenschutzModal) {
         datenschutzModal.classList.add('hidden');
-        unlockScroll();
+        document.body.style.overflow = 'auto';
     }
 });
 
