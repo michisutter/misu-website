@@ -1,4 +1,20 @@
 // Custom cursor (only on non-touch devices)
+
+// === Preload all project images after hero animation ===
+function preloadProjectImages() {
+    if (!window.projects || !Array.isArray(window.projects)) return;
+    window.projects.forEach(project => {
+        if (project.image) {
+            const img = new window.Image();
+            img.src = project.image;
+        }
+    });
+}
+
+// Wait for hero animation (2s) then preload images
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(preloadProjectImages, 2000);
+});
 const customCursor = document.getElementById('custom-cursor');
 const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
@@ -70,6 +86,7 @@ if (scrollCircle) {
     if (footer) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                console.log('Footer intersection:', entry.isIntersecting, entry.intersectionRatio);
                 if (entry.isIntersecting) {
                     scrollCircle.classList.add('at-footer');
                 } else {
@@ -77,9 +94,22 @@ if (scrollCircle) {
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.5
         });
         observer.observe(footer);
+    }
+    
+    // Mobile: Ensure scroll-circle hides when leaving footer after interaction
+    const isMobile = window.innerWidth <= 640;
+    if (isMobile) {
+        window.addEventListener('scroll', () => {
+            if (!footer) return;
+            const footerRect = footer.getBoundingClientRect();
+            const inView = footerRect.top < window.innerHeight && footerRect.bottom > 0;
+            if (!inView) {
+                scrollCircle.classList.remove('at-footer');
+            }
+        });
     }
 }
 

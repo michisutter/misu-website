@@ -33,10 +33,14 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://heymisu.ch" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
+
+    <!-- Favicon (RealFaviconGenerator, assets/img/favicons) -->
+    <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg" />
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="misu" />
+    <link rel="manifest" href="/assets/img/favicons/site.webmanifest" />
 
     <title>misu | Partner für multimediale Konzepte und Steuerungen</title>
 
@@ -438,7 +442,7 @@
         #scroll-circle {
             position: fixed;
             right: -70px;
-            bottom: 100px;
+            bottom: 40px;
             width: 140px;
             height: 140px;
             cursor: pointer;
@@ -448,6 +452,14 @@
             animation: fadeInCircle 1s ease-in-out 5.5s forwards;
             will-change: right, bottom;
             transform: translateZ(0);
+        }
+
+        @media (max-width: 768px) {
+            #scroll-circle {
+                width: 90px;
+                height: 90px;
+                right: -40px;
+            }
         }
 
         #scroll-circle::before {
@@ -469,7 +481,8 @@
         }
 
         #scroll-circle.at-footer {
-            bottom: 100px;
+            bottom: 120px !important;
+            right: 30px !important;
         }
 
         #scroll-circle svg {
@@ -1114,7 +1127,7 @@
             <!-- Content -->
             <div class="max-w-5xl mx-auto">
                 <!-- Image floats on the left on desktop -->
-                <img src="assets/img/michael-sutter.PNG" alt="Michael Sutter" loading="lazy"
+                <img src="assets/img/michael-sutter.jpg" alt="Michael Sutter" loading="lazy"
                     class="w-full md:w-[400px] md:float-left md:mr-8 mb-8 aspect-square object-cover shadow-xl">
 
                 <!-- Text Content -->
