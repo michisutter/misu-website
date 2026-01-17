@@ -51,10 +51,23 @@ function lockScroll() {
 function unlockScroll() {
   document.documentElement.classList.remove('no-scroll');
   document.body.classList.remove('no-scroll');
+
   const top = document.body.style.top;
   document.body.style.top = '';
+
   const y = top ? Math.abs(parseInt(top, 10)) : __scrollY;
+
+  // --- IMPORTANT: disable smooth scrolling just for the restore ---
+  const prevScrollBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = 'auto';
+
+  // Restore instantly (no smooth animation)
   window.scrollTo(0, y);
+
+  // Restore previous scroll behavior on next frame
+  requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = prevScrollBehavior;
+  });
 }
 
 // Fullscreen menu toggle
