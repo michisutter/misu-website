@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description"
         content="misu - Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich. Crestron-zertifiziert.  Kontakt: hello@heymisu.ch" />
     <meta name="keywords"
@@ -714,6 +714,23 @@
         /* TEMPORARY: Test all-white background */
         section {
             background: white !important;
+        }
+
+        /* Safe area for iOS bottom bar */
+        body {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        footer {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Fullscreen menu covers safe areas on mobile */
+        #fullscreen-menu {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            min-height: 100vh;
+            height: 100dvh;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -1506,6 +1523,41 @@
 
     <!-- Main JavaScript -->
     <script src="main.js"></script>
+
+        <script>
+        // Prevent background scroll/touchmove when menu is open (mobile)
+        document.addEventListener('DOMContentLoaded', function() {
+            var menu = document.getElementById('fullscreen-menu');
+            var menuToggle = document.getElementById('menu-toggle');
+            var menuClose = document.getElementById('menu-close');
+            function preventScroll(e) {
+                if (menu.classList.contains('menu-open')) {
+                    e.preventDefault();
+                }
+            }
+            // Only apply on touch devices
+            function isTouchDevice() {
+                return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            }
+            if (isTouchDevice()) {
+                menu.addEventListener('touchmove', preventScroll, { passive: false });
+                document.body.addEventListener('touchmove', preventScroll, { passive: false });
+            }
+            // Ensure menu is fullscreen on open (for iOS)
+            if (menuToggle && menu) {
+                menuToggle.addEventListener('click', function() {
+                    menu.style.height = '100dvh';
+                    menu.style.minHeight = '100vh';
+                });
+            }
+            if (menuClose && menu) {
+                menuClose.addEventListener('click', function() {
+                    menu.style.height = '';
+                    menu.style.minHeight = '';
+                });
+            }
+        });
+        </script>
 
 
         <script>
