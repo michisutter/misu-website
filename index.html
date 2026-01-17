@@ -1507,51 +1507,6 @@
     <!-- Main JavaScript -->
     <script src="main.js"></script>
 
-        <script>
-        // Dynamically update theme-color for iOS Safari fullscreen menu
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get or create the theme-color meta tag
-            let themeMeta = document.querySelector('meta[name="theme-color"]');
-            if (!themeMeta) {
-                themeMeta = document.createElement('meta');
-                themeMeta.name = 'theme-color';
-                document.head.appendChild(themeMeta);
-            }
-            // Store the default color (from markup or fallback)
-            const defaultColor = themeMeta.content || '#ffffff';
-            // Menu colors
-            const menuColor = '#5FD4A5'; // misu-mint
-            // Menu open/close logic
-            const menuToggle = document.getElementById('menu-toggle');
-            const menuClose = document.getElementById('menu-close');
-            const fullscreenMenu = document.getElementById('fullscreen-menu');
-            function setThemeColor(color) {
-                themeMeta.setAttribute('content', color);
-            }
-            // Open menu: set theme color to menuColor
-            if (menuToggle && fullscreenMenu) {
-                menuToggle.addEventListener('click', function() {
-                    setThemeColor(menuColor);
-                });
-            }
-            // Close menu: revert to default
-            if (menuClose && fullscreenMenu) {
-                menuClose.addEventListener('click', function() {
-                    setTimeout(function() {
-                        setThemeColor(defaultColor);
-                    }, 300); // Wait for menu close animation
-                });
-            }
-            // Also revert on Escape key (if menu closes this way)
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && fullscreenMenu && fullscreenMenu.classList.contains('menu-open')) {
-                    setTimeout(function() {
-                        setThemeColor(defaultColor);
-                    }, 300);
-                }
-            });
-        });
-        </script>
 
         <script>
             // Make header white and fade out overlay when footer reaches the bottom of the overlay (with 5px offset)
