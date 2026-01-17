@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="misu - Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich. Crestron-zertifiziert.  Kontakt: hello@heymisu.ch" />
     <meta name="keywords"
@@ -12,22 +12,20 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph Tags for Social Sharing -->
-    <meta property="og: title" content="misu - Partner für multimediale Konzepte und Steuerungen" />
-    <meta property="og:description"
-        content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
+    <meta property="og:title" content="misu - Partner für multimediale Konzepte und Steuerungen" />
+    <meta property="og:description" content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
     <meta property="og:type" content="website" />
-    <meta property="og: url" content="https://heymisu.ch" />
+    <meta property="og:url" content="https://heymisu.ch" />
     <meta property="og:site_name" content="misu" />
     <meta property="og:locale" content="de_CH" />
-    <meta property="og: image" content="https://heymisu.ch/assets/img/og-image.jpg" />
-    <meta property="og:image: width" content="1200" />
-    <meta property="og: image: height" content="630" />
+    <meta property="og:image" content="https://heymisu.ch/assets/img/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="misu - Partner für multimediale Konzepte und Steuerungen" />
-    <meta name="twitter: description"
-        content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
+    <meta name="twitter:description" content="Dein Partner für AV-Technik, multimediale Konzepte und Mediensteuerungen in Zürich." />
     <meta name="twitter:image" content="https://heymisu.ch/assets/img/og-image.jpg" />
 
     <!-- Canonical URL -->
@@ -95,6 +93,57 @@
             font-display: swap;
         }
     </style>
+    <style>
+        /* Mobile: fullscreen project modal */
+        @media (max-width: 640px) {
+            #project-modal {
+                padding: 0 !important;
+            }
+
+            #project-modal > div {
+                position: fixed;
+                inset: 0;
+                width: 100%;
+                height: 100vh;
+                max-width: 100%;
+                max-height: none;
+                border-radius: 0;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            /* Ensure close button is reachable */
+            #project-modal #close-modal {
+                top: 12px;
+                right: 12px;
+                z-index: 9999;
+                width: 48px;
+                height: 48px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0,0,0,0.65);
+                color: #ffffff;
+                border-radius: 9999px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+                border: none;
+                padding: 0;
+            }
+
+            #project-modal #close-modal .material-icons {
+                font-size: 22px;
+                line-height: 1;
+            }
+        }
+    </style>
+
+    <script>
+    // Ensure scroll position is always at the top on reload or navigation
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    </script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -716,22 +765,7 @@
             background: white !important;
         }
 
-        /* Safe area for iOS bottom bar */
-        body {
-            padding-bottom: env(safe-area-inset-bottom);
-        }
-        footer {
-            padding-bottom: env(safe-area-inset-bottom);
-        }
 
-        /* Fullscreen menu covers safe areas on mobile */
-        #fullscreen-menu {
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-            min-height: 100vh;
-            height: 100dvh;
-            box-sizing: border-box;
-        }
     </style>
 </head>
 
@@ -889,11 +923,7 @@
     <!-- About Section - TECHNIK, DIE BEWEGT -->
     <section class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-5xl">
-            <!-- Main Title -->
-            <!-- <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-misu-purple mb-12 text-center">
-                TECHNIK, DIE BEWEGT.
-                TECHNIK MIT SPASSFAKTOR.
-            </h1> -->
+            <!-- Main Title (removed commented-out h1 for clarity) -->
 
             <!-- Subtitle -->
             <p class="text-3xl md:text-5xl lg:text-6xl font-light text-misu-purple mb-16 text-center leading-relaxed">
@@ -1121,7 +1151,7 @@
     </section>
 
     <!-- Project Modal -->
-    <div id="project-modal" class="hidden fixed inset-0 bg-misu-mint/95 z-50 flex items-center justify-center p-6">
+    <div id="project-modal" class="hidden fixed inset-0 bg-white z-50 flex items-center justify-center p-6">
         <div class="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
             <!-- Close Button -->
             <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
@@ -1156,9 +1186,6 @@
 
                 <!-- Text Content -->
                 <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
-                    <!--<p class="font-medium text-2xl md:text-3xl text-misu-purple">
-                        Hey, wer steckt denn hinter misu?
-                    </p>-->
 
                     <p>
                         misu wurde 2026 von Michael Sutter gegründet.
@@ -1180,17 +1207,6 @@
                         wirklich ausmacht.
                     </p>
 
-                    <!--<p>
-                        In dieser Zeit habe ich unzählige Räume, Anforderungen und Menschen kennengelernt – und dabei
-                        gelernt, wie man Technik so plant und steuert, dass sie nicht nervt, sondern begeistert.
-                    </p>
-
-                    <p>
-                        Ich habe Projekte begleitet, Lösungen entwickelt, Probleme aus dem Weg geräumt, Systeme
-                        verbessert, wieder angepasst und immer weiter verfeinert. Jede Herausforderung hat mich
-                        weitergebracht – fachlich und menschlich – und mein Verständnis dafür geschärft, was gute
-                        AV‑Technik wirklich ausmacht.
-                    </p>-->
 
                     <p class="font-semibold text-misu-purple">
                         Ich kenne die Branche – und ihre Tücken – aus nächster Nähe.
@@ -1524,40 +1540,6 @@
     <!-- Main JavaScript -->
     <script src="main.js"></script>
 
-        <script>
-        // Prevent background scroll/touchmove when menu is open (mobile)
-        document.addEventListener('DOMContentLoaded', function() {
-            var menu = document.getElementById('fullscreen-menu');
-            var menuToggle = document.getElementById('menu-toggle');
-            var menuClose = document.getElementById('menu-close');
-            function preventScroll(e) {
-                if (menu.classList.contains('menu-open')) {
-                    e.preventDefault();
-                }
-            }
-            // Only apply on touch devices
-            function isTouchDevice() {
-                return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            }
-            if (isTouchDevice()) {
-                menu.addEventListener('touchmove', preventScroll, { passive: false });
-                document.body.addEventListener('touchmove', preventScroll, { passive: false });
-            }
-            // Ensure menu is fullscreen on open (for iOS)
-            if (menuToggle && menu) {
-                menuToggle.addEventListener('click', function() {
-                    menu.style.height = '100dvh';
-                    menu.style.minHeight = '100vh';
-                });
-            }
-            if (menuClose && menu) {
-                menuClose.addEventListener('click', function() {
-                    menu.style.height = '';
-                    menu.style.minHeight = '';
-                });
-            }
-        });
-        </script>
 
 
         <script>
@@ -1616,25 +1598,6 @@
             }
         </style>
 
-    <script>
-    // Ensure scroll position is always at the top on reload or navigation
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-    </script>
 </script>
 </body>
 
-        <style>
-            .header-white {
-                background: white !important;
-                box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
-                transition: background 0.18s, box-shadow 0.18s;
-            }
-            #header-gradient-overlay.overlay-inactive {
-                opacity: 0 !important;
-                pointer-events: none !important;
-                transition: opacity 0.18s;
-            }
-        </style>

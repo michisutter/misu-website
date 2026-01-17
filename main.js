@@ -271,8 +271,9 @@ function openModal(project) {
         <img src="${project.image}" alt="${project.title}" class="w-full h-64 md:h-96 object-cover">
         <div class="p-8">
             <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-4">${project.title}</h2>
-            <p class="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed">${project.description}</p>
-            <div class="flex flex-wrap gap-3">
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">${project.description}</p>
+            ${project.more ? `<div class="mt-6 text-lg md:text-xl text-gray-700 leading-relaxed">${project.more}</div>` : ''}
+            <div class="flex flex-wrap gap-3 mt-6">
                 ${project.tags.map(tag => {
                     // Check if tag is an object with text and link
                     if (typeof tag === 'object' && tag.text && tag.link) {
@@ -310,6 +311,34 @@ modal.addEventListener('click', (e) => {
         document.body.style.overflow = 'auto';
     }
 });
+
+// Mobile: swipe down to close modal
+(function setupModalSwipeToClose() {
+    if (!modal) return;
+    const modalInner = document.querySelector('#project-modal > div');
+    if (!modalInner) return;
+
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    modalInner.addEventListener('touchstart', (e) => {
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        touchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
+
+    modalInner.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchEndY - touchStartY;
+
+        // If swiped down more than threshold, close modal
+        const SWIPE_CLOSE_THRESHOLD = 80; // px
+        if (deltaY > SWIPE_CLOSE_THRESHOLD) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    }, { passive: true });
+})();
 
 // Impressum Modal
 const impressumLinks = document.querySelectorAll('a[href="#impressum"]');
