@@ -312,33 +312,7 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// Mobile: swipe down to close modal
-(function setupModalSwipeToClose() {
-    if (!modal) return;
-    const modalInner = document.querySelector('#project-modal > div');
-    if (!modalInner) return;
-
-    let touchStartY = 0;
-    let touchEndY = 0;
-
-    modalInner.addEventListener('touchstart', (e) => {
-        if (!e.changedTouches || e.changedTouches.length === 0) return;
-        touchStartY = e.changedTouches[0].clientY;
-    }, { passive: true });
-
-    modalInner.addEventListener('touchend', (e) => {
-        if (!e.changedTouches || e.changedTouches.length === 0) return;
-        touchEndY = e.changedTouches[0].clientY;
-        const deltaY = touchEndY - touchStartY;
-
-        // If swiped down more than threshold, close modal
-        const SWIPE_CLOSE_THRESHOLD = 80; // px
-        if (deltaY > SWIPE_CLOSE_THRESHOLD) {
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-    }, { passive: true });
-})();
+// swipe-to-close removed per user request
 
 // Impressum Modal
 const impressumLinks = document.querySelectorAll('a[href="#impressum"]');
