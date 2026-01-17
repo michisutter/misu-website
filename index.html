@@ -465,11 +465,17 @@
         #scroll-circle::before {
             content: '';
             position: absolute;
-            left: -150px;
-            top: -30px;
-            right: -30px;
-            bottom: -30px;
-            pointer-events: none;
+            left: -20px;
+            top: -20px;
+            right: -50px;
+            bottom: -20px;
+            pointer-events: auto;
+        }
+
+        @media (max-width: 768px) {
+            #scroll-circle::before {
+                pointer-events: none;
+            }
         }
 
         #scroll-circle:hover {
@@ -835,6 +841,7 @@
 
     <!-- Fixed gradient overlay to fade content under transparent header -->
     <div
+        id="header-gradient-overlay"
         class="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/90 to-transparent pointer-events-none z-30">
     </div>
 
@@ -1045,8 +1052,8 @@
             </h2>
 
             <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
-                Projekte, die bewegen - in den letzten 10 Jahren bei ehemaligen Arbeitgebern realisiert. Seit 2026 unter
-                eigenen Namen.
+                Projekte, die bewegen – in den letzten 10 Jahren bei früheren Arbeitgebern realisiert, seit 2026 unter
+                eigenem Namen.
             </p>
 
             <!-- Projects Stack (scroll-reveal) -->
@@ -1132,9 +1139,9 @@
 
                 <!-- Text Content -->
                 <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
-                    <p class="font-medium text-2xl md:text-3xl text-misu-purple">
+                    <!--<p class="font-medium text-2xl md:text-3xl text-misu-purple">
                         Hey, wer steckt denn hinter misu?
-                    </p>
+                    </p>-->
 
                     <p>
                         misu wurde 2026 von Michael Sutter gegründet.
@@ -1145,11 +1152,18 @@
                     </p>
 
                     <p>
-                        Ich bin seit rund 20 Jahren in der AV‑Welt zuhause: zuerst als Tontechniker auf Events, später
-                        viele Jahre in einem der renommiertesten Planungsbüros der Schweiz.
+                        Seit rund 20 Jahren bin ich in der AV‑Welt zuhause: zuerst als Tontechniker auf Events, später
+                        viele Jahre in einem der renommiertesten Planungsbüros der Schweiz. In dieser Zeit habe ich
+                        gelernt, wie man Technik so plant und steuert, dass sie nicht nervt, sondern begeistert.
                     </p>
 
                     <p>
+                        Ich habe Projekte begleitet, Lösungen entwickelt, Probleme gelöst und Systeme immer weiter
+                        verfeinert. Jede Herausforderung hat mein Verständnis dafür geschärft, was gute AV‑Technik
+                        wirklich ausmacht.
+                    </p>
+
+                    <!--<p>
                         In dieser Zeit habe ich unzählige Räume, Anforderungen und Menschen kennengelernt – und dabei
                         gelernt, wie man Technik so plant und steuert, dass sie nicht nervt, sondern begeistert.
                     </p>
@@ -1159,7 +1173,7 @@
                         verbessert, wieder angepasst und immer weiter verfeinert. Jede Herausforderung hat mich
                         weitergebracht – fachlich und menschlich – und mein Verständnis dafür geschärft, was gute
                         AV‑Technik wirklich ausmacht.
-                    </p>
+                    </p>-->
 
                     <p class="font-semibold text-misu-purple">
                         Ich kenne die Branche – und ihre Tücken – aus nächster Nähe.
@@ -1167,7 +1181,7 @@
 
                     <p>
                         Mit misu bringe ich all diese Erfahrung in ein flexibles, modernes Unternehmen ein – mit klarer
-                        Vision und dem Anspruch, Technik so zu planen und umzusetzen, dass es Spass macht.
+                        Vision und dem Anspruch, Technik so umzusetzen, dass sie einfach Spass macht.
                     </p>
                 </div>
             </div>
@@ -1493,6 +1507,77 @@
     <!-- Main JavaScript -->
     <script src="main.js"></script>
 
+        <script>
+            // Make header white and fade out overlay when footer reaches the bottom of the overlay (with 5px offset)
+            document.addEventListener('DOMContentLoaded', function() {
+                const overlay = document.getElementById('header-gradient-overlay');
+                const footer = document.querySelector('footer');
+                const header = document.querySelector('header');
+                if (!overlay || !footer || !header) return;
+                function checkFooterInView() {
+                    // Get the overlay and its position
+                    const overlayEl = document.getElementById('header-gradient-overlay');
+                    if (!overlayEl) return;
+                    const overlayRect = overlayEl.getBoundingClientRect();
+                    const overlayBottom = overlayRect.bottom;
+                    const footerRect = footer.getBoundingClientRect();
+                    // When the top of the footer is within 5px of the overlay's bottom, trigger the effect
+                    // 1. Instantly turn header white
+                    // 2. After 10ms, fade out the overlay (transparency effect)
+                    if (footerRect.top <= overlayBottom + 5) {
+                        if (!header.classList.contains('header-white')) {
+                            header.classList.add('header-white');
+                            setTimeout(() => {
+                                overlayEl.classList.add('overlay-inactive');
+                                overlayEl.style.transition = 'opacity 0.25s';
+                            }, 10);
+                        }
+                    } else {
+                        // When scrolling up, fade in overlay first, then remove white header after 10ms
+                        if (header.classList.contains('header-white')) {
+                            overlayEl.classList.remove('overlay-inactive');
+                            overlayEl.style.transition = 'none';
+                            setTimeout(() => {
+                                header.classList.remove('header-white');
+                            }, 10);
+                        }
+                    }
+                }
+                window.addEventListener('scroll', checkFooterInView);
+                window.addEventListener('resize', checkFooterInView);
+                checkFooterInView();
+            });
+        </script>
+        <style>
+            .header-white {
+                background: white !important;
+                box-shadow: none !important;
+                transition: background 0.25s, box-shadow 0.25s;
+            }
+            #header-gradient-overlay {
+                transition: opacity 0.25s;
+            }
+            #header-gradient-overlay.overlay-inactive {
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+        </style>
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+</script>
 </body>
 
-</html>
+        <style>
+            .header-white {
+                background: white !important;
+                box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
+                transition: background 0.18s, box-shadow 0.18s;
+            }
+            #header-gradient-overlay.overlay-inactive {
+                opacity: 0 !important;
+                pointer-events: none !important;
+                transition: opacity 0.18s;
+            }
+        </style>
