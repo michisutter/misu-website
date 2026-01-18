@@ -42,6 +42,9 @@
     <meta name="apple-mobile-web-app-title" content="misu" />
     <link rel="manifest" href="assets/img/favicons/site.webmanifest" />
 
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
     <title>misu | Partner für multimediale Konzepte und Steuerungen</title>
 
     <!-- Structured Data -->
@@ -63,86 +66,6 @@
         }
     }
     </script>
-
-    <style>
-        /* Ultralight for light weights */
-        @font-face {
-            font-family: 'PPTelegraf';
-            src: url('assets/fonts/telegraf/PPTelegraf-Ultralight.woff2') format('woff2');
-            font-weight: 200 300;
-            /* Covers font-light (300) */
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* Regular for normal/medium weights */
-        @font-face {
-            font-family: 'PPTelegraf';
-            src: url('assets/fonts/telegraf/PPTelegraf-Regular.woff2') format('woff2');
-            font-weight: 400 600;
-            /* Covers font-normal (400), font-medium (500), font-semibold (600) */
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* Ultrabold for bold weights */
-        @font-face {
-            font-family: 'PPTelegraf';
-            src: url('assets/fonts/telegraf/PPTelegraf-Ultrabold.woff2') format('woff2');
-            font-weight: 700 900;
-            /* Covers font-bold (700) and heavier */
-            font-style: normal;
-            font-display: swap;
-        }
-    </style>
-    <style>
-        /* Mobile: near-fullscreen project modal (not fixed/fullscreen to avoid iOS issues) */
-        @media (max-width: 640px) {
-            #project-modal {
-                padding: 12px !important;
-                align-items: center;
-                justify-content: center;
-            }
-
-            /* Use a large centered panel with a small top/bottom gap instead of fixed 100vh */
-            #project-modal>div {
-                position: relative;
-                margin: 8px 0;
-                width: 100%;
-                max-width: 980px;
-                max-height: calc(100vh - 48px);
-                border-radius: 12px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
-                border: 1px solid rgba(0, 0, 0, 0.04);
-                background: white;
-            }
-
-            /* Ensure close button is reachable and visible */
-            #project-modal #close-modal {
-                top: 10px;
-                right: 10px;
-                z-index: 9999;
-                width: 44px;
-                height: 44px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                background: rgba(0, 0, 0, 0.6);
-                color: #ffffff;
-                border-radius: 9999px;
-                box-shadow: 0 8px 26px rgba(0, 0, 0, 0.25);
-                border: none;
-                padding: 0;
-            }
-
-            #project-modal #close-modal .material-icons {
-                font-size: 20px;
-                line-height: 1;
-            }
-        }
-    </style>
 
     <script>
         // Ensure scroll position is always at the top on reload or navigation
@@ -182,630 +105,6 @@
             }
         }
     </script>
-
-    <style>
-        /* Custom animations */
-        @keyframes fadeInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100px) translateY(30px) rotate(-5deg) scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-            }
-        }
-
-        @keyframes fadeInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px) translateY(30px) rotate(5deg) scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-            }
-        }
-
-        @keyframes spinInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(150px) translateY(50px) rotate(360deg) scale(0.5);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-            }
-        }
-
-        .animate-line {
-            opacity: 0;
-        }
-
-        .animate-line:nth-child(1) {
-            animation: fadeInFromLeft 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            animation-delay: 0.5s;
-        }
-
-        .animate-line:nth-child(2) {
-            animation: fadeInFromRight 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            animation-delay: 1.5s;
-        }
-
-        .animate-line:nth-child(3) {
-            animation: fadeInFromLeft 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            animation-delay: 2.5s;
-        }
-
-        .animate-line:nth-child(4) {
-            animation: spinInFromRight 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            animation-delay: 3.5s;
-        }
-
-        /* Stacked scroll-reveal layout (Vitamin2-inspired) */
-        #projects-stack {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            min-height: 150vh;
-            /* Extra height for scroll */
-        }
-
-        .project-stack-card {
-            position: sticky;
-            top: 20vh;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            aspect-ratio: 1 / 1;
-            /* Square */
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            will-change: opacity, transform;
-            transform: translateZ(0);
-        }
-
-        .project-stack-card.visible {
-            opacity: 1;
-        }
-
-        /* Varying sizes for creative look */
-        .project-stack-card:nth-child(1) {
-            max-width: 500px;
-        }
-
-        .project-stack-card:nth-child(2) {
-            max-width: 640px;
-        }
-
-        .project-stack-card:nth-child(3) {
-            max-width: 560px;
-        }
-
-        .project-stack-card:nth-child(4) {
-            max-width: 620px;
-        }
-
-        .project-stack-card:nth-child(5) {
-            max-width: 520px;
-        }
-
-        .project-stack-card:nth-child(6) {
-            max-width: 600px;
-        }
-
-        .project-stack-card:nth-child(7) {
-            max-width: 580px;
-        }
-
-        .project-stack-card:nth-child(8) {
-            max-width: 630px;
-        }
-
-        .project-stack-card:nth-child(9) {
-            max-width: 540px;
-        }
-
-        .project-stack-card:nth-child(10) {
-            max-width: 610px;
-        }
-
-        .project-stack-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            border-radius: 0;
-            /* Sharp edges */
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            /* Rotation will be controlled by JavaScript based on scroll */
-        }
-
-        .project-stack-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .project-stack-card:hover .project-stack-inner {
-            transform: rotate(0deg) scale(1.05) !important;
-        }
-
-        .project-stack-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .project-stack-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 60%);
-            display: flex;
-            align-items: flex-end;
-            padding: 2rem;
-            pointer-events: none;
-        }
-
-        .project-stack-title {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        /* New Kompetenzen scroll-reveal animations */
-        .kompetenz-item {
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .kompetenz-item.visible {
-            opacity: 1 !important;
-            transform: translateX(0) !important;
-        }
-
-        .project-grid-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(107, 68, 98, 0.9), transparent 60%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            display: flex;
-            align-items: flex-end;
-            padding: 2rem;
-        }
-
-        .project-grid-card:hover .project-grid-overlay {
-            opacity: 1;
-        }
-
-        .project-grid-title {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            transform: translateY(20px);
-            transition: transform 0.4s ease;
-        }
-
-        .project-grid-card:hover .project-grid-title {
-            transform: translateY(0);
-        }
-
-        /* Custom Cursor */
-        * {
-            cursor: none !important;
-        }
-
-        #custom-cursor {
-            width: 12px;
-            height: 12px;
-            background-color: #842e60;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%) scale(1);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        #custom-cursor.cursor-hover {
-            transform: translate(-50%, -50%) scale(2.5);
-        }
-
-        /* Hide custom cursor on touch devices */
-        @media (hover: none) and (pointer: coarse) {
-            * {
-                cursor: auto !important;
-            }
-
-            #custom-cursor {
-                display: none;
-            }
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 50px;
-        }
-
-        section {
-            scroll-margin-top: 0px;
-        }
-
-
-        /* =========================================================
-   MOBILE FIXES
-   - Prevent horizontal "page panning"
-   - iOS-safe scroll locking for fullscreen overlays/modals
-   ========================================================= */
-
-        /* 1) Stop horizontal swipe/pan caused by overflow */
-        html,
-        body {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        /* 2) iOS-safe scroll lock (used by JS via .no-scroll) */
-        html.no-scroll,
-        body.no-scroll {
-            overflow: hidden !important;
-            height: 100% !important;
-        }
-
-        /* Position fixed prevents iOS background scroll bleed */
-        body.no-scroll {
-            position: fixed !important;
-            left: 0;
-            right: 0;
-            width: 100%;
-        }
-
-        /* Header hide/show transition */
-        header {
-            transition: transform 0.3s ease-in-out;
-        }
-
-        /* Fullscreen menu transitions */
-        @keyframes menuSlideDown {
-            0% {
-                transform: translateY(-100%);
-            }
-
-            70% {
-                transform: translateY(24px);
-            }
-
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes menuSlideUp {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-100%);
-            }
-        }
-
-        #fullscreen-menu {
-            transform: translateY(-100%);
-        }
-
-        #fullscreen-menu.menu-open {
-            animation: menuSlideDown 700ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        #fullscreen-menu.menu-closing {
-            animation: menuSlideUp 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        /* Rotating circle button */
-        @keyframes rotateCircle {
-            from {
-                transform: rotate(360deg);
-            }
-
-            to {
-                transform: rotate(0deg);
-            }
-        }
-
-        @keyframes fadeInCircle {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        #scroll-circle {
-            position: fixed;
-            right: -70px;
-            bottom: 40px;
-            width: 140px;
-            height: 140px;
-            cursor: pointer;
-            z-index: 30;
-            transition: right 0.3s ease, bottom 0.6s ease;
-            opacity: 0;
-            animation: fadeInCircle 1s ease-in-out 5.5s forwards;
-            will-change: right, bottom;
-            transform: translateZ(0);
-        }
-
-        @media (max-width: 768px) {
-            #scroll-circle {
-                width: 90px;
-                height: 90px;
-                right: -40px;
-            }
-        }
-
-        #scroll-circle::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: -20px;
-            right: -50px;
-            bottom: -20px;
-            pointer-events: auto;
-        }
-
-        @media (max-width: 768px) {
-            #scroll-circle::before {
-                pointer-events: none;
-            }
-        }
-
-        #scroll-circle:hover {
-            right: 30px;
-        }
-
-        #scroll-circle:active {
-            right: 30px;
-        }
-
-        #scroll-circle.at-footer {
-            bottom: 120px !important;
-            right: 30px !important;
-        }
-
-        #scroll-circle svg {
-            animation: rotateCircle 15s linear infinite;
-            will-change: transform;
-            transform: translateZ(0);
-        }
-
-        /* Crestron Badge */
-        @keyframes badgeWiggle {
-
-            0%,
-            100% {
-                transform: rotate(0deg);
-            }
-
-            2% {
-                transform: rotate(-15deg);
-            }
-
-            4% {
-                transform: rotate(15deg);
-            }
-
-            6% {
-                transform: rotate(-15deg);
-            }
-
-            8% {
-                transform: rotate(15deg);
-            }
-
-            10% {
-                transform: rotate(0deg);
-            }
-        }
-
-        .programmierung-wrapper {
-            position: relative;
-        }
-
-        #crestron-badge {
-            position: absolute;
-            left: -160px;
-            top: 0;
-            width: 120px;
-            height: 120px;
-            cursor: pointer;
-            z-index: 30;
-        }
-
-        #crestron-badge.wiggling {
-            animation: badgeWiggle 5s ease-in-out infinite;
-        }
-
-        @media (max-width: 768px) {
-            #crestron-badge {
-                position: static;
-                display: inline-block;
-                width: 80px;
-                height: 80px;
-                margin-right: 12px;
-                vertical-align: middle;
-            }
-        }
-
-        /* Crestron Popup */
-        #crestron-popup {
-            position: absolute;
-            left: 120px;
-            top: 50%;
-            transform: translateY(-50%) scale(0.8);
-            width: 400px;
-            background: white;
-            border: 3px solid #842e60;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            z-index: 31;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        #crestron-popup::before {
-            content: '';
-            position: absolute;
-            left: -12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            border-right: 12px solid #842e60;
-        }
-
-        #crestron-popup.open {
-            opacity: 1;
-            transform: translateY(-50%) scale(1);
-            pointer-events: auto;
-        }
-
-        @media (max-width: 768px) {
-            #crestron-popup {
-                position: fixed;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%) scale(0.8);
-                width: 90%;
-                max-width: 400px;
-            }
-
-            #crestron-popup::before {
-                display: none;
-            }
-
-            #crestron-popup.open {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        /* Loudspeaker Badge */
-        .inbetriebnahme-wrapper {
-            position: relative;
-        }
-
-        #loudspeaker-badge {
-            position: absolute;
-            right: -160px;
-            top: 0;
-            width: 120px;
-            height: 120px;
-            cursor: pointer;
-            z-index: 30;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #59d49b;
-            border-radius: 50%;
-        }
-
-        #loudspeaker-badge .material-icons {
-            font-size: 64px;
-            color: #842e60;
-        }
-
-        #loudspeaker-badge.wiggling {
-            animation: badgeWiggle 5s ease-in-out infinite;
-        }
-
-        @media (max-width: 768px) {
-            #loudspeaker-badge {
-                position: static;
-                display: inline-flex;
-                width: 80px;
-                height: 80px;
-                margin-left: 12px;
-                vertical-align: middle;
-            }
-
-            #loudspeaker-badge .material-icons {
-                font-size: 48px;
-            }
-        }
-
-        /* Loudspeaker Popup */
-        #loudspeaker-popup {
-            position: absolute;
-            right: 120px;
-            top: 50%;
-            transform: translateY(-50%) scale(0.8);
-            width: 400px;
-            background: white;
-            border: 3px solid #59d49b;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            z-index: 31;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        #loudspeaker-popup::before {
-            content: '';
-            position: absolute;
-            right: -12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            border-left: 12px solid #59d49b;
-        }
-
-        #loudspeaker-popup.open {
-            opacity: 1;
-            transform: translateY(-50%) scale(1);
-            pointer-events: auto;
-        }
-
-        @media (max-width: 768px) {
-            #loudspeaker-popup {
-                position: fixed;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%) scale(0.8);
-                width: 90%;
-                max-width: 400px;
-            }
-
-            #loudspeaker-popup::before {
-                display: none;
-            }
-
-            #loudspeaker-popup.open {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        /* TEMPORARY: Test all-white background */
-        section {
-            background: white !important;
-        }
-    </style>
 </head>
 
 <body class="bg-white font-sans">
@@ -823,14 +122,14 @@
 
             <!-- Menu Button (both mobile and desktop) -->
             <button id="menu-toggle" class="text-misu-purple">
-                <span class="material-icons text-3xl">menu</span>
+                <span class="material-icons text-4xl md:text-5xl">menu</span>
             </button>
         </div>
     </header>
 
     <!-- Fullscreen Menu Overlay -->
     <nav id="fullscreen-menu"
-        class="fixed top-0 left-0 w-screen h-screen bg-misu-mint z-50 flex items-center justify-center">
+        class="fixed top-0 left-0 right-0 h-screen bg-misu-mint z-50 flex items-center justify-center">
         <!-- Header bar in menu with logo and close button -->
         <div class="fixed top-0 left-0 right-0">
             <div class="w-full px-8 py-4 flex justify-between items-center">
@@ -838,7 +137,7 @@
                     <img src="assets/img/misu_Signatur1.png" alt="misu Logo" class="h-12 md:h-16 object-contain">
                 </a>
                 <button id="menu-close" class="text-misu-purple">
-                    <span class="material-icons text-3xl">close</span>
+                    <span class="material-icons text-4xl md:text-5xl">close</span>
                 </button>
             </div>
         </div>
@@ -1148,8 +447,8 @@
         </div>
     </section>
 
-    <!-- Referenzen Section (OLD CAROUSEL VERSION) -->
-    <section id="referenzen-old" class="py-20 px-6 bg-white">
+    <!-- Referenzen Carousel Section -->
+    <section id="referenzen-carousel" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
             <!--             <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-16 text-center">
@@ -1578,8 +877,6 @@
     <!-- Main JavaScript -->
     <script src="main.js"></script>
 
-
-
     <script>
         // Make header white and fade out overlay when footer reaches the bottom of the overlay (with 5px offset)
         document.addEventListener('DOMContentLoaded', function () {
@@ -1616,27 +913,20 @@
                     }
                 }
             }
-            window.addEventListener('scroll', checkFooterInView);
+            // rAF throttle helper for smoother scroll handling
+            function rafThrottle(fn) {
+                let ticking = false;
+                return function (...args) {
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(() => { fn.apply(this, args); ticking = false; });
+                    }
+                };
+            }
+
+            window.addEventListener('scroll', rafThrottle(checkFooterInView), { passive: true });
             window.addEventListener('resize', checkFooterInView);
             checkFooterInView();
         });
-    </script>
-    <style>
-        .header-white {
-            background: white !important;
-            box-shadow: none !important;
-            transition: background 0.25s, box-shadow 0.25s;
-        }
-
-        #header-gradient-overlay {
-            transition: opacity 0.25s;
-        }
-
-        #header-gradient-overlay.overlay-inactive {
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
-    </style>
-
     </script>
 </body>

@@ -15,6 +15,7 @@ function preloadProjectImages() {
 window.addEventListener('DOMContentLoaded', () => {
     setTimeout(preloadProjectImages, 2000);
 });
+
 const customCursor = document.getElementById('custom-cursor');
 const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
@@ -43,31 +44,46 @@ let __scrollY = 0;
 
 function lockScroll() {
   __scrollY = window.scrollY || 0;
-  document.documentElement.classList.add('no-scroll');
   document.body.classList.add('no-scroll');
-  document.body.style.top = `-${__scrollY}px`;
+  
+  // Only use position fixed trick on mobile
+  if (window.innerWidth < 1024) {
+    document.body.style.top = `-${__scrollY}px`;
+  }
 }
 
 function unlockScroll() {
-  document.documentElement.classList.remove('no-scroll');
-  document.body.classList.remove('no-scroll');
+    // Only restore scroll on mobile
+    if (window.innerWidth < 1024) {
+        const top = document.body.style.top;
+        const y = top ? Math.abs(parseInt(top, 10)) : __scrollY;
+        // Temporarily disable smooth scrolling so restoring position is instantaneous
+        const prevScrollBehavior = document.documentElement.style.scrollBehavior;
+        document.documentElement.style.scrollBehavior = 'auto';
+        // Set document scroll first while body is still fixed, then remove the lock
+        window.scrollTo(0, y);
+        // Clear inline top and remove the lock class
+        document.body.style.top = '';
+        document.body.classList.remove('no-scroll');
+        // Restore previous scroll behavior (if any). If empty, let CSS rule apply.
+        document.documentElement.style.scrollBehavior = prevScrollBehavior || '';
+    } else {
+        document.body.classList.remove('no-scroll');
+    }
+}
 
-  const top = document.body.style.top;
-  document.body.style.top = '';
-
-  const y = top ? Math.abs(parseInt(top, 10)) : __scrollY;
-
-  // --- IMPORTANT: disable smooth scrolling just for the restore ---
-  const prevScrollBehavior = document.documentElement.style.scrollBehavior;
-  document.documentElement.style.scrollBehavior = 'auto';
-
-  // Restore instantly (no smooth animation)
-  window.scrollTo(0, y);
-
-  // Restore previous scroll behavior on next frame
-  requestAnimationFrame(() => {
-    document.documentElement.style.scrollBehavior = prevScrollBehavior;
-  });
+// rAF throttle helper: ensures a callback runs at most once per animation frame
+function rafThrottle(fn) {
+    let ticking = false;
+    return function (...args) {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+                fn.apply(this, args);
+                ticking = false;
+            });
+        }
+    };
 }
 
 // Fullscreen menu toggle
@@ -76,56 +92,64 @@ const menuClose = document.getElementById('menu-close');
 const fullscreenMenu = document.getElementById('fullscreen-menu');
 const menuLinks = document.querySelectorAll('.menu-link');
 
-menuToggle.addEventListener('click', () => {
-    openMenu();
-});
+if (menuToggle && fullscreenMenu) {
+    menuToggle.addEventListener('click', () => {
+        openMenu();
+    });
+}
 
-menuClose.addEventListener('click', () => {
-    closeMenu();
-});
-
+if (menuClose && fullscreenMenu) {
+    menuClose.addEventListener('click', () => {
+        closeMenu();
+    });
+}
 
 function openMenu() {
+  if (!fullscreenMenu) return;
   lockScroll();
   fullscreenMenu.classList.add('menu-open');
 }
 
 function closeMenu() {
+  if (!fullscreenMenu) return;
   fullscreenMenu.classList.remove('menu-open');
   fullscreenMenu.classList.add('menu-closing');
 
-  // keep your animation timing, unlock AFTER it finishes
+  // Wait for animation, then unlock
   setTimeout(() => {
     fullscreenMenu.classList.remove('menu-closing');
     unlockScroll();
   }, 400);
 }
 
-
 // Close menu when clicking a link (and scroll AFTER unlock)
-menuLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    const href = link.getAttribute('href');
+if (menuLinks.length > 0) {
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
 
-    // Only intercept in-page anchor links
-    if (href && href.startsWith('#')) {
-      e.preventDefault();
+            // Only intercept in-page anchor links
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
 
-      closeMenu(); // unlockScroll() happens inside closeMenu after 400ms
+                // Save the target BEFORE closing menu
+                const target = document.querySelector(href);
 
-      // Scroll AFTER the menu close animation + unlock has finished
-      setTimeout(() => {
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 420); // a little > 400ms to be safe
-    } else {
-      // external links behave normally
-      closeMenu();
-    }
-  });
-});
+                closeMenu(); // unlockScroll() happens inside closeMenu after 400ms
+
+                // Scroll AFTER the menu close animation + unlock has finished
+                setTimeout(() => {
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 420); // slightly > 400ms to be safe
+            } else {
+                // external links behave normally
+                closeMenu();
+            }
+        });
+    });
+}
 
 
 // Rotating circle scroll to footer
@@ -143,7 +167,6 @@ if (scrollCircle) {
     if (footer) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                console.log('Footer intersection:', entry.isIntersecting, entry.intersectionRatio);
                 if (entry.isIntersecting) {
                     scrollCircle.classList.add('at-footer');
                 } else {
@@ -159,7 +182,7 @@ if (scrollCircle) {
     // Mobile: Ensure scroll-circle hides when leaving footer after interaction
     const isMobile = window.innerWidth <= 640;
     if (isMobile) {
-        window.addEventListener('scroll', () => {
+        const handleScrollCircle = rafThrottle(() => {
             if (!footer) return;
             const footerRect = footer.getBoundingClientRect();
             const inView = footerRect.top < window.innerHeight && footerRect.bottom > 0;
@@ -167,10 +190,11 @@ if (scrollCircle) {
                 scrollCircle.classList.remove('at-footer');
             }
         });
+        window.addEventListener('scroll', handleScrollCircle, { passive: true });
     }
 }
 
-// Referenzen - Carousel with navigation
+// Referenzen Carousel Section
 const carousel = document.getElementById('carousel');
 const modal = document.getElementById('project-modal');
 const modalContent = document.getElementById('modal-content');
@@ -369,8 +393,6 @@ modal.addEventListener('click', (e) => {
     }
 });
 
-// swipe-to-close removed per user request
-
 // Impressum Modal
 const impressumLinks = document.querySelectorAll('a[href="#impressum"]');
 const impressumModal = document.getElementById('impressum-modal');
@@ -482,8 +504,8 @@ if (projectsStack) {
         });
     }
     
-    // Run on scroll and initial load
-    window.addEventListener('scroll', updateStackOnScroll);
+    // Run on scroll and initial load (throttled)
+    window.addEventListener('scroll', rafThrottle(updateStackOnScroll), { passive: true });
     updateStackOnScroll();
 }
 
