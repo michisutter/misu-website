@@ -42,6 +42,13 @@
     <meta name="apple-mobile-web-app-title" content="misu" />
     <link rel="manifest" href="assets/img/favicons/site.webmanifest" />
 
+    <!-- Font Preloading -->
+    <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-Ultralight.woff2" as="font" type="font/woff2"
+        crossorigin>
+    <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-Ultrabold.woff2" as="font" type="font/woff2" crossorigin>
+
     <!-- External Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 
@@ -150,7 +157,7 @@
                 class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Arbeiten</a>
             <a href="#ueber-mich"
                 class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Über
-                mich</a>
+                misu</a>
             <a href="#netzwerk"
                 class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Netzwerk</a>
         </div>
@@ -206,7 +213,7 @@
 
     <!-- Loudspeaker Badge -->
     <div id="loudspeaker-badge">
-        <span class="material-icons">volume_up</span>
+        <img src="assets/img/competences/dante-level-3.webp" alt="Audio Expert" class="w-full h-full object-contain">
     </div>
 
     <!-- Loudspeaker Popup -->
@@ -237,22 +244,22 @@
     <section id="home"
         class="min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-white via-gray-50 to-white">
         <div class="max-w-4xl w-full text-center space-y-6">
-            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-gray-800 animate-line">
+            <p class="text-3xl md:text-5xl lg:text-6xl font-normal text-gray-800 animate-line">
                 Hey – verirrt im AV‑Dschungel?
             </p>
-            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-gray-800 animate-line">
+            <p class="text-3xl md:text-5xl lg:text-6xl font-normal text-gray-800 animate-line">
                 Zu viel Technik - zu wenig Spass?
             </p>
-            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-misu-purple animate-line">
+            <p class="text-3xl md:text-5xl lg:text-6xl font-normal text-misu-purple animate-line">
                 Keine Sorge, wir holen dich da raus.
             </p>
-            <p class="text-3xl md:text-5xl lg:text-6xl font-bold text-misu-mint animate-line">
+            <p class="text-3xl md:text-5xl lg:text-6xl font-semibold text-misu-mint animate-line">
                 Mit Technik, die begeistert.
             </p>
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div id="hero-scroll-indicator" class="absolute bottom-8 left-1/2 -translate-x-1/2">
             <span class="material-icons text-4xl text-misu-mint animate-bounce">expand_more</span>
         </div>
     </section>
@@ -263,16 +270,16 @@
             <!-- Main Title (removed commented-out h1 for clarity) -->
 
             <!-- Subtitle -->
-            <p class="text-3xl md:text-5xl lg:text-6xl font-light text-misu-purple mb-16 text-center leading-relaxed">
+            <p class="text-3xl md:text-5xl lg:text-6xl font-normal text-misu-purple mb-16 text-center leading-relaxed">
                 Dein Partner für multimediale Konzepte und Steuerungen,<br>
-                die begeistern und dir das Leben erleichtern.
+                die Freude machen und dir das Leben erleichtern.
             </p>
 
             <!-- Content Paragraphs -->
             <div class="space-y-8 text-xl md:text-2xl text-gray-700 leading-relaxed text-center">
                 <p>
-                    Wir sind misu – als Spezialist für moderne, flexible und stabile
-                    Multimediatechnik bieten wir Lösungen, die einfach Spass machen.
+                    misu, Spezialist für moderne, flexible und stabile
+                    Multimediatechnik bietet Lösungen, die einfach Spass machen.
                 </p>
 
                 <p>
@@ -295,6 +302,8 @@
         </div>
     </section>
 
+    <!-- Separator before Kompetenzen -->
+    <div class="section-separator"></div>
     <!-- Kompetenzen Section -->
     <section id="kompetenzen" class="py-20 px-6 bg-white relative overflow-hidden">
         <div class="container mx-auto max-w-6xl">
@@ -310,7 +319,7 @@
 
             <!-- Center line decoration -->
             <div
-                class="absolute left-1/2 top-40 bottom-0 w-px bg-gradient-to-b from-misu-mint via-misu-purple to-misu-mint opacity-20 hidden md:block">
+                class="absolute left-1/2 top-56 bottom-0 w-px bg-gradient-to-b from-misu-mint via-misu-purple to-misu-mint opacity-20 hidden md:block">
             </div>
 
             <!-- Competencies List (Alternating) -->
@@ -320,15 +329,15 @@
                 <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-right space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Konzepte</h3>
+                            <h3 class="text-2xl md:text-3xl font-semibold text-misu-purple mb-4">Konzepte</h3>
                             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                                Wir erstellen für dich Grundlagenkonzepte sowie erste Kostenschätzungen, damit du
+                                Wir erstellen für dich Grundlagenkonzepte und Kostenschätzungen, damit du
                                 perfekt
                                 vorbereitet bist, um mit deinem Technikpartner in den Austausch zu gehen.
                             </p>
                             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                                Klar, verständlich und praxisnah – damit deine Idee von Anfang an auf stabilen Füssen
-                                steht.
+                                Klar, verständlich und praxisnah – damit du früh Klarheit über Machbarkeit, Umfang und
+                                Kosten hast.
                             </p>
                         </div>
                         <div class="hidden md:block"></div>
@@ -340,7 +349,7 @@
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="hidden md:block"></div>
                         <div class="space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Fachplanung</h3>
+                            <h3 class="text-2xl md:text-3xl font-semibold text-misu-purple mb-4">Fachplanung</h3>
                             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen
                                 und
@@ -352,7 +361,7 @@
                                 die beste Lösung für dich.
                             </p>
                             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                                So stellst du sicher, dass dein Projekt von Anfang an auf solidem Fundament steht.
+                                So stellst du sicher, dass dein Projekt auf solidem Fundament steht.
                             </p>
                         </div>
                     </div>
@@ -363,7 +372,7 @@
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-right space-y-4">
                             <div class="inbetriebnahme-wrapper">
-                                <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Inbetriebnahme</h3>
+                                <h3 class="text-2xl md:text-3xl font-semibold text-misu-purple mb-4">Inbetriebnahme</h3>
                             </div>
                             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines
@@ -387,7 +396,7 @@
                         <div class="hidden md:block"></div>
                         <div class="space-y-4">
                             <div class="programmierung-wrapper">
-                                <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Programmierung</h3>
+                                <h3 class="text-2xl md:text-3xl font-semibold text-misu-purple mb-4">Programmierung</h3>
                             </div>
                             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 Damit am Ende wirklich alles so läuft, wie du es dir vorstellst, braucht es eine präzise
@@ -408,7 +417,7 @@
                 <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-right space-y-4">
-                            <h3 class="text-3xl md:text-4xl font-medium text-misu-purple mb-4">Qualitätskontrolle</h3>
+                            <h3 class="text-2xl md:text-3xl font-semibold text-misu-purple mb-4">Qualitätskontrolle</h3>
                             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
                                 Du möchtest sicherstellen, dass der Integrator die Arbeiten wirklich nach deinen
                                 Anforderungen ausführt?
@@ -427,6 +436,8 @@
         </div>
     </section>
 
+    <!-- Separator before Arbeiten -->
+    <div class="section-separator"></div>
     <!-- Referenzen Stacked Section -->
     <section id="referenzen" class="py-20 px-6 bg-gray-50">
         <div class="container mx-auto max-w-7xl">
@@ -436,8 +447,7 @@
             </h2>
 
             <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
-                Projekte, die bewegen – in den letzten 10 Jahren bei früheren Arbeitgebern realisiert, seit 2026 unter
-                eigenem Namen.
+                Projekte, die bewegen – aus früheren Tätigkeiten und seit 2026 unter dem Namen misu.
             </p>
 
             <!-- Projects Stack (scroll-reveal) -->
@@ -451,7 +461,7 @@
     <section id="referenzen-carousel" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
-            <!--             <h2 class="text-4xl md:text-6xl font-bold text-misu-purple mb-16 text-center">
+            <!--             <h2 class="text-4xl md:text-6xl font-semibold text-misu-purple mb-16 text-center">
                 und viele mehr....
             </h2> -->
             <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
@@ -502,17 +512,20 @@
         </div>
     </div>
 
+    <!-- Separator before Über mich -->
+    <div class="section-separator"></div>
     <!-- Über mich Section -->
     <section id="ueber-mich" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
             <h2 class="text-4xl md:text-6xl font-semibold text-misu-purple mb-6 text-center">
-                Über mich
+                Erfahrung, die man spürt.
             </h2>
 
             <!-- Section Claim -->
             <p class="text-2xl md:text-3xl font-light text-gray-700 mb-16 text-center">
-                Erfahrung, die man spürt. Projekte, die bleiben.
+                misu – flexibel, und unkompliziert, mit klarer Vision und dem Anspruch, Technik so umzusetzen, dass sie
+                Spass macht. Als Unternehmen neu unterwegs, die Erfahrung dahinter, ist es nicht.
             </p>
 
             <!-- Content -->
@@ -524,12 +537,8 @@
                 <!-- Text Content -->
                 <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
 
-                    <p>
-                        misu wurde 2026 von Michael Sutter gegründet.
-                    </p>
-
-                    <p>
-                        Auch wenn misu als Unternehmen frisch unterwegs ist – die Erfahrung dahinter ist es nicht.
+                    <p class="font-semibold">
+                        Michael Sutter
                     </p>
 
                     <p>
@@ -544,20 +553,17 @@
                         wirklich ausmacht.
                     </p>
 
-
                     <p class="font-semibold text-misu-purple">
                         Ich kenne die Branche – und ihre Tücken – aus nächster Nähe.
                     </p>
-
                     <p>
-                        Mit misu bringe ich all diese Erfahrung in ein flexibles, modernes Unternehmen ein – mit klarer
-                        Vision und dem Anspruch, Technik so umzusetzen, dass sie einfach Spass macht.
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Separator before Netzwerk -->
+    <div class="section-separator"></div>
     <!-- Netzwerk Section -->
     <section id="netzwerk" class="py-20 px-6 bg-gray-50">
         <div class="container mx-auto max-w-6xl">
@@ -568,39 +574,58 @@
 
             <!-- Section Claim -->
             <p class="text-2xl md:text-3xl font-light text-gray-700 mb-12 text-center">
-                Es geht nicht ohne andere
-            </p>
+                Damit bei deinen Projekten alles rund läuft, arbeitet misu mit ausgewählten Firmen zusammen.
+                So kombinieren wir genau die richtigen Kompetenzen und sorgen dafür, dass du immer das bestmögliche
+                Ergebnis bekommst. </p>
 
             <!-- Content -->
-            <div class="max-w-4xl mx-auto mb-16">
+            <!--<div class="max-w-4xl mx-auto mb-16">
                 <p class="text-lg md:text-xl text-gray-700 leading-relaxed text-center">
                     Damit bei deinen Projekten alles rund läuft, arbeitet misu mit ausgewählten Firmen zusammen.
                     So kombinieren wir genau die richtigen Kompetenzen und sorgen dafür, dass du immer das bestmögliche
                     Ergebnis bekommst.
-                </p>
-            </div>
+                </p>-->
+        </div>
 
-            <!-- Partner Logos -->
-            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-                <a href="https://www.neroplan.ch" target="_blank" rel="noopener noreferrer"
-                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                    <img src="assets/img/network/logo-neroplan.png" alt="Neroplan" class="h-12 md:h-16 object-contain">
-                </a>
-                <a href="https://www.tingo.ch" target="_blank" rel="noopener noreferrer"
-                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                    <img src="assets/img/network/logo-tingo.svg" alt="Tingo" class="h-12 md:h-16 object-contain">
-                </a>
-                <a href="https://www.nike.com" target="_blank" rel="noopener noreferrer"
-                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike"
-                        class="h-12 md:h-16 object-contain">
-                </a>
-                <a href="https://www.coca-cola.com" target="_blank" rel="noopener noreferrer"
-                    class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" alt="Coca-Cola"
-                        class="h-12 md:h-16 object-contain">
-                </a>
-            </div>
+        <!-- Partner Logos -->
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            <a href="https://www.neroplan.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-neroplan.png" alt="Neroplan" class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.tingo.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-tingo.svg" alt="Tingo" class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.tokyoblue.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-tokyoblue.png" alt="Tokyoblue" class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.vision-inside.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-vision-inside.png" alt="Vision Inside"
+                    class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.steinersarnen.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-steiner-sarnen.svg" alt="Steiner Sarnen"
+                    class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.smartronic.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-smartronic.svg" alt="Smartronic" class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.atelierlorraine.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-atelier-lorraine.png" alt="Atelier Lorraine"
+                    class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.produktionsbude.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img src="assets/img/network/logo-produktionsbude.jpg" alt="Produktionsbude"
+                    class="h-12 md:h-16 object-contain">
+            </a>
+        </div>
         </div>
     </section>
 
@@ -614,11 +639,11 @@
 
             <!-- Modal Content -->
             <div class="p-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-8">Impressum</h2>
+                <h2 class="text-3xl md:text-4xl font-semibold text-misu-purple mb-8">Impressum</h2>
 
                 <div class="space-y-4 text-gray-700">
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">Kontaktadresse</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">Kontaktadresse</h3>
                         <p>misu - Michael Sutter<br>
                             Idaplatz 8<br>
                             CH-8003 Zürich<br>
@@ -626,7 +651,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">Kontakt</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">Kontakt</h3>
                         <p>Telefon: +41 79 571 25 08<br>
                             E-Mail: hello@heymisu.ch<br>
                             Website: www.heymisu.ch<br>
@@ -634,14 +659,14 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">Verantwortlich für den Inhalt</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">Verantwortlich für den Inhalt</h3>
                         <p>Michael Sutter<br>
                             Idaplatz 8<br>
                             CH-8003 Zürich</p>
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">Haftungsausschluss</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">Haftungsausschluss</h3>
                         <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit,
                             Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen
                             den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der
@@ -650,14 +675,14 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">Haftung für Links</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">Haftung für Links</h3>
                         <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es
                             wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung
                             solcher Webseiten erfolgen auf eigene Gefahr des Nutzers oder der Nutzerin.</p>
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">Urheberrechte</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">Urheberrechte</h3>
                         <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf der
                             Website gehören ausschliesslich der Firma misu oder den speziell genannten Rechtsinhabern.
                             Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der
@@ -665,7 +690,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">Webdesign</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">Webdesign</h3>
                         <p>© 2026 Webdesign by misu</p>
                     </div>
                 </div>
@@ -683,11 +708,11 @@
 
             <!-- Modal Content -->
             <div class="p-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-misu-purple mb-8">Datenschutzerklärung</h2>
+                <h2 class="text-3xl md:text-4xl font-semibold text-misu-purple mb-8">Datenschutzerklärung</h2>
 
                 <div class="space-y-4 text-gray-700">
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">1. Allgemeines</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">1. Allgemeines</h3>
                         <p class="mb-3">Diese Datenschutzerklärung informiert Sie über die Bearbeitung von Personendaten
                             durch misu Michael Sutter (nachfolgend «wir» oder «uns») im Zusammenhang mit der Nutzung
                             unserer Website www.heymisu.ch sowie unseren weiteren Dienstleistungen.</p>
@@ -699,7 +724,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">2. Erhebung und Bearbeitung von
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">2. Erhebung und Bearbeitung von
                             Personendaten</h3>
                         <p class="mb-3">Wir erheben und bearbeiten Personendaten, die Sie uns freiwillig zur Verfügung
                             stellen, insbesondere wenn Sie:</p>
@@ -714,7 +739,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">3. Zweck der Datenbearbeitung</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">3. Zweck der Datenbearbeitung</h3>
                         <p class="mb-2">Wir bearbeiten Ihre Personendaten für folgende Zwecke:</p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>Bearbeitung von Anfragen und Kommunikation mit Ihnen</li>
@@ -725,7 +750,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">4. Weitergabe von Daten</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">4. Weitergabe von Daten</h3>
                         <p class="mb-3">Wir geben Ihre Personendaten nur weiter, wenn dies für die Erbringung unserer
                             Dienstleistungen erforderlich ist, Sie eingewilligt haben oder wir gesetzlich dazu
                             verpflichtet sind. Dabei können folgende Empfänger in Frage kommen:</p>
@@ -737,14 +762,14 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">5. Cookies und Tracking</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">5. Cookies und Tracking</h3>
                         <p>Unsere Website verwendet technisch notwendige Cookies, um die Funktionalität der Website zu
                             gewährleisten. Diese Cookies werden automatisch gelöscht, wenn Sie Ihren Browser schliessen.
                             Wir verwenden derzeit keine Tracking- oder Analyse-Tools von Drittanbietern.</p>
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">6. Datensicherheit</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">6. Datensicherheit</h3>
                         <p>Wir treffen angemessene technische und organisatorische Sicherheitsmassnahmen, um Ihre
                             Personendaten vor unbefugtem Zugriff, Verlust oder Missbrauch zu schützen. Der Zugang zu
                             Ihren Daten ist auf Personen beschränkt, die diese für die Erfüllung ihrer Aufgaben
@@ -752,14 +777,14 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">7. Aufbewahrungsdauer</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">7. Aufbewahrungsdauer</h3>
                         <p>Wir bewahren Ihre Personendaten nur so lange auf, wie dies für die Erfüllung der genannten
                             Zwecke erforderlich ist oder wie es gesetzliche Aufbewahrungspflichten vorsehen. Danach
                             werden Ihre Daten gelöscht oder anonymisiert.</p>
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">8. Ihre Rechte</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">8. Ihre Rechte</h3>
                         <p class="mb-2">Gemäss dem Schweizer Datenschutzgesetz (DSG) haben Sie folgende Rechte:</p>
                         <ul class="list-disc list-inside mb-3 space-y-1">
                             <li>Recht auf Auskunft über Ihre gespeicherten Daten</li>
@@ -772,7 +797,8 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">9. Änderungen dieser Datenschutzerklärung
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">9. Änderungen dieser
+                            Datenschutzerklärung
                         </h3>
                         <p>Wir behalten uns vor, diese Datenschutzerklärung jederzeit anzupassen. Die aktuelle Version
                             ist auf unserer Website verfügbar. Wir empfehlen Ihnen, diese Seite regelmässig zu besuchen.
@@ -780,7 +806,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-xl font-bold text-misu-purple mb-2">10. Kontakt</h3>
+                        <h3 class="text-xl font-semibold text-misu-purple mb-2">10. Kontakt</h3>
                         <p class="mb-3">Bei Fragen zum Datenschutz können Sie sich jederzeit an uns wenden:</p>
                         <p>misu - Michael Sutter<br>
                             Idaplatz 8<br>
@@ -803,10 +829,10 @@
                     <!--<a href="#home" class="block">
                         <img src="assets/img/misu_Signatur2.png" alt="misu" class="h-16 md:h-20 mb-4">
                     </a>-->
-                    <p class="text-gray-300 mb-4">
+                    <h4 class="text-lg font-semibold text-gray-300 mb-4">
                         misu <br> Partner für multimediale Konzepte und Steuerungen.
-                    </p>
-                    <p class="text-gray-400 text-sm">
+                    </h4>
+                    <p class="text-gray-400">
                         Michael Sutter<br>
                         Idaplatz 8<br>
                         Zürich<br>
@@ -816,7 +842,7 @@
 
                 <!-- Contact -->
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Kontakt</h4>
+                    <h4 class="text-lg font-semibold mb-4">Kontakt</h4>
                     <ul class="space-y-3 text-gray-300">
                         <li>
                             <a href="mailto:hello@heymisu.ch"
@@ -844,7 +870,7 @@
 
                 <!-- Quick Links -->
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-3 text-gray-300">
                         <li>
                             <a href="#kompetenzen" class="hover:text-misu-mint transition-colors">Kompetenzen</a>
@@ -853,7 +879,10 @@
                             <a href="#referenzen" class="hover:text-misu-mint transition-colors">Referenzen</a>
                         </li>
                         <li>
-                            <a href="#ueber-mich" class="hover:text-misu-mint transition-colors">Über mich</a>
+                            <a href="#ueber-mich" class="hover:text-misu-mint transition-colors">Über misu</a>
+                        </li>
+                        <li>
+                            <a href="#netzwerk" class="hover:text-misu-mint transition-colors">Netzwerk</a>
                         </li>
                     </ul>
                 </div>
