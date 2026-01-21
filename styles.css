@@ -68,28 +68,33 @@ body {
         border: 1px solid rgba(0, 0, 0, 0.04);
         background: white;
     }
+}
 
-    #project-modal #close-modal {
-        top: 10px;
-        right: 10px;
-        z-index: 9999;
-        width: 44px;
-        height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.6);
-        color: #ffffff;
-        border-radius: 9999px;
-        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.25);
-        border: none;
-        padding: 0;
-    }
 
-    #project-modal #close-modal .material-icons {
-        font-size: 20px;
-        line-height: 1;
-    }
+/* Project modal style for all screens */
+#project-modal #close-modal {
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border-radius: 9999px;
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.25);
+    border: none;
+    padding: 0;
+}
+
+#project-modal #close-modal svg {
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+    display: inline-block;
+    color: #ffffff;
 }
 
 /* =================================================================
@@ -529,11 +534,12 @@ header {
     height: 140px;
     cursor: pointer;
     z-index: 30;
-    transition: right 0.3s ease, bottom 0.6s ease;
+    /* Only animate transform & opacity to avoid expensive layout/paint */
+    transition: transform 380ms cubic-bezier(.2,.9,.2,1), opacity 380ms ease;
     opacity: 0;
-    animation: fadeInCircle 1s ease-in-out 5.5s forwards;
-    will-change: right, bottom;
-    transform: translateZ(0);
+    /* start slightly translated so the entrance is transform-only */
+    transform: translateX(24px) translateZ(0);
+    will-change: transform, opacity;
 }
 
 @media (max-width: 768px) {
@@ -574,9 +580,19 @@ header {
 }
 
 #scroll-circle svg {
-    animation: rotateCircle 15s linear infinite;
+    /* don't auto-rotate until visible */
     will-change: transform;
     transform: translateZ(0);
+}
+
+/* Apply rotation and reveal only when element becomes visible */
+#scroll-circle.scroll-visible {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+}
+
+#scroll-circle.scroll-visible svg {
+    animation: rotateCircle 15s linear infinite;
 }
 
 /* =================================================================
@@ -698,8 +714,9 @@ header {
     display: block;
 }
 
-#loudspeaker-badge .material-icons {
-    font-size: 64px;
+#loudspeaker-badge svg {
+    width: 64px;
+    height: 64px;
     color: #842e60;
 }
 
@@ -717,8 +734,9 @@ header {
         vertical-align: middle;
     }
 
-    #loudspeaker-badge .material-icons {
-        font-size: 48px;
+    #loudspeaker-badge svg {
+        width: 48px;
+        height: 48px;
     }
 }
 

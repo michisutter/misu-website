@@ -180,6 +180,38 @@ if (scrollCircle) {
         }
     });
 
+    // Reveal the circle only after the user scrolls past the hero section
+    // (i.e. when the next section after #home becomes visible). This keeps
+    // the circle out of LCP and only shows it once the page's main hero
+    // animation/content has been passed.
+    try {
+        const sections = Array.from(document.querySelectorAll('section'));
+        const homeIndex = sections.findIndex(s => s.id === 'home');
+        let revealTarget = null;
+
+        if (homeIndex >= 0 && homeIndex < sections.length - 1) {
+            revealTarget = sections[homeIndex + 1];
+        }
+
+        if (revealTarget) {
+            const sectionObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        scrollCircle.classList.add('scroll-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            sectionObserver.observe(revealTarget);
+        } else {
+            // Fallback: reveal after a short delay (hero animation finished)
+            setTimeout(() => scrollCircle.classList.add('scroll-visible'), 2200);
+        }
+    } catch (err) {
+        scrollCircle.classList.add('scroll-visible');
+    }
+
     // Move circle left when reaching footer
     const footer = document.querySelector('footer');
     if (footer) {
@@ -496,9 +528,10 @@ if (projectsStack) {
         const stackCard = document.createElement('div');
         stackCard.className = 'project-stack-card';
         stackCard.dataset.index = index; // Store index for rotation calculation
+        const loadingStrategy = index === 0 ? 'eager' : 'lazy';
         stackCard.innerHTML = `
             <div class="project-stack-inner">
-                <img src="${project.image}" alt="${project.title}" loading="lazy">
+                <img src="${project.image}" alt="${project.title}" width="600" height="600" loading="${loadingStrategy}">
                 <div class="project-stack-overlay">
                     <h3 class="project-stack-title">${project.title}</h3>
                 </div>
