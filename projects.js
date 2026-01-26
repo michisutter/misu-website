@@ -3,7 +3,7 @@ const projects = [
     {
         id: 1,
         title: "Rigi Lok7",
-        image: "assets/img/projects/project-rigi.jpg",
+        image: "assets/img/projects/project-rigi.avif",
         description: `Auf der Rigi entsteht ein neues Erlebnismuseum mit Mehrkanal Audiosystem, gesteuertem Showablauf und einer modernen Steuerung.`,
         more: `misu kümmert sich um die Mediensteuerung und Inbetriebnahme der AV-Technik. Wir freuen uns, Teil dieses spannenden Projekts zu sein und gemeinsam mit unseren Kollegen von Neroplan, Tokyoblue und Otiger Media Systems die technische Umsetzung zu realisieren.`,
         tags: [
@@ -17,7 +17,7 @@ const projects = [
     {
         id: 2,
         title: "Maison Cailler Broc — Erlebnisrundgang",
-        image: "assets/img/projects/project-cailler.jpg",
+        image: "assets/img/projects/project-cailler.avif",
         description: `Erlebnisrundgang durch acht Räume, mehrsprachig gesteuert, mit mechanischen Effekten sowie Licht‑ und Mediensteuerung.`,
         more: `Im Auftrag von Auviso wurde die technische Umsetzung des Besuchererlebnisses im Maison Cailler überarbeitet. Die Arbeiten erfolgten im angestellten Verhältnis bei der Tingo GmbH und umfassten die Erneuerung der Mediensteuerung, die Behebung bestehender Fehler sowie die technische Aktualisierung des Gesamtsystems. Das System steuert mehrsprachig Mechanik, Licht und Medien und ist für einen zuverlässigen Dauerbetrieb ausgelegt.`,
         tags: [
@@ -30,9 +30,9 @@ const projects = [
     {
         id: 3,
         title: "Givaudan Schweiz",
-        image: "assets/img/projects/project-givaudan.jpg",
+        image: "assets/img/projects/project-givaudan.avif",
         description: "Bei Givaudan Schweiz wurden Meeting- und Boardrooms, Digital-Signage-Systeme, der Welcome-Bereich mit LED-Wänden, Eventräume sowie ein Ausstellungsbereich realisiert.",
-        more: "Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Medienteuerung, Digital Signage sowie Teile der Fachplanung und Projektleitung. Das Ergebnis ist eine konsistente, betriebssichere Medieninfrastruktur für unterschiedliche Nutzungen.",
+        more: "Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, Digital Signage sowie Teile der Fachplanung und Projektleitung. Das Ergebnis ist eine konsistente, betriebssichere Medieninfrastruktur für unterschiedliche Nutzungen.",
          tags: [
             { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
             { text: "Kunde: Givaudan Schweiz", link: "https://givaudan.com" },
@@ -42,7 +42,7 @@ const projects = [
     {
         id: 4,
         title: "Just Erlebniswelt",
-        image: "assets/img/projects/project-just.jpg",
+        image: "assets/img/projects/project-just.avif",
         description: `Für Just Schweiz umfasste das Projekt einen Besucherrundgang mit 360°-Grossprojektion, Showsteuerung, Mehrkanal-Audio sowie eine interaktive Mediaguide-Steuerung. Das Erlebnis verbindet Bild, Ton und Interaktion zu einem durchgängigen, immersiven Rundgang.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, das Tuning des Audiosystems, die Inbetriebnahme sowie Teile der Fachplanung. Ziel war ein präzise abgestimmtes Zusammenspiel aller Komponenten für einen stabilen und hochwertigen Betrieb.`,
         tags: [
@@ -54,7 +54,7 @@ const projects = [
     {
         id: 5,
         title: "Legionärspfad Vindonissa",
-        image: "assets/img/projects/project-legionaerspfad.jpg",
+        image: "assets/img/projects/project-legionaerspfad.avif",
         description: `Für den Legionärspfad Vindonissa, den römischen Erlebnispark am historischen Legionslager in Windisch, wurde eine mehrsprachige Preshow mit unterschiedlichen Showabläufen realisiert. Die Inszenierung bildet den Auftakt des Besucherrundgangs und verbindet Bild, Ton und Ablaufsteuerung zu einem eindrücklichen Einstieg.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Medien- und Showablaufsteuerung, die Fachplanung sowie das Audiosystem‑Tuning. Ziel war ein stabiler, präzise abgestimmter Betrieb der gesamten Inszenierung.`,
         tags: [
@@ -66,7 +66,7 @@ const projects = [
     {
         id: 6,
         title: "Kernkraftwerk Leibstadt",
-        image: "assets/img/projects/project-leibstadt.jpg",
+        image: "assets/img/projects/project-leibstadt.avif",
         description: `Für das Kernkraftwerk Leibstadt wurde im Visitor Center ein multimediales Besuchererlebnis mit Guidefunktion, mehrsprachig interaktiven Räumen und Stationen sowie einem Auditorium mit Preshow umgesetzt.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung, die Integration von KNX und Audio-Systemen sowie Teile der Fachplanung. Ziel war ein stabiler, verständlich bedienbarer und betriebssicherer Gesamtauftritt.`,
         tags: [
@@ -78,7 +78,7 @@ const projects = [
     {
         id: 7,
         title: "Bergkäserei Marbach",
-        image: "assets/img/projects/project-marbach.jpg",
+        image: "assets/img/projects/project-marbach.avif",
         description: `Für die Bergkäserei Marbach wurde ein Besucherrundgang mit Personenzählung, Audioguides, einer Preshow mit Timeslot-System sowie einer Ausstellung mit interaktiven Stationen umgesetzt.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung sowie Digital‑Signage‑Lösungen. Ziel war ein stabiler, klar strukturierter Besucherfluss und ein zuverlässig gesteuerter Betrieb der gesamten Attraktion.`,
         tags: [
@@ -90,7 +90,7 @@ const projects = [
     {
         id: 8,
         title: "Omega Museum",
-        image: "assets/img/projects/project-omega.jpg",
+        image: "assets/img/projects/project-omega.avif",
         description: `Für das Omega Museum wurde ein Erlebnismuseum mit 360°- und 270°-Projektionen, interaktiven Touchscreen-Stationen, mehrsprachigen Inhalten sowie einem Timeslot-System umgesetzt.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Konfiguration der Medienplayer sowie die Integration in die Haussteuerung. Ziel war ein stabiler, synchroner Betrieb aller Medien und ein klar strukturierter Ablauf für Besucherinnen und Besucher.`,
         tags: [
@@ -102,7 +102,7 @@ const projects = [
     {
         id: 9,
         title: "Pfahlbaumuseum Unteruhldingen",
-        image: "assets/img/projects/project-pfahlbaumuseum.jpg",
+        image: "assets/img/projects/project-pfahlbaumuseum.avif",
         description: `Für das Pfahlbaumuseum Unteruhldingen wurde ein Erlebnisrundgang durch drei Räume mit mehrsprachigen Shows, 360°-Projektion sowie Show- und Lichtsteuerung technisch erneuert und auf den aktuellen Stand gebracht.`,
         more: `Die Arbeiten umfassten die Erneuerung und Aktualisierung der Technik sowie die Inbetriebnahme, Mediensteuerung, Konfiguration der Medienplayer und Teile der Fachplanung. Ziel war ein stabiler, zeitgemässer Betrieb und ein zuverlässig abgestimmtes Zusammenspiel aller Medienkomponenten.`,
         tags: [
@@ -114,7 +114,7 @@ const projects = [
     {
         id: 10,
         title: "Siemens Zug",
-        image: "assets/img/projects/project-siemens-zug.jpg",
+        image: "assets/img/projects/project-siemens-zug.avif",
         description: `Für Siemens Zug umfasste das Projekt die Ausstattung von Meetingräumen, Boardrooms und Eventräumen sowie Digital-Signage-Lösungen im Headquarters- und Campus-Umfeld.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Audiokonfiguration aller Meetingräume, die Integration von Microsoft Teams Rooms sowie eine moderne Multikamera-Lösung. Ziel war eine einheitliche, leistungsfähige und benutzerfreundliche Medientechnik für Meetings und Events.`,
         tags: [
@@ -126,7 +126,7 @@ const projects = [
     {
         id: 11,
         title: "Tierpark Goldau",
-        image: "assets/img/projects/project-tierpark-goldau.jpg",
+        image: "assets/img/projects/project-tierpark-goldau.avif",
         description: `Für den Tierpark Goldau wurde im Bergsturzmuseum ein Erlebnisraum mit Bergsturz‑Simulator, Rüttelplattformen, Spezialeffekten sowie einer grossen LED‑Wand realisiert. Ergänzt wurde die Inszenierung durch Showsteuerung und Personenzählung.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung, die Inbetriebnahme sowie die Integration der KNX‑Haussteuerung. Ziel war ein sicherer, präzise abgestimmter und zuverlässiger Betrieb der gesamten Erlebnisinstallation.`,
         tags: [
@@ -138,7 +138,7 @@ const projects = [
     {
         id: 12,
         title: "Vogelwarte Sempach",
-        image: "assets/img/projects/project-vogelwarte.jpg",
+        image: "assets/img/projects/project-vogelwarte.avif",
         description: `Für die Vogelwarte Sempach wurde eine Erlebnisausstellung über mehrere Räume mit Preshow, Audioguide, interaktiven Touchscreen-Stationen sowie einem RFID-System zur Besucherauswertung technisch überarbeitet.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Überarbeitung der Mediensteuerung, technische Updates sowie die Anpassung einzelner Showinhalte, inklusive einer neuen Robotershow.`,
         tags: [
@@ -150,7 +150,7 @@ const projects = [
     {
         id: 13,
         title: "Zoo Zürich",
-        image: "assets/img/projects/project-zoo-zuerich.jpg",
+        image: "assets/img/projects/project-zoo-zuerich.avif",
         description: `Für den Zoo Zürich, Infocenter Masoala, wurde eine grossformatige 360°-Projektion mit Mehrkanal-Audiobespielung, Eventbetrieb und Showsteuerung umgesetzt.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung, die Integration in die Gesamtsteuerung sowie das Mehrkanal-Audiosystem. Ziel war eine immersive, präzise synchronisierte Inszenierung für den täglichen Betrieb und Events.`,
         tags: [
@@ -162,7 +162,7 @@ const projects = [
     {
         id: 14,
         title: "Zunftmuseum Zürich",
-        image: "assets/img/projects/project-zunftmuseum.jpg",
+        image: "assets/img/projects/project-zunftmuseum.avif",
         description: `Für das Zunftmuseum Zürich wurde ein Erlebnismuseum über drei Räume mit jeweils eigener Show, mehrsprachigen Inhalten sowie interaktiven Stationen technisch aktualisiert.`,
         more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten das Update der Mediensteuerung, die Inbetriebnahme sowie Teile der Fachplanung. Ziel war ein stabiler, zeitgemässer Betrieb und ein klar abgestimmter Ablauf der einzelnen Inszenierungen.`,
         tags: [

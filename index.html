@@ -49,6 +49,9 @@
     <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-Ultrabold.woff2" as="font" type="font/woff2" crossorigin>
 
+    <!-- Preload header logo (critical for LCP) -->
+    <link rel="preload" as="image" href="assets/img/misu_Logo_purple_RGB.svg">
+
     <!-- External Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 
@@ -143,7 +146,8 @@
         <div class="w-full px-4 md:px-4 py-4 flex justify-between items-center">
             <!-- Logo -->
             <a href="#home" class="block -ml-6 md:-ml-2">
-                <img id="header-logo" src="assets/img/misu_Logo_purple_RGB.svg" alt="misu Logo" width="192" height="64" class="h-8 md:h-10">
+                <img id="header-logo" src="assets/img/misu_Logo_purple_RGB.svg" alt="misu Logo" width="192" height="64"
+                    class="h-8 md:h-10" loading="eager" decoding="async" fetchpriority="high">
             </a>
 
             <!-- Menu Button (both mobile and desktop) -->
@@ -163,7 +167,8 @@
         <div class="fixed top-0 left-0 right-0">
             <div class="w-full px-4 md:px-4 py-4 flex justify-between items-center">
                 <a href="#home" class="block -ml-6 md:-ml-2">
-                    <img src="assets/img/misu_Logo_purple_RGB.svg" alt="misu Logo" width="192" height="64" class="h-8 md:h-10">
+                    <img src="assets/img/misu_Logo_purple_RGB.svg" alt="misu Logo" width="192" height="64"
+                        class="h-8 md:h-10">
                 </a>
                 <button id="menu-close" class="text-misu-purple">
                     <svg class="text-4xl md:text-5xl" style="width:1em;height:1em;vertical-align:middle;"
@@ -571,7 +576,7 @@
             <div class="max-w-6xl mx-auto">
                 <!-- Image floats on the left on desktop -->
                 <img src="assets/img/michael-sutter.jpg" alt="Michael Sutter" loading="lazy"
-                    class="w-full md:w-[400px] md:float-left md:mr-8 mb-8 aspect-square object-cover shadow-xl">
+                    class="w-full md:w-[360px] md:h-[460px] md:float-left md:mr-8 mb-8 object-cover object-top shadow-xl">
 
                 <!-- Text Content -->
                 <div class="space-y-4 text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -581,8 +586,9 @@
                     </p>
 
                     <p>
-                        Seit rund 20 Jahren bin ich in der AV‑Welt zuhause: zuerst als Tontechniker auf Events, später
-                        viele Jahre in einem der renommiertesten Planungsbüros der Schweiz. In dieser Zeit habe ich
+                        Seit rund 20 Jahren bin ich in der AV‑Welt zuhause: zuerst als Tontechniker FA im
+                        Eventbereich, später viele Jahre in einem der renommiertesten Planungsbüros der Schweiz. In
+                        dieser Zeit habe ich
                         gelernt, wie man Technik so plant und steuert, dass sie nicht nervt, sondern begeistert.
                     </p>
 
@@ -595,7 +601,14 @@
                     <p class="font-semibold text-misu-purple">
                         Ich kenne die Branche – und ihre Tücken – aus nächster Nähe.
                     </p>
+
                     <p>
+                        Mein Fachwissen basiert auf langjähriger Erfahrung in der AV-Fachplanung und kontinuierlicher
+                        Weiterbildung. Ich plane Medientechnik ganzheitlich – von der Konzeption über die Detailplanung
+                        bis zur Inbetriebnahme.
+                        Ergänzt wird dieses Know-how durch Zertifizierungen wie Dante Level 3 für Audio-Netzwerke,
+                        Crestron Masters Certified Programmer sowie weitere Zertifikate namhafter AV-Hersteller.
+                    </p>
                 </div>
             </div>
         </div>
@@ -627,38 +640,47 @@
         <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             <a href="https://www.neroplan.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-neroplan.png" alt="Neroplan" width="160" height="64" class="h-12 md:h-16 object-contain">
+                <img data-src="assets/img/network/logo-neroplan.png" alt="Neroplan" width="160" height="64"
+                    class="h-12 md:h-16 object-contain">
             </a>
             <a href="https://www.tingo.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-tingo.svg" alt="Tingo" width="160" height="64" class="h-12 md:h-16 object-contain">
+                <img data-src="assets/img/network/logo-tingo.svg" alt="Tingo" width="160" height="64"
+                    class="h-12 md:h-16 object-contain">
             </a>
             <a href="https://www.tokyoblue.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-tokyoblue.png" alt="Tokyoblue" width="160" height="64" class="h-12 md:h-16 object-contain">
+                <img data-src="assets/img/network/logo-tokyoblue.png" alt="Tokyoblue" width="160" height="64"
+                    class="h-12 md:h-16 object-contain">
             </a>
             <a href="https://www.vision-inside.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-vision-inside.png" alt="Vision Inside" width="160" height="64"
+                <img data-src="assets/img/network/logo-vision-inside.png" alt="Vision Inside" width="160" height="64"
                     class="h-12 md:h-16 object-contain">
             </a>
             <a href="https://www.steinersarnen.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-steiner-sarnen.svg" alt="Steiner Sarnen" width="160" height="64"
+                <img data-src="assets/img/network/logo-steiner-sarnen.svg" alt="Steiner Sarnen" width="160" height="64"
                     class="h-12 md:h-16 object-contain">
             </a>
             <a href="https://www.smartronic.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-smartronic.svg" alt="Smartronic" width="160" height="64" class="h-12 md:h-16 object-contain">
+                <img data-src="assets/img/network/logo-smartronic.svg" alt="Smartronic" width="160" height="64"
+                    class="h-12 md:h-16 object-contain">
             </a>
             <a href="https://www.atelierlorraine.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-atelier-lorraine.png" alt="Atelier Lorraine" width="160" height="64"
+                <img data-src="assets/img/network/logo-atelier-lorraine.png" alt="Atelier Lorraine" width="160"
+                    height="64" class="h-12 md:h-16 object-contain">
+            </a>
+            <a href="https://www.mediasys.ch" target="_blank" rel="noopener noreferrer"
+                class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
+                <img data-src="assets/img/network/logo-mediasys.svg" alt="Mediasys" width="160" height="64"
                     class="h-12 md:h-16 object-contain">
             </a>
-            <a href="https://www.produktionsbude.ch" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.vicoma.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img src="assets/img/network/logo-produktionsbude.jpg" alt="Produktionsbude" width="160" height="64"
+                <img data-src="assets/img/network/logo-vicoma.png" alt="Vicoma" width="160" height="64"
                     class="h-12 md:h-16 object-contain">
             </a>
         </div>
@@ -890,7 +912,7 @@
                     <ul class="space-y-3 text-gray-300">
                         <li>
                             <a href="mailto:hello@heymisu.ch"
-                                class="hover:text-misu-mint transition-colors flex items-center gap-2">
+                                class="hover:text-misu-mint transition-colors inline-flex items-center gap-2">
                                 <svg class="text-xl" style="width:1em;height:1em;vertical-align:middle;"
                                     viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false">
                                     <path
@@ -901,7 +923,7 @@
                         </li>
                         <li>
                             <a href="tel:+41795712508"
-                                class="hover:text-misu-mint transition-colors flex items-center gap-2">
+                                class="hover:text-misu-mint transition-colors inline-flex items-center gap-2">
                                 <svg class="text-xl" style="width:1em;height:1em;vertical-align:middle;"
                                     viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false">
                                     <path
@@ -912,7 +934,7 @@
                         </li>
                         <li>
                             <a href="https://instagram.com/heymisu.ch" target="_blank" rel="noopener noreferrer"
-                                class="hover:text-misu-mint transition-colors flex items-center gap-2">
+                                class="hover:text-misu-mint transition-colors inline-flex items-center gap-2">
                                 <svg class="text-xl" style="width:1em;height:1em;vertical-align:middle;"
                                     viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false">
                                     <path

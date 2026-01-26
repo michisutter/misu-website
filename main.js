@@ -1,19 +1,74 @@
 // Custom cursor (only on non-touch devices)
 
-// === Preload all project images after hero animation ===
-function preloadProjectImages() {
-    if (!window.projects || !Array.isArray(window.projects)) return;
-    window.projects.forEach(project => {
-        if (project.image) {
-            const img = new window.Image();
-            img.src = project.image;
-        }
+// === Preload project images (returns a Promise).
+// Preloads up to `count` images (default: all). Resolves early on timeout.
+function preloadProjectImages(count = Infinity, timeoutMs = 3000) {
+    return new Promise((resolve) => {
+        if (!window.projects || !Array.isArray(window.projects)) return resolve([]);
+        const list = window.projects.slice(0, count === Infinity ? window.projects.length : count);
+        const urls = list.map(p => p.image).filter(Boolean);
+        if (urls.length === 0) return resolve([]);
+
+        const loaders = urls.map(src => new Promise(res => {
+            const img = new Image();
+            img.onload = () => res({ src, status: 'ok' });
+            img.onerror = () => res({ src, status: 'error' });
+            img.src = src;
+        }));
+
+        const all = Promise.all(loaders);
+        const timer = new Promise(res => setTimeout(res, timeoutMs, 'timeout'));
+
+        Promise.race([all, timer]).then(result => {
+            // If timer won, still resolve (we don't want to block); otherwise resolve when done.
+            resolve(urls);
+        }).catch(() => resolve(urls));
     });
 }
 
-// Wait for hero animation (2s) then preload images
+// Defer non-critical loads until user interaction or 3s fallback.
+let __deferredStarted = false;
+function startDeferredLoads() {
+    if (__deferredStarted) return;
+    __deferredStarted = true;
+
+    // 1) Swap network images (data-src -> src)
+    try {
+        const deferredImgs = document.querySelectorAll('img[data-src]');
+        deferredImgs.forEach(img => {
+            const src = img.getAttribute('data-src');
+            if (src) {
+                img.setAttribute('src', src);
+                img.setAttribute('loading', img.getAttribute('loading') || 'lazy');
+                img.setAttribute('decoding', 'async');
+                img.removeAttribute('data-src');
+            }
+        });
+    } catch (e) {
+        // ignore
+    }
+
+    // 2) Preload and build the projects stack (first 5)
+    preloadProjectImages(5, 3000).then(() => {
+        if (typeof buildProjectsStack === 'function') buildProjectsStack();
+    }).catch(() => {
+        if (typeof buildProjectsStack === 'function') buildProjectsStack();
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(preloadProjectImages, 2000);
+    // Install one-time interaction listeners
+    const events = ['scroll', 'wheel', 'touchstart', 'keydown'];
+    const handler = (e) => {
+        startDeferredLoads();
+        events.forEach(ev => window.removeEventListener(ev, handler, { passive: true }));
+        clearTimeout(fallbackTimer);
+    };
+
+    events.forEach(ev => window.addEventListener(ev, handler, { passive: true }));
+
+    // Fallback: if no interaction within 3s, start loads
+    const fallbackTimer = setTimeout(() => startDeferredLoads(), 3000);
 });
 
 // ============================================
@@ -313,7 +368,7 @@ if (typeof projects !== 'undefined' && carousel && modal && modalContent && clos
         projectCard.innerHTML = `
         <div class="cursor-pointer group">
             <div class="relative aspect-square overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                <img src="${project.image}" alt="${project.title}" loading="lazy"
+                 <img src="${project.image}" alt="${project.title}" loading="lazy" decoding="async" width="600" height="600"
                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
                     <h3 class="text-xl md:text-2xl font-semibold text-white">${project.title}</h3>
@@ -521,17 +576,20 @@ datenschutzModal.addEventListener('click', (e) => {
 
 const projectsStack = document.getElementById('projects-stack');
 
-if (projectsStack) {
+function buildProjectsStack() {
+    if (!projectsStack || typeof projects === 'undefined' || !Array.isArray(projects)) return;
+    // Clear any existing content to avoid duplicates
+    projectsStack.innerHTML = '';
+
     // Create stacked cards - ONLY FIRST 5 PROJECTS
     const stackProjects = projects.slice(0, 5);
     stackProjects.forEach((project, index) => {
         const stackCard = document.createElement('div');
         stackCard.className = 'project-stack-card';
         stackCard.dataset.index = index; // Store index for rotation calculation
-        const loadingStrategy = index === 0 ? 'eager' : 'lazy';
         stackCard.innerHTML = `
             <div class="project-stack-inner">
-                <img src="${project.image}" alt="${project.title}" width="600" height="600" loading="${loadingStrategy}">
+                <img src="${project.image}" alt="${project.title}" width="600" height="600" decoding="async">
                 <div class="project-stack-overlay">
                     <h3 class="project-stack-title">${project.title}</h3>
                 </div>
@@ -565,7 +623,7 @@ if (projectsStack) {
 
             // Apply transforms
             const inner = card.querySelector('.project-stack-inner');
-            inner.style.transform = `rotate(${currentAngle}deg)`;
+            if (inner) inner.style.transform = `rotate(${currentAngle}deg)`;
 
             // Fade in/out based on visibility
             if (scrollProgress > 0.2) {
