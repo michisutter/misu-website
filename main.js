@@ -1,4 +1,10 @@
-// Custom cursor (only on non-touch devices)
+// Debug: Intercept all scrollTo calls
+const originalScrollTo = window.scrollTo;
+window.scrollTo = function(...args) {
+    console.log('scrollTo called with:', args);
+    console.trace('Call stack:');
+    originalScrollTo.apply(window, args);
+};
 
 // === Preload project images (returns a Promise).
 // Preloads up to `count` images (default: all). Resolves early on timeout.
@@ -130,15 +136,15 @@ function unlockScroll() {
     if (window.innerWidth < 1024) {
         const top = document.body.style.top;
         const y = top ? Math.abs(parseInt(top, 10)) : __scrollY;
-        // Temporarily disable smooth scrolling so restoring position is instantaneous
+        
+        // FIRST: Remove the fixed positioning
+        document.body.classList.remove('no-scroll');
+        document.body.style.top = '';
+        
+        // THEN: Restore scroll position
         const prevScrollBehavior = document.documentElement.style.scrollBehavior;
         document.documentElement.style.scrollBehavior = 'auto';
-        // Set document scroll first while body is still fixed, then remove the lock
         window.scrollTo(0, y);
-        // Clear inline top and remove the lock class
-        document.body.style.top = '';
-        document.body.classList.remove('no-scroll');
-        // Restore previous scroll behavior (if any). If empty, let CSS rule apply.
         document.documentElement.style.scrollBehavior = prevScrollBehavior || '';
     } else {
         document.body.classList.remove('no-scroll');
@@ -181,12 +187,21 @@ function openMenu() {
     if (!fullscreenMenu) return;
     lockScroll();
     fullscreenMenu.classList.add('menu-open');
+    // Change cursor to white for menu
+    if (customCursor) {
+        customCursor.style.backgroundColor = '#ffffff';
+    }
 }
 
 function closeMenu() {
     if (!fullscreenMenu) return;
     fullscreenMenu.classList.remove('menu-open');
     fullscreenMenu.classList.add('menu-closing');
+
+    // Change cursor back to misu-mint
+    if (customCursor) {
+        customCursor.style.backgroundColor = '#59d49b';
+    }
 
     // Wait for animation, then unlock
     setTimeout(() => {

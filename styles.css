@@ -1,4 +1,383 @@
 /* =================================================================
+   MISU INTRO ANIMATION
+   ================================================================= */
+
+.misu-intro {
+    width: 100%;
+    height: 100vh;
+    background-color: #31003a;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+}
+
+.misu-hey-wrap {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.misu-hey {
+    margin: 0;
+    font-size: clamp(10rem, 28vw, 32rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    color: #842e60;
+    transform-origin: center center;
+}
+
+.misu-leaves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.misu-leaf {
+    position: absolute;
+    width: clamp(140px, 18vw, 260px);
+    fill: currentColor;
+    color: #c4fac7;
+}
+
+.misu-leaf-1 {
+    top: 6%;
+    left: 8%;
+}
+
+.misu-leaf-2 {
+    top: 10%;
+    right: 6%;
+}
+
+.misu-leaf-3 {
+    top: 35%;
+    left: 3%;
+}
+
+.misu-leaf-4 {
+    top: 38%;
+    right: 4%;
+}
+
+.misu-leaf-5 {
+    bottom: 28%;
+    left: 6%;
+}
+
+.misu-leaf-6 {
+    bottom: 24%;
+    right: 6%;
+}
+
+.misu-leaf-7 {
+    bottom: 6%;
+    left: 20%;
+}
+
+.misu-leaf-8 {
+    bottom: 8%;
+    right: 18%;
+}
+
+.misu-texts {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.misu-texts p {
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 400;
+    color: #003c3c;
+}
+
+.misu-text-left {
+    position: relative;
+}
+
+.misu-text-left::before {
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    width: 110%;
+    height: 65%;
+    left: -5%;
+    bottom: -10%;
+    z-index: -1;
+}
+
+.misu-text-right {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.9;
+}
+
+.misu-text-right span {
+    display: block;
+}
+
+.misu-text-right span:last-child {
+    font-weight: 700;
+}
+
+.misu-texts.misu-tech {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.misu-tech-sentence {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.misu-tech-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.misu-texts.misu-tech p {
+    margin: 0;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 500;
+    color: #000000;
+}
+
+.misu-tech-1 {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+.misu-tech-highlight {
+    margin: 0;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 500;
+    color: #000000;
+    position: relative;
+    top: -2rem;
+}
+
+.misu-tech-highlight::before {
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    width: 110%;
+    height: 65%;
+    left: -5%;
+    bottom: -10%;
+    z-index: -1;
+}
+
+.misu-tech-2 {
+    text-align: left;
+    position: relative;
+    padding-left: 2rem;
+    top: -1rem;
+}
+
+.misu-spass-container {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    height: clamp(10rem, 25vw, 25rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -2rem;
+}
+
+.misu-spass-letter {
+    position: absolute;
+    font-size: clamp(6rem, 18vw, 18rem);
+    font-weight: 600;
+    color: #000000;
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    line-height: 1;
+}
+
+.misu-spass-s1 {
+    top: 5%;
+    left: 0%;
+    transform: rotate(10deg);
+}
+
+.misu-spass-p {
+    top: 15%;
+    left: 22%;
+    transform: rotate(-12deg);
+}
+
+.misu-spass-a {
+    top: 0%;
+    left: 42%;
+    transform: rotate(10deg);
+}
+
+.misu-spass-s2 {
+    top: 35%;
+    left: 48%;
+    transform: rotate(15deg);
+}
+
+.misu-spass-s3 {
+    top: 20%;
+    left: 65%;
+    transform: rotate(-18deg);
+}
+
+.misu-spass-question {
+    top: 10%;
+    left: 80%;
+    transform: rotate(15deg);
+    font-size: clamp(7rem, 20vw, 20rem);
+}
+
+.misu-star-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 10rem;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.misu-star {
+    width: clamp(120px, 18vw, 250px);
+    color: #ffffff;
+    fill: currentColor;
+    transform-origin: center center;
+}
+
+.misu-logo-wrap {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.misu-logo {
+    width: clamp(200px, 40vw, 600px);
+    height: auto;
+    transform-origin: center center;
+}
+
+.misu-slide-text-wrap {
+    position: absolute;
+    inset: 0;
+    background-color: #31003a;
+    z-index: 6;
+    pointer-events: none;
+    display: grid;
+    place-items: center;
+}
+
+.misu-slide-text {
+    margin: 0;
+    font-size: clamp(4rem, 12vw, 12rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.misu-solutions-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 7;
+    pointer-events: none;
+}
+
+.misu-solutions-mit {
+  margin: 0;
+  font-size: clamp(6rem, 15vw, 15rem);
+  font-family: 'PPTelegraf', Arial, sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+  position: absolute;
+  z-index: 3;
+}
+
+.misu-solutions-text-1 {
+    margin: 0;
+    font-size: clamp(4rem, 10vw, 10rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+    align-self: flex-start;
+    padding-left: 10%;
+    z-index: 2;
+}
+
+.misu-solutions-text-2 {
+    margin: 0;
+    font-size: clamp(4rem, 10vw, 10rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+    align-self: flex-end;
+    padding-right: 10%;
+    z-index: 2;
+}
+
+.misu-solutions-star {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    color: #842e60;
+    fill: currentColor;
+    transform-origin: center center;
+    z-index: 1;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .misu-intro * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* =================================================================
    FONTS
    ================================================================= */
 
@@ -418,19 +797,19 @@ body {
 }
 
 #custom-cursor {
-    width: 12px;
-    height: 12px;
-    background-color: #842e60;
+    width: 30px;
+    height: 30px;
+    background-color: #59d49b;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    transform: translate(-50%, -50%) scale(1);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transform: translate(-50%, -50%) scale(0.4);
+    transition: transform 0.3s ease;
 }
 
 #custom-cursor.cursor-hover {
-    transform: translate(-50%, -50%) scale(2.5);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 /* Hide custom cursor on touch devices */
@@ -465,7 +844,7 @@ html,
 body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* iOS-safe scroll lock (used by JS via .no-scroll) */
@@ -512,6 +891,7 @@ header {
 
 #fullscreen-menu {
     transform: translateY(-100%);
+    z-index: 200;
 }
 
 #fullscreen-menu.menu-open {
@@ -535,7 +915,7 @@ header {
     cursor: pointer;
     z-index: 30;
     /* Only animate transform & opacity to avoid expensive layout/paint */
-    transition: transform 380ms cubic-bezier(.2,.9,.2,1), opacity 380ms ease;
+    transition: transform 380ms cubic-bezier(.2, .9, .2, 1), opacity 380ms ease;
     opacity: 0;
     /* start slightly translated so the entrance is transform-only */
     transform: translateX(24px) translateZ(0);
@@ -798,11 +1178,11 @@ header {
 /* =================================================================
    TEMPORARY: All-white background
    ================================================================= */
-
+/*
 section {
     background: white !important;
 }
-
+*/
 /* =================================================================
    SECTION SEPARATOR
    Subtle horizontal rule between major sections
@@ -811,7 +1191,7 @@ section {
     width: 100%;
     height: 1px;
     margin: 1.5rem 0;
-    background: linear-gradient(to right, transparent, rgba(95,212,165,0.35), rgba(107,68,98,0.25), rgba(95,212,165,0.35), transparent);
+    background: linear-gradient(to right, transparent, rgba(95, 212, 165, 0.35), rgba(107, 68, 98, 0.25), rgba(95, 212, 165, 0.35), transparent);
 }
 
 @media (min-width: 768px) {
