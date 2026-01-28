@@ -1,0 +1,621 @@
+/* =================================================================
+   MISU INTRO ANIMATION
+   ================================================================= */
+
+.misu-intro {
+    width: 100%;
+    height: 100vh;
+    background-color: #31003a;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+}
+
+.misu-hey-wrap {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.misu-hey {
+    margin: 0;
+    font-size: clamp(10rem, 28vw, 32rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 600;
+    line-height: 1;
+    color: #842e60;
+    transform-origin: center center;
+}
+
+/* =================================================================
+   LEAVES - DESKTOP
+   ================================================================= */
+
+.misu-leaves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.misu-leaf {
+    position: absolute;
+    color: #c4fac7;
+}
+
+.misu-leaf svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Leaf 1 - Blatt2 (648x647) - 30vw */
+.misu-leaf-1 {
+    top: -10%;
+    left: -10%;
+    width: clamp(120px, 30vw, 750px);
+    aspect-ratio: 648 / 647;
+}
+
+/* Leaf 2 - Blatt1 (764x1040) - 30vw */
+.misu-leaf-2 {
+    top: -25%;
+    left: 30%;
+    width: clamp(120px, 30vw, 750px);
+    aspect-ratio: 764 / 1040;
+}
+
+/* Leaf 3 - Blatt3 (552x929) - 31vw */
+.misu-leaf-3 {
+    top: -28%;
+    right: -10%;
+    width: clamp(124px, 31vw, 775px);
+    aspect-ratio: 552 / 929;
+}
+
+/* Leaf 4 - Blatt2 (648x647) - 24vw */
+.misu-leaf-4 {
+    top: 45%;
+    right: -7%;
+    width: clamp(96px, 24vw, 600px);
+    aspect-ratio: 648 / 647;
+}
+
+/* Leaf 5 - Blatt3 (552x929) - 22vw */
+.misu-leaf-5 {
+    bottom: 12%;
+    left: 5%;
+    width: clamp(88px, 22vw, 550px);
+    aspect-ratio: 552 / 929;
+}
+
+/* Leaf 6 - Blatt2 (648x647) - 30vw */
+.misu-leaf-6 {
+    bottom: -10%;
+    left: 18%;
+    width: clamp(120px, 30vw, 750px);
+    aspect-ratio: 648 / 647;
+}
+
+/* Leaf 7 - Blatt1 (764x1040) - 32vw */
+.misu-leaf-7 {
+    bottom: -8%;
+    right: 15%;
+    width: clamp(128px, 32vw, 800px);
+    aspect-ratio: 764 / 1040;
+}
+
+/* Leaf 8 - Blatt3 (552x929) - 24vw */
+.misu-leaf-8 {
+    bottom: -45%;
+    left: -10%;
+    width: clamp(96px, 24vw, 600px);
+    aspect-ratio: 552 / 929;
+}
+
+/* =================================================================
+   LEAVES - TABLET (max-width: 1024px)
+   ================================================================= */
+
+@media (max-width: 1024px) {
+
+    /* Leaf 1 - Blatt2 */
+    .misu-leaf-1 {
+        top: -10%;
+        left: -10%;
+        width: clamp(100px, 32vw, 500px);
+    }
+
+    /* Leaf 2 - Blatt1 */
+    .misu-leaf-2 {
+        top: -25%;
+        left: 30%;
+        width: clamp(100px, 38vw, 600px);
+    }
+
+    /* Leaf 3 - Blatt3 */
+    .misu-leaf-3 {
+        top: -18%;
+        right: -10%;
+        width: clamp(104px, 35vw, 520px);
+    }
+
+    /* Leaf 4 - Blatt2 */
+    .misu-leaf-4 {
+        top: 45%;
+        right: -7%;
+        width: clamp(80px, 30vw, 450px);
+    }
+
+    /* Leaf 5 - Blatt3 */
+    .misu-leaf-5 {
+        bottom: 15%;
+        left: 0%;
+        width: clamp(74px, 30vw, 400px);
+    }
+
+    /* Leaf 6 - Blatt2 */
+    .misu-leaf-6 {
+        bottom: -10%;
+        left: 18%;
+        width: clamp(100px, 38vw, 500px);
+    }
+
+    /* Leaf 7 - Blatt1 */
+    .misu-leaf-7 {
+        bottom: -8%;
+        right: 15%;
+        width: clamp(108px, 35vw, 540px);
+    }
+
+    /* Leaf 8 - Blatt3 */
+    .misu-leaf-8 {
+        bottom: -40%;
+        left: -15%;
+        width: clamp(80px, 30vw, 450px);
+    }
+}
+
+/* =================================================================
+   LEAVES - MOBILE (max-width: 640px)
+   ================================================================= */
+
+@media (max-width: 640px) {
+
+    /* Leaf 1 - Blatt2 */
+    .misu-leaf-1 {
+        top: 15%;
+        left: -5%;
+        width: clamp(120px, 65vw, 300px);
+        transform: rotate(90deg); /* Override GSAP rotation */
+
+    }
+
+    /* Leaf 2 - Blatt1 */
+    .misu-leaf-2 {
+        top: -5%;
+        left: 5%;
+        width: clamp(120px, 35vw, 300px);
+    }
+
+    /* Leaf 3 - Blatt3 */
+    .misu-leaf-3 {
+        top: -12%;
+        right: 0%;
+        width: clamp(85px, 47vw, 320px);
+    }
+
+    /* Leaf 4 - Blatt2 */
+    .misu-leaf-4 {
+        top: 28%;
+        right: -3%;
+        width: clamp(70px, 40vw, 250px);
+    }
+
+    /* Leaf 5 - Blatt3 */
+    .misu-leaf-5 {
+        top: 35%;
+        left: -3%;
+        width: clamp(65px, 38vw, 230px);
+    }
+
+    /* Leaf 6 - Blatt2 */
+    .misu-leaf-6 {
+        bottom: -2%;
+        left: 19%;
+        width: clamp(80px, 55vw, 300px);
+    }
+
+    /* Leaf 7 - Blatt1 */
+    .misu-leaf-7 {
+        bottom: 20%;
+        right: -5%;
+        width: clamp(85px, 57vw, 320px);
+    }
+
+    /* Leaf 8 - Blatt3 */
+    .misu-leaf-8 {
+        bottom: 8%;
+        left: -8%;
+        width: clamp(70px, 50vw, 250px);
+    }
+}
+
+.misu-texts {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Mobile - stacked vertically */
+@media (max-width: 640px) {
+    .misu-texts {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+.misu-texts p {
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 400;
+    color: #003c3c;
+}
+
+.misu-text-left {
+    position: relative;
+}
+
+.misu-text-left::before {
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    width: 104%;
+    height: 32%;
+    left: -2%;
+    bottom: 22%;
+    z-index: -1;
+}
+
+.misu-text-right {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.9;
+}
+
+.misu-text-right span {
+    display: block;
+}
+
+.misu-text-right span:last-child {
+    font-weight: 600;
+}
+
+.misu-texts.misu-tech {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0rem;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.misu-tech-sentence {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.misu-tech-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0rem;
+}
+
+.misu-texts.misu-tech p {
+    margin: 0;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 400;
+    color: #000000;
+}
+
+.misu-tech-1 {
+    text-align: right;
+    margin-top: 2rem;
+}
+
+.misu-tech-highlight {
+    margin: 0;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    font-weight: 400;
+    color: #000000;
+    position: relative;
+    top: -3rem;
+}
+
+.misu-tech-highlight::before {
+    content: '';
+    position: absolute;
+    background-color: #ffffff;
+    width: 104%;
+    height: 32%;
+    left: -2%;
+    bottom: 22%;
+    z-index: -1;
+}
+
+.misu-tech-2 {
+    text-align: left;
+    position: relative;
+    padding-left: 2rem;
+    top: -8rem;
+}
+
+.misu-spass-container {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    height: clamp(10rem, 25vw, 25rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -8rem;
+}
+
+.misu-spass-letter {
+    position: absolute;
+    font-size: clamp(6rem, 18vw, 18rem);
+    font-weight: 600;
+    color: #000000;
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    line-height: 1;
+}
+
+.misu-spass-s1 {
+    top: 5%;
+    left: 0%;
+    transform: rotate(10deg);
+}
+
+.misu-spass-p {
+    top: 15%;
+    left: 22%;
+    transform: rotate(-12deg);
+}
+
+.misu-spass-a {
+    top: 0%;
+    left: 42%;
+    transform: rotate(10deg);
+}
+
+.misu-spass-s2 {
+    top: 35%;
+    left: 48%;
+    transform: rotate(15deg);
+}
+
+.misu-spass-s3 {
+    top: 20%;
+    left: 65%;
+    transform: rotate(-18deg);
+}
+
+.misu-spass-question {
+    top: 10%;
+    left: 80%;
+    transform: rotate(15deg);
+    font-size: clamp(7rem, 20vw, 20rem);
+}
+
+@media (max-width: 640px) {
+    .misu-texts.misu-tech {
+        justify-content: flex-start;
+        /* Align to top instead of center */
+        padding-top: 10vh;
+        /* Start higher up */
+    }
+
+    .misu-tech-sentence {
+        flex-direction: column;
+        align-items: center;
+        gap: 0rem;
+    }
+
+    .misu-tech-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .misu-tech-1 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .misu-tech-highlight {
+        top: 0;
+    }
+
+    .misu-tech-2 {
+        top: 0;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .misu-spass-container {
+        margin-top: 0vh;
+        /* More space pushing Spass down */
+    }
+}
+
+.misu-star-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 8rem;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.misu-star {
+    width: clamp(140px, 20vw, 320px);
+    color: #ffffff;
+    fill: currentColor;
+    transform-origin: center center;
+}
+
+.misu-logo-wrap {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.misu-logo {
+    width: clamp(200px, 40vw, 600px);
+    height: auto;
+    transform-origin: center center;
+}
+
+.misu-slide-text-wrap {
+    position: absolute;
+    inset: 0;
+    background-color: #31003a;
+    z-index: 6;
+    pointer-events: none;
+    display: grid;
+    place-items: center;
+}
+
+.misu-slide-text {
+    margin: 0;
+    font-size: clamp(4rem, 12vw, 12rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    line-height: 1;
+    padding: 0 10vw; /* Add here globally */
+}
+
+.misu-solutions-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 7;
+    pointer-events: none;
+}
+
+.misu-solutions-mit {
+    margin: 0;
+    font-size: clamp(6rem, 15vw, 15rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+    position: absolute;
+    z-index: 3;
+}
+
+.misu-solutions-text-1 {
+    margin: 0;
+    font-size: clamp(4rem, 10vw, 10rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+    align-self: flex-start;
+    padding-left: 10%;
+    z-index: 2;
+}
+
+.misu-solutions-text-2 {
+    margin: 0;
+    font-size: clamp(4rem, 10vw, 10rem);
+    font-family: 'PPTelegraf', Arial, sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+    align-self: flex-end;
+    padding-right: 10%;
+    z-index: 2;
+}
+
+.misu-solutions-star {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    color: #842e60;
+    fill: currentColor;
+    transform-origin: center center;
+    z-index: 1;
+}
+
+@media (max-width: 640px) {
+    .misu-solutions-text-1,
+    .misu-solutions-text-2 {
+        align-self: center;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center; /* Center the text itself */
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .misu-intro * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Landscape mobile - 2 column grid for menu */
+@media (max-width: 950px) and (orientation: landscape) {
+    #fullscreen-menu {
+        justify-content: center;
+        padding-top: 10vh;
+    }
+    
+    #fullscreen-menu > div:last-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 3rem 3rem;
+        max-width: 80%;
+    }
+    
+    #fullscreen-menu .menu-link {
+        font-size: 3rem;
+    }
+    .misu-tech-2 {
+        top: -5rem;
+    }
+}

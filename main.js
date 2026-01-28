@@ -1,11 +1,3 @@
-// Debug: Intercept all scrollTo calls
-const originalScrollTo = window.scrollTo;
-window.scrollTo = function(...args) {
-    console.log('scrollTo called with:', args);
-    console.trace('Call stack:');
-    originalScrollTo.apply(window, args);
-};
-
 // === Preload project images (returns a Promise).
 // Preloads up to `count` images (default: all). Resolves early on timeout.
 function preloadProjectImages(count = Infinity, timeoutMs = 3000) {
@@ -325,7 +317,10 @@ if (heroScrollIndicator) {
             target = sections[homeIndex + 1];
         }
         if (!target) target = document.querySelector('footer');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) {
+            const targetTop = target.offsetTop;
+            window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
     });
 }
 
@@ -531,6 +526,37 @@ modal.addEventListener('click', (e) => {
     if (e.target === modal) {
         modal.classList.add('hidden');
         unlockScroll();
+    }
+});
+
+// Global ESC key handler for all modals and popups
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        // Project modal
+        if (!modal.classList.contains('hidden')) {
+            modal.classList.add('hidden');
+            unlockScroll();
+        }
+        // Impressum modal
+        if (impressumModal && !impressumModal.classList.contains('hidden')) {
+            impressumModal.classList.add('hidden');
+            unlockScroll();
+        }
+        // Datenschutz modal
+        if (datenschutzModal && !datenschutzModal.classList.contains('hidden')) {
+            datenschutzModal.classList.add('hidden');
+            unlockScroll();
+        }
+        // Crestron badge popup
+        if (typeof isPopupOpen !== 'undefined' && isPopupOpen && crestronPopup && crestronPopup.classList.contains('open')) {
+            isPopupOpen = false;
+            crestronPopup.classList.remove('open');
+        }
+        // Loudspeaker badge popup
+        if (typeof isLoudspeakerPopupOpen !== 'undefined' && isLoudspeakerPopupOpen && loudspeakerPopup && loudspeakerPopup.classList.contains('open')) {
+            isLoudspeakerPopupOpen = false;
+            loudspeakerPopup.classList.remove('open');
+        }
     }
 });
 
