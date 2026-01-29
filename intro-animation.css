@@ -192,7 +192,8 @@
         top: 15%;
         left: -5%;
         width: clamp(120px, 65vw, 300px);
-        transform: rotate(90deg); /* Override GSAP rotation */
+        transform: rotate(90deg);
+        /* Override GSAP rotation */
 
     }
 
@@ -270,7 +271,7 @@
     font-size: clamp(3rem, 8vw, 8rem);
     font-family: 'PPTelegraf', Arial, sans-serif;
     font-weight: 400;
-    color: #003c3c;
+    color: #000000;
 }
 
 .misu-text-left {
@@ -517,7 +518,8 @@
     color: #ffffff;
     white-space: nowrap;
     line-height: 1;
-    padding: 0 10vw; /* Add here globally */
+    padding: 0 10vw;
+    /* Add here globally */
 }
 
 .misu-solutions-wrap {
@@ -579,12 +581,14 @@
 }
 
 @media (max-width: 640px) {
+
     .misu-solutions-text-1,
     .misu-solutions-text-2 {
         align-self: center;
         padding-left: 0;
         padding-right: 0;
-        text-align: center; /* Center the text itself */
+        text-align: center;
+        /* Center the text itself */
     }
 }
 
@@ -603,18 +607,19 @@
         justify-content: center;
         padding-top: 10vh;
     }
-    
-    #fullscreen-menu > div:last-child {
+
+    #fullscreen-menu>div:last-child {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         gap: 3rem 3rem;
         max-width: 80%;
     }
-    
+
     #fullscreen-menu .menu-link {
         font-size: 3rem;
     }
+
     .misu-tech-2 {
         top: -5rem;
     }

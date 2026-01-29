@@ -24,20 +24,20 @@ function preloadProjectImages(count = Infinity, timeoutMs = 3000) {
     });
 }
 
-// Defer non-critical loads until user interaction or 3s fallback.
+// Simplified deferred loads - just swap network images
 let __deferredStarted = false;
 function startDeferredLoads() {
     if (__deferredStarted) return;
     __deferredStarted = true;
 
-    // 1) Swap network images (data-src -> src)
+    // Swap network partner images (data-src -> src)
     try {
         const deferredImgs = document.querySelectorAll('img[data-src]');
         deferredImgs.forEach(img => {
             const src = img.getAttribute('data-src');
             if (src) {
                 img.setAttribute('src', src);
-                img.setAttribute('loading', img.getAttribute('loading') || 'lazy');
+                img.setAttribute('loading', 'lazy');
                 img.setAttribute('decoding', 'async');
                 img.removeAttribute('data-src');
             }
@@ -45,17 +45,15 @@ function startDeferredLoads() {
     } catch (e) {
         // ignore
     }
-
-    // 2) Preload and build the projects stack (first 5)
-    preloadProjectImages(5, 3000).then(() => {
-        if (typeof buildProjectsStack === 'function') buildProjectsStack();
-    }).catch(() => {
-        if (typeof buildProjectsStack === 'function') buildProjectsStack();
-    });
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    // Install one-time interaction listeners
+    // Build projects stack immediately - images will lazy load as they scroll into view
+    if (typeof buildProjectsStack === 'function') {
+        buildProjectsStack();
+    }
+
+    // Install one-time interaction listeners for network partner images
     const events = ['scroll', 'wheel', 'touchstart', 'keydown'];
     const handler = (e) => {
         startDeferredLoads();
@@ -76,22 +74,37 @@ if (typeof projects === 'undefined' || !Array.isArray(projects)) {
     console.error('❌ ERROR: projects.js failed to load or projects array is missing.');
     console.error('Make sure projects.js is loaded before main.js in your HTML.');
 
-    // Optionally show a user-friendly message
+    // Hide project sections entirely on failure
     document.addEventListener('DOMContentLoaded', () => {
-        const projectSections = document.querySelectorAll('#projects-stack, #carousel');
-        projectSections.forEach(section => {
-            if (section) {
-                section.innerHTML = '<p style="text-align:center; padding:2rem; color:#842e60;">Projects could not be loaded. Please refresh the page.</p>';
-            }
-        });
+        const projectsStackSection = document.getElementById('referenzen');
+        const carouselSection = document.getElementById('referenzen-carousel');
+
+        if (projectsStackSection) {
+            projectsStackSection.style.display = 'none';
+        }
+        if (carouselSection) {
+            carouselSection.style.display = 'none';
+        }
     });
+
+    // Create a safe empty projects array to prevent errors in rest of code
+    window.projects = [];
 }
 
 const customCursor = document.getElementById('custom-cursor');
 const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
 if (!isTouchDevice) {
+    // Only hide cursor after first mouse movement
+    let cursorActivated = false;
+
     document.addEventListener('mousemove', (e) => {
+        // Hide default cursor on first mouse move
+        if (!cursorActivated) {
+            document.documentElement.classList.add('custom-cursor-active');
+            cursorActivated = true;
+        }
+
         customCursor.style.left = e.clientX + 'px';
         customCursor.style.top = e.clientY + 'px';
 
@@ -128,11 +141,11 @@ function unlockScroll() {
     if (window.innerWidth < 1024) {
         const top = document.body.style.top;
         const y = top ? Math.abs(parseInt(top, 10)) : __scrollY;
-        
+
         // FIRST: Remove the fixed positioning
         document.body.classList.remove('no-scroll');
         document.body.style.top = '';
-        
+
         // THEN: Restore scroll position
         const prevScrollBehavior = document.documentElement.style.scrollBehavior;
         document.documentElement.style.scrollBehavior = 'auto';
@@ -394,12 +407,20 @@ if (typeof projects !== 'undefined' && carousel && modal && modalContent && clos
     // Initialize carousel
     updateCarouselConfig();
 
-    // Listen for window resize to adjust carousel
+    // Listen for window resize to adjust carousel - only rebuild on breakpoint changes
     let resizeTimeout;
+    let lastBreakpoint = getItemsPerPage(); // Store initial breakpoint
+
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            updateCarouselConfig();
+            const currentBreakpoint = getItemsPerPage();
+
+            // Only rebuild if we crossed a breakpoint (items per page changed)
+            if (currentBreakpoint !== lastBreakpoint) {
+                lastBreakpoint = currentBreakpoint;
+                updateCarouselConfig();
+            }
         }, 200);
     });
 
@@ -630,7 +651,7 @@ function buildProjectsStack() {
         stackCard.dataset.index = index; // Store index for rotation calculation
         stackCard.innerHTML = `
             <div class="project-stack-inner">
-                <img src="${project.image}" alt="${project.title}" width="600" height="600" decoding="async">
+                <img src="${project.image}" alt="${project.title}" loading="lazy" width="600" height="600" decoding="async">
                 <div class="project-stack-overlay">
                     <h3 class="project-stack-title">${project.title}</h3>
                 </div>

@@ -42,12 +42,13 @@
     <meta name="apple-mobile-web-app-title" content="misu" />
     <link rel="manifest" href="assets/img/favicons/site.webmanifest" />
 
+    <!-- Preconnect to CDNs -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+
     <!-- Font Preloading -->
-    <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-Ultralight.woff2" as="font" type="font/woff2"
-        crossorigin>
     <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="assets/fonts/telegraf/PPTelegraf-Ultrabold.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Preload header logo (critical for LCP) -->
     <link rel="preload" as="image" href="assets/img/misu_Logo_purple.svg">
@@ -90,7 +91,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Project Data -->
-    <script src="projects.js"></script>
+    <script defer src="projects.js"></script>
 
     <script>
         tailwind.config = {
@@ -205,7 +206,7 @@
         </button>
         <div class="space-y-3 text-gray-700 text-sm leading-relaxed">
             <p>
-                Wir arbeiten grundsätzlich herstellerunabhängig und setzen jedes Projekt mit dem Steuerungssystem um,
+                misu arbeitet grundsätzlich herstellerunabhängig und setzt jedes Projekt mit dem Steuerungssystem um,
                 das technisch und funktional am besten zu deinen Anforderungen passt.
             </p>
             <p class="font-semibold text-misu-purple">
@@ -329,10 +330,10 @@
         </div>
 
         <div class="misu-texts">
-            <p class="misu-text-left">Verwirrt</p>
+            <p class="misu-text-left">Verirrt</p>
             <p class="misu-text-right">
                 <span>im AV-</span>
-                <span>Dschungel</span>
+                <span>Dschungel?</span>
             </p>
         </div>
 
@@ -357,7 +358,7 @@
 
         <!-- Scroll indicator -->
         <div id="hero-scroll-indicator" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-50">
-            <svg class="text-4xl text-misu-mint animate-bounce" style="width:1em;height:1em;vertical-align:middle;"
+            <svg class="text-4xl text-misu-mint" style="width:1em;height:1em;vertical-align:middle;"
                 viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false">
                 <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
             </svg>
@@ -1054,12 +1055,11 @@
     </footer>
 
     <!-- Intro Animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="intro-animation.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="intro-animation.js"></script>
 
     <!-- Main JavaScript -->
-    <script src="main.js"></script>
-
+    <script defer src="main.js"></script>
     <script>
         // Make header white and fade out overlay when footer reaches the bottom of the overlay (with 5px offset)
         document.addEventListener('DOMContentLoaded', function () {

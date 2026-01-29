@@ -13,7 +13,7 @@ tl.addLabel('start')
   .addLabel('fadeOut', 8.7)
   .addLabel('logoZoom', 9.7)
   .addLabel('slideText', 10.5)
-  .addLabel('solutionsScene', 13);
+  .addLabel('solutionsScene', 14);
 
 // Initial states - hide and position all elements
 tl.set('.misu-hey', {
@@ -53,11 +53,11 @@ if (isMobile) {
     .set('.misu-leaf-8', { rotation: 180, x: '-200%', y: '220%' });
 }
 
-  tl.set('.misu-text-left', {
-    opacity: 0,
-    x: -40,
-    force3D: true
-  })
+tl.set('.misu-text-left', {
+  opacity: 0,
+  x: -40,
+  force3D: true
+})
   .set('.misu-text-right', {
     opacity: 0,
     x: 40,
@@ -355,18 +355,18 @@ tl.to('.misu-logo', {
 // Scene 7: Slide text transitions across screen
 tl.to('.misu-slide-text-wrap', {
   x: '-150%',
-  duration: 3,
+  duration: 4,
   ease: 'power1.inOut'
 }, 'slideText')
   // Background changes when text LEFT EDGE reaches left viewport edge
   .to('.misu-intro', {
     backgroundColor: '#31003a',
     duration: 0.01
-  }, 'slideText+=1.2')  // When text reaches x: 0%
+  }, 'slideText+=1.8')  // When text reaches x: 0%
   .to('.misu-logo', {
     opacity: 0,
     duration: 0.01
-  }, 'slideText+=1.2');
+  }, 'slideText+=1.8');
 
 // Scene 8: Solutions scene - "Mit" appears first (center, small to big)
 tl.fromTo('.misu-solutions-mit',
@@ -415,6 +415,14 @@ tl.to('.misu-solutions-star', {
   ease: 'power2.inOut'
 }, 'solutionsScene+=1.9');
 
+// Show scroll indicator when animation completes
+tl.eventCallback('onComplete', () => {
+  const heroScrollIndicator = document.getElementById('hero-scroll-indicator');
+  if (heroScrollIndicator) {
+    heroScrollIndicator.style.transition = 'opacity 0.6s ease';
+    heroScrollIndicator.style.opacity = '1';
+  }
+});
 /*
 // TEMPORARY: Pause at 3 seconds (after leaves are in position)
 tl.pause(9);*/

@@ -2,15 +2,6 @@
    FONTS
    ================================================================= */
 
-/* Ultralight for light weights */
-@font-face {
-    font-family: 'PPTelegraf';
-    src: url('assets/fonts/telegraf/PPTelegraf-Ultralight.woff2') format('woff2');
-    font-weight: 200 300;
-    font-style: normal;
-    font-display: swap;
-}
-
 /* Regular for normal/medium weights */
 @font-face {
     font-family: 'PPTelegraf';
@@ -25,15 +16,6 @@
     font-family: 'PPTelegraf';
     src: url('assets/fonts/telegraf/PPTelegraf-SemiBold.woff2') format('woff2');
     font-weight: 600 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* Ultrabold for bold weights */
-@font-face {
-    font-family: 'PPTelegraf';
-    src: url('assets/fonts/telegraf/PPTelegraf-Ultrabold.woff2') format('woff2');
-    font-weight: 800 900;
     font-style: normal;
     font-display: swap;
 }
@@ -212,6 +194,26 @@ body {
 /* =================================================================
    HERO ANIMATION
    ================================================================= */
+
+#hero-scroll-indicator {
+    opacity: 0;
+}
+
+#hero-scroll-indicator svg {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
 
 .animate-line {
     opacity: 0;
@@ -409,11 +411,9 @@ body {
     transform: translateX(0) !important;
 }
 
-/* =================================================================
-   CUSTOM CURSOR
-   ================================================================= */
-
-* {
+/* Custom cursor - only hide default cursor after mouse movement */
+html.custom-cursor-active,
+html.custom-cursor-active * {
     cursor: none !important;
 }
 
@@ -435,7 +435,9 @@ body {
 
 /* Hide custom cursor on touch devices */
 @media (hover: none) and (pointer: coarse) {
-    * {
+
+    html.custom-cursor-active,
+    html.custom-cursor-active * {
         cursor: auto !important;
     }
 
