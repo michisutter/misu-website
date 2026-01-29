@@ -13,20 +13,27 @@ tl.addLabel('start')
   .addLabel('fadeOut', 8.7)
   .addLabel('logoZoom', 9.7)
   .addLabel('slideText', 10.5)
-  .addLabel('solutionsScene', 14);
+  .addLabel('solutionsScene', 13.5);
 
-// Initial states - hide and position all elements
-tl.set('.misu-hey', {
-  scale: 14,
-  opacity: 0,
-  force3D: true
+// Initial states - make all wrappers visible to reserve space (prevents layout shift)
+tl.set(['.misu-hey-wrap', '.misu-leaves', '.misu-texts:not(.misu-tech)', '.misu-texts.misu-tech',
+  '.misu-star-wrap', '.misu-logo-wrap', '.misu-slide-text-wrap', '.misu-solutions-wrap'], {
+  visibility: 'visible'
 })
-// Initial states - hide all leaves first
-tl.set('.misu-leaf', {
-  opacity: 0,  // Changed from 1 to 0
-  scale: 1,
-  force3D: true
-})
+
+  // Initial states - hide and position all elements
+  .set('.misu-hey', {
+    scale: 14,
+    opacity: 0,
+    force3D: true
+  })
+  // Initial states - hide all leaves first
+  .set('.misu-leaf', {
+    opacity: 0,  // Changed from 1 to 0
+    scale: 1,
+    force3D: true
+  })
+
 // Check if mobile
 const isMobile = window.innerWidth <= 640;
 

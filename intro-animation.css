@@ -11,6 +11,8 @@
     overflow: hidden;
     position: relative;
     z-index: 100;
+    contain: layout style paint;
+    will-change: background-color;
 }
 
 .misu-hey-wrap {
@@ -20,6 +22,7 @@
     place-items: center;
     overflow: hidden;
     z-index: 2;
+    visibility: hidden;
 }
 
 .misu-hey {
@@ -41,6 +44,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 4;
+    visibility: hidden;
 }
 
 .misu-leaf {
@@ -256,6 +260,7 @@
     gap: 1.2rem;
     pointer-events: none;
     z-index: 3;
+    visibility: hidden;
 }
 
 /* Mobile - stacked vertically */
@@ -313,6 +318,7 @@
     gap: 0rem;
     pointer-events: none;
     z-index: 3;
+    visibility: hidden;
 }
 
 .misu-tech-sentence {
@@ -408,7 +414,7 @@
 }
 
 .misu-spass-s2 {
-    top: 35%;
+    top: 45%;
     left: 48%;
     transform: rotate(15deg);
 }
@@ -476,6 +482,7 @@
     padding: 8rem;
     pointer-events: none;
     z-index: 4;
+    visibility: hidden;
 }
 
 .misu-star {
@@ -492,6 +499,7 @@
     place-items: center;
     overflow: hidden;
     z-index: 5;
+    visibility: hidden;
 }
 
 .misu-logo {
@@ -508,6 +516,7 @@
     pointer-events: none;
     display: grid;
     place-items: center;
+    visibility: hidden;
 }
 
 .misu-slide-text {
@@ -531,6 +540,7 @@
     align-items: center;
     z-index: 7;
     pointer-events: none;
+    visibility: hidden;
 }
 
 .misu-solutions-mit {
