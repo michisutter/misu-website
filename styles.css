@@ -814,3 +814,48 @@ header {
         margin: 3rem 0;
     }
 }
+
+/* =================================================================
+   KOMPETENZEN CARDS - Minimal CSS (only what Tailwind can't do)
+   ================================================================= */
+
+/* Scroll reveal animation */
+.kompetenz-card {
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.kompetenz-card.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Icon sizing - responsive */
+.kompetenz-icon {
+    max-width: none;
+    /* Remove limit completely */
+    width: 500px;
+    /* Force size */
+}
+
+@media (max-width: 768px) {
+    .kompetenz-icon {
+        width: 300px;
+    }
+}
+
+/* Toggle button arrow indicator */
+.kompetenz-toggle::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.kompetenz-toggle.active::before {
+    transform: rotate(90deg);
+}
+
+/* Hidden state for expandable content */
+.kompetenz-more.hidden {
+    display: none;
+}

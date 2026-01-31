@@ -506,7 +506,7 @@ if (typeof projects !== 'undefined' && carousel && modal && modalContent && clos
 // Open modal with project details
 function openModal(project) {
     modalContent.innerHTML = `
-        <img src="${project.image}" alt="${project.title}" class="w-full h-64 md:h-96 object-cover">
+        <img src="${project.image}" alt="${project.title}" class="w-full h-[24rem] md:h-[36rem] object-cover">
         <div class="p-8">
             <h2 class="text-3xl md:text-4xl font-semibold text-misu-purple mb-4">${project.title}</h2>
             <p class="text-lg md:text-xl text-gray-700 leading-relaxed">${project.description}</p>
@@ -701,27 +701,120 @@ function buildProjectsStack() {
     updateStackOnScroll();
 }
 
-// Scroll-reveal animation for new Kompetenzen section
-const kompetenzItems = document.querySelectorAll('.kompetenz-item');
+// Scroll-reveal animation for Kompetenzen cards
+const kompetenzCards = document.querySelectorAll('.kompetenz-card');
 
-if (kompetenzItems.length > 0) {
+if (kompetenzCards.length > 0) {
     const observerOptions = {
         threshold: 0.2,
         rootMargin: '0px 0px -100px 0px'
     };
 
     const kompetenzObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                // Add staggered delay for each card
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 150); // 150ms delay between each card
             }
         });
     }, observerOptions);
 
-    kompetenzItems.forEach(item => {
-        kompetenzObserver.observe(item);
+    kompetenzCards.forEach(card => {
+        kompetenzObserver.observe(card);
     });
 }
+
+// Toggle "mehr/weniger" functionality for kompetenz cards
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('kompetenz-toggle')) {
+        const button = e.target;
+        const card = button.closest('.kompetenz-card');
+        const moreContent = card.querySelector('.kompetenz-more');
+
+        if (moreContent.classList.contains('hidden')) {
+            // Show more content
+            moreContent.classList.remove('hidden');
+            button.textContent = 'weniger';
+            button.classList.add('active');
+        } else {
+            // Hide more content
+            moreContent.classList.add('hidden');
+            button.textContent = 'mehr';
+            button.classList.remove('active');
+        }
+    }
+});
+
+// Kompetenzen Layout - Dynamic two-column on desktop, single column on mobile
+function setupKompetenzenLayout() {
+    const container = document.getElementById('kompetenzen-container');
+    if (!container) return;
+
+    const cards = Array.from(container.querySelectorAll('.kompetenz-card'));
+    if (cards.length === 0) return; // Safety check
+
+    let lastBreakpoint = null; // Start as null to force initial layout
+
+    function layoutCards() {
+        const currentBreakpoint = window.innerWidth >= 768 ? 'desktop' : 'mobile';
+
+        // Only rebuild if breakpoint changed
+        if (currentBreakpoint === lastBreakpoint) return;
+        lastBreakpoint = currentBreakpoint;
+
+        if (currentBreakpoint === 'mobile') {
+            // Mobile: single column
+            container.className = 'flex flex-col space-y-8';
+            container.innerHTML = '';
+
+            // Add cards in original order
+            cards.forEach(card => container.appendChild(card));
+        } else {
+            // Desktop: create two-column layout
+            container.className = 'flex gap-8 items-start';
+            container.innerHTML = '';
+
+            // Create left and right columns
+            const leftCol = document.createElement('div');
+            leftCol.className = 'flex flex-col space-y-8 w-1/2';
+
+            const rightCol = document.createElement('div');
+            rightCol.className = 'flex flex-col space-y-8 w-1/2';
+
+            // Distribute cards: odd to left (1,3,5), even to right (2,4)
+            cards.forEach((card, index) => {
+                if (index % 2 === 0) {
+                    leftCol.appendChild(card);
+                } else {
+                    rightCol.appendChild(card);
+                }
+            });
+
+            container.appendChild(leftCol);
+            container.appendChild(rightCol);
+        }
+    }
+
+    // Run immediately on load
+    layoutCards();
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(layoutCards, 150);
+    });
+}
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', setupKompetenzenLayout);
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', setupKompetenzenLayout);
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', setupKompetenzenLayout);
 
 // Crestron Badge - Position in Programmierung section
 const crestronBadge = document.getElementById('crestron-badge');

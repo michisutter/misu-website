@@ -190,10 +190,13 @@
     <!-- (scroll-circle moved earlier) -->
 
     <!-- Crestron Badge -->
+    <!-- BADGES TEMPORARILY DISABLED
+
     <div id="crestron-badge">
         <img src="assets/img/competences/crestron-master-badge.png" alt="Crestron Master Certified"
             class="w-full h-full object-contain">
     </div>
+    END BADGES TEMPORARILY DISABLED -->
 
     <!-- Crestron Popup -->
     <div id="crestron-popup">
@@ -222,9 +225,12 @@
     </div>
 
     <!-- Loudspeaker Badge -->
+    <!-- BADGES TEMPORARILY DISABLED
+
     <div id="loudspeaker-badge">
         <img src="assets/img/competences/dante-level-3.webp" alt="Audio Expert" class="w-full h-full object-contain">
     </div>
+    END BADGES TEMPORARILY DISABLED -->
 
     <!-- Loudspeaker Popup -->
     <div id="loudspeaker-popup">
@@ -403,8 +409,9 @@
 
     <!-- Separator before Kompetenzen -->
     <div class="section-separator"></div>
+
     <!-- Kompetenzen Section -->
-    <section id="kompetenzen" class="py-20 px-6 bg-white relative overflow-hidden">
+    <section id="kompetenzen" class="py-20 px-6 bg-white">
         <div class="container mx-auto max-w-6xl">
             <!-- Section Title -->
             <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4 text-left">
@@ -416,122 +423,265 @@
                 Hey, wir sind auf deiner Seite, vom Konzept bis zur Nutzung
             </p>
 
-            <!-- Center line decoration -->
-            <div
-                class="absolute left-1/2 top-80 bottom-0 w-px bg-gradient-to-b from-misu-mint via-misu-purple to-misu-mint opacity-20 hidden md:block">
-            </div>
+            <!-- Competencies Cards Grid -->
+            <div id="kompetenzen-container" class="flex flex-col space-y-8">
+                <!-- Card 1: Konzeption -->
+                <div class="kompetenz-card opacity-0 translate-y-[50px]" data-card="1">
+                    <!-- Title box - small dark purple at top left -->
+                    <div class="bg-[#31003a] text-white text-2xl md:text-3xl font-semibold px-6 py-3 inline-block">
+                        Konzeption
+                    </div>
 
-            <!-- Competencies List (Alternating) -->
-            <div class="space-y-16 relative">
+                    <!-- Dark purple background with icon -->
+                    <div class="bg-[#31003a] py-0 px-0 flex items-center justify-center">
+                        <img src="assets/img/competences/icon-konzeption.svg" alt="Konzeption Icon"
+                            class="kompetenz-icon w-[600px] h-auto">
+                    </div>
 
-                <!-- Konzepte (LEFT) -->
-                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="text-right space-y-4">
-                            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Konzeption</h3>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                    <!-- Dark purple background with text -->
+                    <div class="bg-[#31003a] px-8 pt-0 pb-4 text-white -mt-8">
+                        <div class="space-y-4">
+                            <p class="text-lg md:text-xl leading-relaxed">
                                 Wir erstellen für dich Grundlagenkonzepte und Kostenschätzungen, damit du
-                                perfekt
-                                vorbereitet bist, um mit deinem Technikpartner in den Austausch zu gehen.
+                                perfekt vorbereitet bist, um mit deinem Technikpartner in den Austausch zu gehen.
                             </p>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl leading-relaxed">
                                 Klar, verständlich und praxisnah – damit du früh Klarheit über Machbarkeit, Umfang und
                                 Kosten hast.
                             </p>
                         </div>
-                        <div class="hidden md:block"></div>
-                    </div>
-                </div>
 
-                <!-- Fachplanung (RIGHT) -->
-                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="right">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="hidden md:block"></div>
-                        <div class="space-y-4">
-                            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Fachplanung</h3>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                                Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen
-                                und
-                                umzusetzen.
-                                Im direkten Austausch mit allen relevanten Gewerken sorgen wir für einen möglichst
-                                reibungslosen Ablauf.
-                                Wir zeichnen Pläne, erstellen Schemata, evaluieren Produkte und finden
-                                herstellerunabhängig
-                                die beste Lösung für dich.
+                        <!-- Hidden more content -->
+                        <div class="kompetenz-more hidden space-y-4 mt-4 pt-4 border-t border-white/20">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Unsere Konzepte bilden die Grundlage für eine erfolgreiche Projektumsetzung. Wir
+                                analysieren deine Anforderungen, entwickeln passende Lösungsansätze und erstellen
+                                transparente Kostenschätzungen.
                             </p>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                                So stellst du sicher, dass dein Projekt auf solidem Fundament steht.
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                So erhältst du eine solide Entscheidungsgrundlage und kannst von Anfang an mit klaren
+                                Erwartungen ins Projekt starten.
                             </p>
                         </div>
                     </div>
+
+                    <!-- mehr button box - same style as title, at bottom left -->
+                    <div
+                        class="hidden bg-[#31003a] text-misu-mint text-base font-semibold px-6 py-3 inline-block hover:text-[#c4fac7] transition-colors cursor-pointer">
+                        <button class="kompetenz-toggle relative pl-6">mehr</button>
+                    </div>
                 </div>
 
-                <!-- Inbetriebnahme (LEFT) -->
-                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="text-right space-y-4">
-                            <div class="inbetriebnahme-wrapper">
-                                <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Inbetriebnahme</h3>
-                            </div>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                                Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines
-                                Systems
-                                und stellen sicher, dass alles so umgesetzt wird, wie es geplant und gewünscht ist.
-                                Gerne
-                                übernehmen wir die komplette Konfiguration deiner AV Geräte.
+                <!-- Card 2: Fachplanung -->
+                <div class="kompetenz-card opacity-0 translate-y-[50px]" data-card="2">
+                    <!-- Title box - small dark purple at top left -->
+                    <div class="bg-[#31003a] text-white text-2xl md:text-3xl font-semibold px-6 py-3 inline-block">
+                        Fachplanung
+                    </div>
+
+                    <!-- Dark purple background with icon -->
+                    <div class="bg-[#31003a] py-0 px-0 flex items-center justify-center">
+                        <img src="assets/img/competences/icon-fachplanung.svg" alt="Fachplanung Icon"
+                            class="kompetenz-icon w-[600px] h-auto">
+                    </div>
+
+                    <!-- Dark purple background with text -->
+                    <div class="bg-[#31003a] px-8 pt-0 pb-4 text-white -mt-8">
+                        <div class="space-y-4">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Wir unterstützen dich dabei, dein Projekt nach der Konzeption professionell zu planen
+                                und umzusetzen. Im direkten Austausch mit allen relevanten Gewerken sorgen wir für einen
+                                möglichst
+                                reibungslosen Ablauf.
                             </p>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Wir zeichnen Pläne, erstellen Schemata, evaluieren Produkte und finden
+                                herstellerunabhängig die beste Lösung für dich.
+                            </p>
+                        </div>
+
+                        <!-- Hidden more content -->
+                        <div class="kompetenz-more hidden space-y-4 mt-4 pt-4 border-t border-white/20">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Die Fachplanung umfasst die detaillierte technische Ausarbeitung deines Projekts. Wir
+                                koordinieren alle beteiligten Gewerke, erstellen Ausführungspläne und begleiten den
+                                gesamten Planungsprozess.
+                            </p>
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Dadurch wird sichergestellt, dass alle technischen Anforderungen erfüllt werden und das
+                                Projekt nach höchsten Qualitätsstandards realisiert wird.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- mehr button box - same style as title, at bottom left -->
+                    <div
+                        class="hidden bg-[#31003a] text-misu-mint text-base font-semibold px-6 py-3 inline-block hover:text-[#c4fac7] transition-colors cursor-pointer">
+                        <button class="kompetenz-toggle relative pl-6">mehr</button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Inbetriebnahme -->
+                <div class="kompetenz-card opacity-0 translate-y-[50px]" data-card="3">
+                    <!-- Title box - small dark purple at top left -->
+                    <div class="bg-[#31003a] text-white text-2xl md:text-3xl font-semibold px-6 py-3 inline-block">
+                        Inbetriebnahme
+                    </div>
+
+                    <!-- Dark purple background with icon -->
+                    <div class="bg-[#31003a] py-0 px-0 flex items-center justify-center">
+                        <img src="assets/img/competences/icon-inbetriebnahme.svg" alt="Inbetriebnahme Icon"
+                            class="kompetenz-icon w-[600px] h-auto">
+                    </div>
+
+                    <!-- Dark purple background with text -->
+                    <div class="bg-[#31003a] px-8 pt-0 pb-4 text-white -mt-8">
+                        <div class="space-y-4">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Gemeinsam mit einem geeigneten AV‑Integrator begleiten wir die Inbetriebnahme deines
+                                Systems und stellen sicher, dass alles so umgesetzt wird, wie es geplant und gewünscht
+                                ist.
+                                Gerne übernehmen wir die komplette Konfiguration deiner AV Geräte.
+                            </p>
+                            <p class="text-lg md:text-xl leading-relaxed">
                                 Für ein präzise eingerichtetes und optimal abgestimmtes System, das genau so
                                 funktioniert, wie es soll.
                             </p>
+
                         </div>
-                        <div class="hidden md:block"></div>
+                        <!-- Hidden more content -->
+                        <div class="kompetenz-more hidden space-y-4 mt-4 pt-4 border-t border-white/20">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                misu besitzt im Bereich Audio eine besondere Expertise. Als langjähriger Tontechniker
+                                mit
+                                eidgenössischem Fachausweis sind wir in diesem Bereich spezialisiert und wissen genau,
+                                worauf es
+                                ankommt.
+                                Wir planen Audiosysteme, die nicht nur funktionieren, sondern wirklich hörenswert sind –
+                                und sind dein
+                                Spezialist für gut klingende Lautsprechersysteme.
+                            </p>
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Zudem richten wir alle gängigen DSP‑Systeme ein und übernehmen das komplette
+                                System‑Tuning.
+                                Dank unserer Dante Level 3 Zertifizierung sorgen wir dabei für eine zuverlässige,
+                                saubere und
+                                professionell strukturierte Audio‑Netzwerkarchitektur.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- mehr button box - same style as title, at bottom left -->
+                    <div
+                        class="bg-[#31003a] text-misu-mint text-base font-semibold px-6 py-3 inline-block hover:text-[#c4fac7] transition-colors cursor-pointer">
+                        <button class="kompetenz-toggle relative pl-6">mehr</button>
                     </div>
                 </div>
 
-                <!-- Programmierung (RIGHT) -->
-                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="right">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="hidden md:block"></div>
+                <!-- Card 4: Programmierung -->
+                <div class="kompetenz-card opacity-0 translate-y-[50px]" data-card="4">
+                    <!-- Title box - small dark purple at top left -->
+                    <div class="bg-[#31003a] text-white text-2xl md:text-3xl font-semibold px-6 py-3 inline-block">
+                        Programmierung
+                    </div>
+
+                    <!-- Dark purple background with icon -->
+                    <div class="bg-[#31003a] py-0 px-0 flex items-center justify-center">
+                        <img src="assets/img/competences/icon-programmierung.svg" alt="Programmierung Icon"
+                            class="kompetenz-icon w-[600px] h-auto">
+                    </div>
+
+                    <!-- Dark purple background with text -->
+                    <div class="bg-[#31003a] px-8 pt-0 pb-4 text-white -mt-8">
                         <div class="space-y-4">
-                            <div class="programmierung-wrapper">
-                                <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Programmierung</h3>
-                            </div>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl leading-relaxed">
                                 Damit am Ende wirklich alles so läuft, wie du es dir vorstellst, braucht es eine präzise
-                                und
-                                sauber durchdachte Programmierung der Mediensteuerung und der Benutzeroberflächen.
+                                und sauber durchdachte Programmierung der Mediensteuerung und der Benutzeroberflächen.
                             </p>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl leading-relaxed">
                                 Mit unserer langjährigen Erfahrung aus Eventtechnik, AV‑Technik, Planung und intuitivem
                                 UI‑Design sorgen wir dafür, dass deine Anlage stabil, logisch aufgebaut und für alle
-                                leicht
-                                verständlich ist – und im Alltag wirklich Spass macht.
+                                leicht verständlich ist – und im Alltag wirklich Spass macht.
+                            </p>
+                        </div>
+
+                        <!-- Hidden more content -->
+                        <div class="kompetenz-more hidden space-y-4 mt-4 pt-4 border-t border-white/20">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                misu arbeitet grundsätzlich herstellerunabhängig und setzt jedes Projekt mit dem
+                                Steuerungssystem um,
+                                das technisch und funktional am besten zu deinen Anforderungen passt.
+                            </p>
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Gleichzeitig möchten wir eine Spezialisierung hervorheben, auf die wir besonders stolz
+                                sind:
+                                Wir sind Crestron Service Provider und Crestron Master Certified Programmer – und
+                                bringen damit echte
+                                Spitzenkompetenz für anspruchsvolle Crestron‑Projekte mit
+                            </p>
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Für dich bedeutet das: ein Partner, der komplexe Systeme souverän, zuverlässig und
+                                zukunftssicher
+                                realisiert.
                             </p>
                         </div>
                     </div>
+                    <!-- mehr button box - same style as title, at bottom left -->
+                    <div
+                        class="bg-[#31003a] text-misu-mint text-base font-semibold px-6 py-3 inline-block hover:text-[#c4fac7] transition-colors cursor-pointer">
+                        <button class="kompetenz-toggle relative pl-6">mehr</button>
+                    </div>
                 </div>
 
-                <!-- Qualitätskontrolle (LEFT) -->
-                <div class="kompetenz-item opacity-0 translate-y-[50px]" data-side="left">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div class="text-right space-y-4">
-                            <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-4">Qualitätskontrolle</h3>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                <!-- Card 5: Qualitätskontrolle -->
+                <div class="kompetenz-card opacity-0 translate-y-[50px]" data-card="5">
+                    <!-- Title box - small dark purple at top left -->
+                    <div class="bg-[#31003a] text-white text-2xl md:text-3xl font-semibold px-6 py-3 inline-block">
+                        Qualitätskontrolle
+                    </div>
+
+                    <!-- Dark purple background with icon -->
+                    <div class="bg-[#31003a] py-0 px-0 flex items-center justify-center">
+                        <img src="assets/img/competences/icon-qualitaet.svg" alt="Qualitätskontrolle Icon"
+                            class="kompetenz-icon w-[600px] h-auto">
+                    </div>
+
+                    <!-- Dark purple background with text -->
+                    <div class="bg-[#31003a] px-8 pt-0 pb-4 text-white -mt-8">
+                        <div class="space-y-4">
+                            <p class="text-lg md:text-xl leading-relaxed">
                                 Du möchtest sicherstellen, dass der Integrator die Arbeiten wirklich nach deinen
                                 Anforderungen ausführt?
                             </p>
-                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            <p class="text-lg md:text-xl leading-relaxed">
                                 Gerne übernehmen wir die Qualitätskontrolle und prüfen in allen Projektphasen die
                                 entscheidenden Schritte – damit dein Projekt exakt so umgesetzt wird, wie du es
                                 brauchst.
                             </p>
                         </div>
-                        <div class="hidden md:block"></div>
+
+                        <!-- Hidden more content -->
+                        <div class="kompetenz-more hidden space-y-4 mt-4 pt-4 border-t border-white/20">
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                Unsere Qualitätskontrolle begleitet dein Projekt von der ersten Planung bis zur finalen
+                                Abnahme. Wir prüfen die Ausführungsqualität, dokumentieren Mängel und stellen sicher,
+                                dass alle Anforderungen erfüllt werden.
+                            </p>
+                            <p class="text-lg md:text-xl leading-relaxed">
+                                So erhältst du die Sicherheit, dass dein Projekt genau nach deinen Vorstellungen
+                                umgesetzt wird.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- mehr button box - same style as title, at bottom left -->
+                    <div
+                        class="hidden bg-[#31003a] text-misu-mint text-base font-semibold px-6 py-3 inline-block hover:text-[#c4fac7] transition-colors cursor-pointer">
+                        <button class="kompetenz-toggle relative pl-6">mehr</button>
                     </div>
                 </div>
-
             </div>
+        </div>
         </div>
     </section>
 
@@ -648,7 +798,7 @@
             <!-- Content -->
             <div class="max-w-6xl mx-auto">
                 <!-- Image floats on the left on desktop -->
-                <img src="assets/img/michael-sutter.jpg" alt="Michael Sutter" loading="lazy"
+                <img src="assets/img/michael-sutter.avif" alt="Michael Sutter" loading="lazy"
                     class="w-full md:w-[360px] md:h-[460px] md:float-left md:mr-8 mb-8 object-cover object-top shadow-xl">
 
                 <!-- Text Content -->
