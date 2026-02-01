@@ -829,18 +829,10 @@ header {
     transform: translateY(0) !important;
 }
 
-/* Icon sizing - responsive */
+/* Icon sizing - responsive (let Tailwind handle width, height auto for aspect ratio) */
 .kompetenz-icon {
-    max-width: none;
-    /* Remove limit completely */
-    width: 500px;
-    /* Force size */
-}
-
-@media (max-width: 768px) {
-    .kompetenz-icon {
-        width: 300px;
-    }
+    height: auto;
+    display: block;
 }
 
 /* Toggle button arrow indicator */

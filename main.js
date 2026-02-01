@@ -773,7 +773,7 @@ function setupKompetenzenLayout() {
             cards.forEach(card => container.appendChild(card));
         } else {
             // Desktop: create two-column layout
-            container.className = 'flex gap-8 items-start';
+            container.className = 'flex gap-20 items-start';
             container.innerHTML = '';
 
             // Create left and right columns

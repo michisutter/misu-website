@@ -429,6 +429,20 @@ tl.eventCallback('onComplete', () => {
     heroScrollIndicator.style.transition = 'opacity 0.6s ease';
     heroScrollIndicator.style.opacity = '1';
   }
+
+  // Auto-scroll after a short delay
+  setTimeout(() => {
+    const sections = Array.from(document.querySelectorAll('section'));
+    const homeIndex = sections.findIndex(s => s.id === 'home');
+    let target = null;
+    if (homeIndex >= 0 && homeIndex < sections.length - 1) {
+      target = sections[homeIndex + 1];
+    }
+    if (!target) target = document.querySelector('footer');
+    if (target) {
+      window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+    }
+  }, 2000); // 2 second delay after scroll arrow appears
 });
 /*
 // TEMPORARY: Pause at 3 seconds (after leaves are in position)
