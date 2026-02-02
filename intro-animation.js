@@ -430,8 +430,13 @@ tl.eventCallback('onComplete', () => {
     heroScrollIndicator.style.opacity = '1';
   }
 
-  // Auto-scroll after a short delay
+  // Auto-scroll after a short delay (only if user hasn't scrolled yet)
   setTimeout(() => {
+    // Check if user has scrolled significantly from top
+    if (window.scrollY > 100) {
+      return; // User has already scrolled, skip auto-scroll
+    }
+    
     const sections = Array.from(document.querySelectorAll('section'));
     const homeIndex = sections.findIndex(s => s.id === 'home');
     let target = null;
@@ -444,6 +449,7 @@ tl.eventCallback('onComplete', () => {
     }
   }, 2000); // 2 second delay after scroll arrow appears
 });
+
 /*
 // TEMPORARY: Pause at 3 seconds (after leaves are in position)
 tl.pause(9);*/

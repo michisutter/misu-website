@@ -29,26 +29,26 @@ const projects = [
     },
     {
         id: 3,
-        title: "Givaudan Schweiz",
-        image: "assets/img/projects/project-givaudan.avif",
-        description: "Bei Givaudan Schweiz wurden Meeting- und Boardrooms, Digital-Signage-Systeme, der Welcome-Bereich mit LED-Wänden, Eventräume sowie ein Ausstellungsbereich realisiert.",
-        more: "Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, Digital Signage sowie Teile der Fachplanung und Projektleitung. Das Ergebnis ist eine konsistente, betriebssichere Medieninfrastruktur für unterschiedliche Nutzungen.",
-         tags: [
-            { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
-            { text: "Kunde: Givaudan Schweiz", link: "https://givaudan.com" },
-            "Leistungen: Mediensteuerung, Digital Signage, Fachplanung. Projektleitung, Inbetriebnahme"
+        title: "Aroma Studio",
+        image: "assets/img/projects/project-aroma.avif",
+        description: "Gemeinsam mit Vision Inside hat misu das Aroma Studio technisch überarbeitet und auf den aktuellen Stand gebracht. Im Fokus standen eine neue Audiotechnik für Videokonferenzen sowie die Optimierung der bestehenden Infrastruktur für einen zuverlässigen täglichen Betrieb.",
+        more: "Die Medienststeuerung wurde überarbeitet und stabilisiert, Abläufe vereinfacht und das Gesamtsystem neu abgestimmt. So ist das Studio heute wieder robust, wartungsarm und bereit für einen reibungslosen Einsatz in Meetings und Präsentationen.",
+        tags: [
+            { text: "Partner: Vision Inside", link: "https://www.vision-inside.ch" },
+            { text: "Kunde: Aroma", link: "https://aroma.ch" },
+            "Leistungen: Mediensteuerung, Audio-System-Tuning, Inbetriebnahme"
         ]
     },
     {
         id: 4,
-        title: "Just Erlebniswelt",
-        image: "assets/img/projects/project-just.avif",
-        description: `Für Just Schweiz umfasste das Projekt einen Besucherrundgang mit 360°-Grossprojektion, Showsteuerung, Mehrkanal-Audio sowie eine interaktive Mediaguide-Steuerung. Das Erlebnis verbindet Bild, Ton und Interaktion zu einem durchgängigen, immersiven Rundgang.`,
-        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, das Tuning des Audiosystems, die Inbetriebnahme sowie Teile der Fachplanung. Ziel war ein präzise abgestimmtes Zusammenspiel aller Komponenten für einen stabilen und hochwertigen Betrieb.`,
+        title: "Givaudan Schweiz",
+        image: "assets/img/projects/project-givaudan.avif",
+        description: "Bei Givaudan Schweiz wurden Meeting- und Boardrooms, Digital-Signage-Systeme, der Welcome-Bereich mit LED-Wänden, Eventräume sowie ein Ausstellungsbereich realisiert.",
+        more: "Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, Digital Signage sowie Teile der Fachplanung und Projektleitung. Das Ergebnis ist eine konsistente, betriebssichere Medieninfrastruktur für unterschiedliche Nutzungen.",
         tags: [
             { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
-            { text: "Kunde: Just Schweiz", link: "https://www.just.swiss/just-welt/" },
-            "Leistungen: Mediensteuerung, Audio-Tuning, Inbetriebnahme, Fachplanung"
+            { text: "Kunde: Givaudan Schweiz", link: "https://givaudan.com" },
+            "Leistungen: Mediensteuerung, Digital Signage, Fachplanung. Projektleitung, Inbetriebnahme"
         ]
     },
     {
@@ -65,14 +65,14 @@ const projects = [
     },
     {
         id: 6,
-        title: "Kernkraftwerk Leibstadt",
-        image: "assets/img/projects/project-leibstadt.avif",
-        description: `Für das Kernkraftwerk Leibstadt wurde im Visitor Center ein multimediales Besuchererlebnis mit Guidefunktion, mehrsprachig interaktiven Räumen und Stationen sowie einem Auditorium mit Preshow umgesetzt.`,
-        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung, die Integration von KNX und Audio-Systemen sowie Teile der Fachplanung. Ziel war ein stabiler, verständlich bedienbarer und betriebssicherer Gesamtauftritt.`,
+        title: "Zoo Zürich",
+        image: "assets/img/projects/project-zoo-zuerich.avif",
+        description: `Für den Zoo Zürich, Infocenter Masoala, wurde eine grossformatige 360°-Projektion mit Mehrkanal-Audiobespielung, Eventbetrieb und Showsteuerung umgesetzt.`,
+        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung, die Integration in die Gesamtsteuerung sowie das Mehrkanal-Audiosystem. Ziel war eine immersive, präzise synchronisierte Inszenierung für den täglichen Betrieb und Events.`,
         tags: [
             { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
-            { text: "Kunde: Kernkraftwerk Leibstadt", link: "https://www.leibstadt.ch" },
-            "Leistungen: Mediensteuerung, Showablaufsteuerung, KNX-Integration, Audio-Systeme, Fachplanung"
+            { text: "Kunde: Zoo Zürich / Masoala", link: "https://zoo.ch" },
+            "Leistungen: Mediensteuerung, Showsteuerung, Mehrkanal-Audio, Systemintegration"
         ]
     },
     {
@@ -113,14 +113,14 @@ const projects = [
     },
     {
         id: 10,
-        title: "Siemens Zug",
-        image: "assets/img/projects/project-siemens-zug.avif",
-        description: `Für Siemens Zug umfasste das Projekt die Ausstattung von Meetingräumen, Boardrooms und Eventräumen sowie Digital-Signage-Lösungen im Headquarters- und Campus-Umfeld.`,
-        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Audiokonfiguration aller Meetingräume, die Integration von Microsoft Teams Rooms sowie eine moderne Multikamera-Lösung. Ziel war eine einheitliche, leistungsfähige und benutzerfreundliche Medientechnik für Meetings und Events.`,
+        title: "Just Erlebniswelt",
+        image: "assets/img/projects/project-just.avif",
+        description: `Für Just Schweiz umfasste das Projekt einen Besucherrundgang mit 360°-Grossprojektion, Showsteuerung, Mehrkanal-Audio sowie eine interaktive Mediaguide-Steuerung. Das Erlebnis verbindet Bild, Ton und Interaktion zu einem durchgängigen, immersiven Rundgang.`,
+        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, das Tuning des Audiosystems, die Inbetriebnahme sowie Teile der Fachplanung. Ziel war ein präzise abgestimmtes Zusammenspiel aller Komponenten für einen stabilen und hochwertigen Betrieb.`,
         tags: [
             { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
-            { text: "Kunde: Siemens Zug", link: "https://www.siemens.com/ch/de/unternehmen/nachhaltigkeit/fertigstellung-campus-zug.html" },
-            "Leistungen: Mediensteuerung, Audiokonfiguration, Teams Rooms Integration, Multikamerasystem"
+            { text: "Kunde: Just Schweiz", link: "https://www.just.swiss/just-welt/" },
+            "Leistungen: Mediensteuerung, Audio-Tuning, Inbetriebnahme, Fachplanung"
         ]
     },
     {
@@ -149,14 +149,14 @@ const projects = [
     },
     {
         id: 13,
-        title: "Zoo Zürich",
-        image: "assets/img/projects/project-zoo-zuerich.avif",
-        description: `Für den Zoo Zürich, Infocenter Masoala, wurde eine grossformatige 360°-Projektion mit Mehrkanal-Audiobespielung, Eventbetrieb und Showsteuerung umgesetzt.`,
-        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung, die Integration in die Gesamtsteuerung sowie das Mehrkanal-Audiosystem. Ziel war eine immersive, präzise synchronisierte Inszenierung für den täglichen Betrieb und Events.`,
+        title: "Kernkraftwerk Leibstadt",
+        image: "assets/img/projects/project-leibstadt.avif",
+        description: `Für das Kernkraftwerk Leibstadt wurde im Visitor Center ein multimediales Besuchererlebnis mit Guidefunktion, mehrsprachig interaktiven Räumen und Stationen sowie einem Auditorium mit Preshow umgesetzt.`,
+        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Showablaufsteuerung, die Integration von KNX und Audio-Systemen sowie Teile der Fachplanung. Ziel war ein stabiler, verständlich bedienbarer und betriebssicherer Gesamtauftritt.`,
         tags: [
             { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
-            { text: "Kunde: Zoo Zürich / Masoala", link: "https://zoo.ch" },
-            "Leistungen: Mediensteuerung, Showsteuerung, Mehrkanal-Audio, Systemintegration"
+            { text: "Kunde: Kernkraftwerk Leibstadt", link: "https://www.leibstadt.ch" },
+            "Leistungen: Mediensteuerung, Showablaufsteuerung, KNX-Integration, Audio-Systeme, Fachplanung"
         ]
     },
     {
@@ -171,4 +171,16 @@ const projects = [
             "Leistungen: Mediensteuerung, Inbetriebnahme, Fachplanung"
         ]
     }
+ /*   {
+        id: 15,
+        title: "Siemens Zug",
+        image: "assets/img/projects/project-siemens-zug.avif",
+        description: `Für Siemens Zug umfasste das Projekt die Ausstattung von Meetingräumen, Boardrooms und Eventräumen sowie Digital-Signage-Lösungen im Headquarters- und Campus-Umfeld.`,
+        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Audiokonfiguration aller Meetingräume, die Integration von Microsoft Teams Rooms sowie eine moderne Multikamera-Lösung. Ziel war eine einheitliche, leistungsfähige und benutzerfreundliche Medientechnik für Meetings und Events.`,
+        tags: [
+            { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
+            { text: "Kunde: Siemens Zug", link: "https://www.siemens.com/ch/de/unternehmen/nachhaltigkeit/fertigstellung-campus-zug.html" },
+            "Leistungen: Mediensteuerung, Audiokonfiguration, Teams Rooms Integration, Multikamerasystem"
+        ]
+    }*/
 ];
