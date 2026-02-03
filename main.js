@@ -230,8 +230,15 @@ if (menuLinks.length > 0) {
 
                 closeMenu(); // unlockScroll() happens inside closeMenu after 400ms
 
-                // Scroll AFTER the menu close animation + unlock has finished
+                // Update hash + scroll AFTER the menu close animation + unlock has finished
                 setTimeout(() => {
+                    try {
+                        history.pushState(null, '', href);
+                    } catch (err) {
+                        // Fallback: update hash directly
+                        window.location.hash = href;
+                    }
+
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
@@ -971,3 +978,61 @@ document.addEventListener('click', (e) => {
         loudspeakerPopup.classList.remove('open');
     }
 });
+
+// ============================================
+// SCROLL TRACKING - Section View Analytics
+// ============================================
+
+// Only run if Google Analytics is loaded
+if (typeof gtag !== 'undefined') {
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id || 'unknown-section';
+
+                // Send event to Google Analytics
+                gtag('event', 'section_view', {
+                    'section_name': sectionId,
+                    'event_category': 'engagement',
+                    'event_label': sectionId
+                });
+
+                console.log('Section viewed:', sectionId); // For debugging
+            }
+        });
+    }, {
+        threshold: 0.5, // Section is considered "viewed" when 50% visible
+        rootMargin: '0px'
+    });
+
+    // Observe all sections with IDs
+    document.querySelectorAll('section[id]').forEach(section => {
+        sectionObserver.observe(section);
+    });
+}
+
+// ============================================
+// SCROLL DEPTH TRACKING
+// ============================================
+
+if (typeof gtag !== 'undefined') {
+    let scrollMarks = { 25: false, 50: false, 75: false, 100: false };
+
+    window.addEventListener('scroll', rafThrottle(() => {
+        const scrollPercent = Math.round(
+            (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+        );
+
+        // Track 25%, 50%, 75%, 100% milestones
+        Object.keys(scrollMarks).forEach(mark => {
+            if (scrollPercent >= mark && !scrollMarks[mark]) {
+                scrollMarks[mark] = true;
+                gtag('event', 'scroll_depth', {
+                    'percent_scrolled': mark,
+                    'event_category': 'engagement'
+                });
+                console.log('Scroll depth:', mark + '%');
+            }
+        });
+    }), { passive: true });
+}
