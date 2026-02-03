@@ -5,7 +5,7 @@ const projects = [
         title: "Rigi Lok7",
         image: "assets/img/projects/project-rigi.avif",
         description: `Auf der Rigi entsteht ein neues Erlebnismuseum mit Mehrkanal Audiosystem, gesteuertem Showablauf und einer modernen Steuerung.`,
-        more: `misu kümmert sich um die Mediensteuerung und Inbetriebnahme der AV-Technik. Wir freuen uns, Teil dieses spannenden Projekts zu sein und gemeinsam mit unseren Kollegen von Neroplan, Tokyoblue und Otiger Media Systems die technische Umsetzung zu realisieren.`,
+        more: `misu kümmert sich um die Mediensteuerung und Inbetriebnahme der AV-Technik. Es ist eine Freude, Teil dieses spannenden Projekts zu sein und gemeinsam mit unseren Kollegen von Neroplan, Tokyoblue und Otiger Media Systems die technische Umsetzung zu realisieren.`,
         tags: [
             { text: "Partner: Neroplan GmbH", link: "https://neroplan.ch" },
             { text: "Partner: Tokyoblue AG", link: "https://tokyoblue.ch" },
@@ -171,16 +171,16 @@ const projects = [
             "Leistungen: Mediensteuerung, Inbetriebnahme, Fachplanung"
         ]
     }
- /*   {
-        id: 15,
-        title: "Siemens Zug",
-        image: "assets/img/projects/project-siemens-zug.avif",
-        description: `Für Siemens Zug umfasste das Projekt die Ausstattung von Meetingräumen, Boardrooms und Eventräumen sowie Digital-Signage-Lösungen im Headquarters- und Campus-Umfeld.`,
-        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Audiokonfiguration aller Meetingräume, die Integration von Microsoft Teams Rooms sowie eine moderne Multikamera-Lösung. Ziel war eine einheitliche, leistungsfähige und benutzerfreundliche Medientechnik für Meetings und Events.`,
-        tags: [
-            { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
-            { text: "Kunde: Siemens Zug", link: "https://www.siemens.com/ch/de/unternehmen/nachhaltigkeit/fertigstellung-campus-zug.html" },
-            "Leistungen: Mediensteuerung, Audiokonfiguration, Teams Rooms Integration, Multikamerasystem"
-        ]
-    }*/
+    /*   {
+           id: 15,
+           title: "Siemens Zug",
+           image: "assets/img/projects/project-siemens-zug.avif",
+           description: `Für Siemens Zug umfasste das Projekt die Ausstattung von Meetingräumen, Boardrooms und Eventräumen sowie Digital-Signage-Lösungen im Headquarters- und Campus-Umfeld.`,
+           more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Mediensteuerung, die Audiokonfiguration aller Meetingräume, die Integration von Microsoft Teams Rooms sowie eine moderne Multikamera-Lösung. Ziel war eine einheitliche, leistungsfähige und benutzerfreundliche Medientechnik für Meetings und Events.`,
+           tags: [
+               { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
+               { text: "Kunde: Siemens Zug", link: "https://www.siemens.com/ch/de/unternehmen/nachhaltigkeit/fertigstellung-campus-zug.html" },
+               "Leistungen: Mediensteuerung, Audiokonfiguration, Teams Rooms Integration, Multikamerasystem"
+           ]
+       }*/
 ];
