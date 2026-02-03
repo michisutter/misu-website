@@ -16,32 +16,41 @@ misu specializes in:
 
 - **HTML5** - Semantic markup
 - **Tailwind CSS** (CDN) - Utility-first styling
-- **Vanilla JavaScript** - No frameworks
-- **Google Fonts** - Inter typeface
+- **Custom CSS** - `styles.css` + `intro-animation.css`
+- **Vanilla JavaScript** - No frameworks (`main.js`, `intro-animation.js`)
+- **Google Fonts** - Inter typeface (temporary)
 - **Material Icons** - Icon library
 
 ## Project Structure
 
 ```
 misu-website/
-├── index.html          # Main single-page application
-├── main.js             # JavaScript functionality
-├── projects.js         # Project data array
+├── index.html              # Main single-page application
+├── styles.css              # Global styling (layout, sections)
+├── intro-animation.css     # Hero intro animation
+├── main.js                 # Core interactions (carousel, modals, header)
+├── intro-animation.js      # Staggered hero intro timing
+├── projects.js             # Project data array
+├── sitemap.xml             # XML sitemap for SEO
 ├── assets/
 │   └── img/
 │       ├── competences/    # Competence section images
 │       └── projects/       # Project portfolio images
+├── assets/icons/           # SVG icons
+└── assets/fonts/           # Brand font files
 └── README.md
 ```
 
 ## Features
 
 - ✨ Animated hero section with staggered text appearance
+- 🧭 Auto-hide header on scroll (shows near top)
 - 📱 Fully responsive design (mobile-first approach)
 - 🎨 Brand colors: `#6B4462` (misu-purple), `#5FD4A5` (misu-mint)
-- 🎯 5 competence areas with image/text layouts
-- 🎠 Project carousel with modal detail views
-- 🔒 Swiss GDPR-compliant (DSG) privacy policy
+- 🎯 5 expandable competence cards (no icon rotation)
+- 🎠 Project carousel with modal detail views (3 items per page)
+- 🧩 Modal system for projects + legal pages (Impressum, AGB/Datenschutz)
+- 🔒 Swiss DSG-compliant privacy policy
 - 🌐 German language (Switzerland market)
 
 ## Local Development
@@ -52,11 +61,7 @@ No build process required! Simply:
 2. Open `index.html` in your browser
 3. All dependencies load via CDN
 
-```bash
-git clone https://github.com/YOUR-USERNAME/misu-website.git
-cd misu-website
-# Open index.html in your browser
-```
+> Tip: open the file directly or serve it with any static server.
 
 ## Deployment
 
@@ -65,6 +70,11 @@ This is a static website that can be deployed to:
 - Netlify
 - Vercel
 - Any static hosting service
+
+## SEO
+
+- Sitemap included at [sitemap.xml](sitemap.xml)
+- Recommended: submit the sitemap to Google Search Console
 
 ## Browser Support
 
