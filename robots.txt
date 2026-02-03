@@ -1,0 +1,8 @@
+# robots.txt for heymisu.ch
+# Allow all search engines to crawl the website
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://heymisu.ch/sitemap.xml
