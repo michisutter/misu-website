@@ -631,6 +631,6 @@
     }
 
     .misu-tech-2 {
-        top: -5rem;
+        top: -5rem; /* Reduced from -8rem (base) to fit landscape viewport */
     }
 }

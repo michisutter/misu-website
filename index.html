@@ -171,7 +171,7 @@
         <div class="fixed top-0 left-0 right-0">
             <div class="w-full px-4 md:px-4 py-4 flex justify-between items-center">
                 <a href="#home" class="block -ml-6 md:-ml-2">
-                    <img src="assets/img/misu_Logo_k.svg" alt="misu Logo" width="192" height="64" class="h-8 md:h-10">
+                    <img src="assets/img/misu_Logo_k.svg" alt="misu Logo" width="192" height="64" class="h-8 md:h-10" decoding="async">
                 </a>
                 <button id="menu-close" class="text-black">
                     <svg class="text-4xl md:text-5xl" style="width:1em;height:1em;vertical-align:middle;"
@@ -196,74 +196,6 @@
                 class="text-black text-5xl md:text-8xl font-normal hover:opacity-70 transition-opacity menu-link">Netzwerk</a>
         </div>
     </nav>
-
-    <!-- (scroll-circle moved earlier) -->
-
-    <!-- Crestron Badge -->
-    <!-- BADGES TEMPORARILY DISABLED
-
-    <div id="crestron-badge">
-        <img src="assets/img/competences/crestron-master-badge.png" alt="Crestron Master Certified"
-            class="w-full h-full object-contain">
-    </div>
-    END BADGES TEMPORARILY DISABLED -->
-
-    <!-- Crestron Popup -->
-    <div id="crestron-popup">
-        <button id="close-crestron-popup" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
-            <svg class="text-xl" style="width:1em;height:1em;vertical-align:middle;" viewBox="0 -960 960 960"
-                fill="currentColor" aria-hidden="true" focusable="false">
-                <path
-                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-            </svg>
-        </button>
-        <div class="space-y-3 text-gray-700 text-sm leading-relaxed">
-            <p>
-                misu arbeitet grundsätzlich herstellerunabhängig und setzt jedes Projekt mit dem Steuerungssystem um,
-                das technisch und funktional am besten zu deinen Anforderungen passt.
-            </p>
-            <p class="font-semibold text-misu-purple">
-                Gleichzeitig möchten wir eine Spezialisierung hervorheben, auf die wir besonders stolz sind:
-                Wir sind Crestron Service Provider und Crestron Master Certified Programmer – und bringen damit echte
-                Spitzenkompetenz für anspruchsvolle Crestron-Projekte mit
-            </p>
-            <p>
-                Für dich bedeutet das: ein Partner, der komplexe Systeme souverän, zuverlässig und zukunftssicher
-                realisiert.
-            </p>
-        </div>
-    </div>
-
-    <!-- Loudspeaker Badge -->
-    <!-- BADGES TEMPORARILY DISABLED
-
-    <div id="loudspeaker-badge">
-        <img src="assets/img/competences/dante-level-3.webp" alt="Audio Expert" class="w-full h-full object-contain">
-    </div>
-    END BADGES TEMPORARILY DISABLED -->
-
-    <!-- Loudspeaker Popup -->
-    <div id="loudspeaker-popup">
-        <button id="close-loudspeaker-popup" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
-            <svg class="text-xl" style="width:1em;height:1em;vertical-align:middle;" viewBox="0 -960 960 960"
-                fill="currentColor" aria-hidden="true" focusable="false">
-                <path
-                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-            </svg>
-        </button>
-        <div class="space-y-3 text-gray-700 text-sm leading-relaxed">
-            <p>
-                misu besitzt im Bereich Audio eine besondere Expertise. Als langjähriger Tontechniker mit
-                eidgenössischem Fachausweis sind wir in diesem Bereich spezialisiert und wissen genau, worauf es
-                ankommt.
-                Wir planen Audiosysteme, die nicht nur funktionieren, sondern wirklich hörenswert sind – und sind dein
-                Spezialist für gut klingende Lautsprechersysteme.
-            <p>Zudem richten wir alle gängigen DSP-Systeme ein und übernehmen das komplette System-Tuning.
-                Dank unserer Dante Level 3 Zertifizierung sorgen wir dabei für eine zuverlässige, saubere und
-                professionell strukturierte Audio-Netzwerkarchitektur.</p>
-            </p>
-        </div>
-    </div>
 
     <!-- Fixed gradient overlay to fade content under transparent header -->
     <div id="header-gradient-overlay"
@@ -440,7 +372,7 @@
                 <div class="kompetenz-card opacity-0 translate-y-[50px]" data-card="1">
                     <!-- Title box - small dark purple at top left -->
                     <div
-                        class="bg-misu-beige text-misu-purple text-2xl md:text-3xl font-semibold px-6 py-3 inline-block">
+                        class="bg-misu-beige text-misu-purple text-2xl md:text-3xl font-semibold px-6 py-3 inline-block" loading="lazy" decoding="async">
                         Konzeption
                     </div>
 
@@ -495,7 +427,7 @@
                     <!-- Dark purple background with icon -->
                     <div class="bg-misu-beige py-0 px-0 flex items-center justify-center">
                         <img src="assets/img/competences/icon-fachplanung.svg" alt="Fachplanung Icon"
-                            class="kompetenz-icon w-[400px] h-auto">
+                            class="kompetenz-icon w-[400px] h-auto" loading="lazy" decoding="async">
                     </div>
 
                     <!-- Dark purple background with text -->
@@ -544,7 +476,7 @@
                     <!-- Dark purple background with icon -->
                     <div class="bg-misu-beige py-0 px-0 flex items-center justify-center">
                         <img src="assets/img/competences/icon-inbetriebnahme.svg" alt="Inbetriebnahme Icon"
-                            class="kompetenz-icon w-[400px] h-auto">
+                            class="kompetenz-icon w-[400px] h-auto" loading="lazy" decoding="async">
                     </div>
 
                     <!-- Dark purple background with text -->
@@ -572,6 +504,9 @@
                                 System-Tuning. Dank der Dante Level 3 Zertifizierung sorgt misu für eine zuverlässige,
                                 saubere und professionell strukturierte Audio-Netzwerkarchitektur.
                             </p>
+                            <!-- Dante Badge -->
+                            <img src="assets/img/competences/dante-level-3.webp" alt="Dante Level 3 Certified"
+                                class="w-20 mt-6 opacity-80" loading="lazy" decoding="async">
                         </div>
                     </div>
 
@@ -593,7 +528,7 @@
                     <!-- Dark purple background with icon -->
                     <div class="bg-misu-beige py-0 px-0 flex items-center justify-center">
                         <img src="assets/img/competences/icon-programmierung.svg" alt="Programmierung Icon"
-                            class="kompetenz-icon w-[400px] h-auto">
+                            class="kompetenz-icon w-[400px] h-auto" loading="lazy" decoding="async">
                     </div>
 
                     <!-- Dark purple background with text -->
@@ -627,6 +562,9 @@
                                 zukunftssicher
                                 realisiert.
                             </p>
+                             <!-- Crestron Badge -->
+                            <img src="assets/img/competences/crestron-master-badge.png" alt="Crestron Master Certified"
+                                class="w-20 mt-6 opacity-80" loading="lazy" decoding="async">
                         </div>
                     </div>
                     <!-- mehr button box - same style as title, at bottom left -->
@@ -647,7 +585,7 @@
                     <!-- Dark purple background with icon -->
                     <div class="bg-misu-beige py-0 px-0 flex items-center justify-center">
                         <img src="assets/img/competences/icon-qualitaet.svg" alt="Qualitätskontrolle Icon"
-                            class="kompetenz-icon w-[400px] h-auto">
+                            class="kompetenz-icon w-[400px] h-auto" loading="lazy" decoding="async">
                     </div>
 
                     <!-- Dark purple background with text -->
@@ -685,7 +623,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -802,7 +739,7 @@
             <!-- Content -->
             <div class="max-w-6xl mx-auto">
                 <!-- Image floats on the left on desktop -->
-                <img src="assets/img/michael-sutter.avif" alt="Michael Sutter" loading="lazy"
+                <img src="assets/img/michael-sutter.avif" alt="Michael Sutter" loading="lazy" decoding="async"
                     class="w-full md:w-[360px] md:h-[460px] md:float-left md:mr-8 mb-8 object-cover object-top shadow-xl">
 
                 <!-- Text Content -->
@@ -874,50 +811,49 @@
         <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             <a href="https://www.neroplan.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-neroplan.png" alt="Neroplan" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-neroplan.png" alt="Neroplan" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.tingo.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-tingo.svg" alt="Tingo" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-tingo.svg" alt="Tingo" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.tokyoblue.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-tokyoblue.png" alt="Tokyoblue" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-tokyoblue.png" alt="Tokyoblue" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.vision-inside.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-vision-inside.png" alt="Vision Inside" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-vision-inside.png" alt="Vision Inside" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.steinersarnen.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-steiner-sarnen.svg" alt="Steiner Sarnen" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-steiner-sarnen.svg" alt="Steiner Sarnen" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.smartronic.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-smartronic.svg" alt="Smartronic" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-smartronic.svg" alt="Smartronic" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.atelierlorraine.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-atelier-lorraine.png" alt="Atelier Lorraine" width="160"
-                    height="64" class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-atelier-lorraine.png" alt="Atelier Lorraine" width="160"
+                    height="64" class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.mediasys.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-mediasys.svg" alt="Mediasys" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-mediasys.svg" alt="Mediasys" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
             <a href="https://www.vicoma.ch" target="_blank" rel="noopener noreferrer"
                 class="grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110">
-                <img data-src="assets/img/network/logo-vicoma.png" alt="Vicoma" width="160" height="64"
-                    class="h-12 md:h-16 object-contain">
+                <img src="assets/img/network/logo-vicoma.png" alt="Vicoma" width="160" height="64"
+                    class="h-12 md:h-16 object-contain" loading="lazy" decoding="async">
             </a>
-        </div>
         </div>
     </section>
 

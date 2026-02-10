@@ -88,42 +88,6 @@ body {
    ANIMATIONS
    ================================================================= */
 
-@keyframes fadeInFromLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-100px) translateY(30px) rotate(-5deg) scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-    }
-}
-
-@keyframes fadeInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(100px) translateY(30px) rotate(5deg) scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-    }
-}
-
-@keyframes spinInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(150px) translateY(50px) rotate(360deg) scale(0.5);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0) translateY(0) rotate(0deg) scale(1);
-    }
-}
-
 @keyframes rotateCircle {
     from {
         transform: rotate(360deg);
@@ -141,34 +105,6 @@ body {
 
     to {
         opacity: 1;
-    }
-}
-
-@keyframes badgeWiggle {
-
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-
-    2% {
-        transform: rotate(-15deg);
-    }
-
-    4% {
-        transform: rotate(15deg);
-    }
-
-    6% {
-        transform: rotate(-15deg);
-    }
-
-    8% {
-        transform: rotate(15deg);
-    }
-
-    10% {
-        transform: rotate(0deg);
     }
 }
 
@@ -218,30 +154,6 @@ body {
     50% {
         transform: translateY(-8px);
     }
-}
-
-.animate-line {
-    opacity: 0;
-}
-
-.animate-line:nth-child(1) {
-    animation: fadeInFromLeft 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: 0.5s;
-}
-
-.animate-line:nth-child(2) {
-    animation: fadeInFromRight 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: 1.5s;
-}
-
-.animate-line:nth-child(3) {
-    animation: fadeInFromLeft 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: 2.5s;
-}
-
-.animate-line:nth-child(4) {
-    animation: spinInFromRight 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    animation-delay: 3.5s;
 }
 
 /* =================================================================
@@ -331,12 +243,6 @@ body {
     transition: transform 0.4s ease;
 }
 
-/*
-.project-stack-card:hover .project-stack-inner {
-    transform: rotate(0deg) !important;
-    transition: transform 0.3s ease;
-}
-*/
 .project-stack-card:hover img {
     transform: scale(1.1);
 }
@@ -358,33 +264,6 @@ body {
 }
 
 /* =================================================================
-   PROJECT GRID OVERLAY
-   ================================================================= */
-
-.project-grid-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(107, 68, 98, 0.9), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    display: flex;
-    align-items: flex-end;
-    padding: 2rem;
-}
-
-.project-grid-card:hover .project-grid-overlay {
-    opacity: 1;
-}
-
-.project-grid-title {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: 600;
-    transform: translateY(20px);
-    transition: transform 0.4s ease;
-}
-
-/* =================================================================
    REFERENZEN CAROUSEL
    Minimal carousel-related styles and markers for the Referenzen
    Carousel Section (HTML id: referenzen-carousel)
@@ -395,27 +274,6 @@ body {
 #carousel {
     display: flex;
     will-change: transform;
-}
-
-.carousel-item {
-    flex: 0 0 auto;
-}
-
-.project-grid-card:hover .project-grid-title {
-    transform: translateY(0);
-}
-
-/* =================================================================
-   KOMPETENZEN SCROLL REVEAL
-   ================================================================= */
-
-.kompetenz-item {
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.kompetenz-item.visible {
-    opacity: 1 !important;
-    transform: translateX(0) !important;
 }
 
 /* Custom cursor - only hide default cursor after mouse movement */
@@ -606,206 +464,6 @@ header {
 }
 
 /* =================================================================
-   CRESTRON BADGE & POPUP
-   ================================================================= */
-
-.programmierung-wrapper {
-    position: relative;
-}
-
-#crestron-badge {
-    position: absolute;
-    left: -160px;
-    top: 0;
-    width: 120px;
-    height: 120px;
-    cursor: pointer;
-    z-index: 30;
-}
-
-#crestron-badge.wiggling {
-    animation: badgeWiggle 5s ease-in-out infinite;
-}
-
-@media (max-width: 768px) {
-    #crestron-badge {
-        position: static;
-        display: inline-block;
-        width: 80px;
-        height: 80px;
-        margin-right: 12px;
-        vertical-align: middle;
-    }
-}
-
-#crestron-popup {
-    position: absolute;
-    left: 120px;
-    top: 50%;
-    transform: translateY(-50%) scale(0.8);
-    width: 400px;
-    background: white;
-    border: 3px solid #842e60;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    z-index: 31;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-#crestron-popup::before {
-    content: '';
-    position: absolute;
-    left: -12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-right: 12px solid #842e60;
-}
-
-#crestron-popup.open {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-    pointer-events: auto;
-}
-
-@media (max-width: 1200px) {
-    #crestron-popup {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        width: 90%;
-        max-width: 400px;
-    }
-
-    #crestron-popup::before {
-        display: none;
-    }
-
-    #crestron-popup.open {
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-/* =================================================================
-   LOUDSPEAKER BADGE & POPUP
-   ================================================================= */
-
-.inbetriebnahme-wrapper {
-    position: relative;
-}
-
-#loudspeaker-badge {
-    position: absolute;
-    right: -160px;
-    top: 0;
-    width: 120px;
-    height: 120px;
-    cursor: pointer;
-    z-index: 30;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border-radius: 50%;
-}
-
-#loudspeaker-badge img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    display: block;
-}
-
-#loudspeaker-badge svg {
-    width: 64px;
-    height: 64px;
-    color: #842e60;
-}
-
-#loudspeaker-badge.wiggling {
-    animation: badgeWiggle 5s ease-in-out infinite;
-}
-
-@media (max-width: 768px) {
-    #loudspeaker-badge {
-        position: static;
-        display: inline-flex;
-        width: 80px;
-        height: 80px;
-        margin-left: 12px;
-        vertical-align: middle;
-    }
-
-    #loudspeaker-badge svg {
-        width: 48px;
-        height: 48px;
-    }
-}
-
-#loudspeaker-popup {
-    position: absolute;
-    right: 120px;
-    top: 50%;
-    transform: translateY(-50%) scale(0.8);
-    width: 400px;
-    background: white;
-    border: 3px solid #59d49b;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-    z-index: 31;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-#loudspeaker-popup::before {
-    content: '';
-    position: absolute;
-    right: -12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-left: 12px solid #59d49b;
-}
-
-#loudspeaker-popup.open {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-    pointer-events: auto;
-}
-
-@media (max-width: 1200px) {
-    #loudspeaker-popup {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
-        width: 90%;
-        max-width: 400px;
-    }
-
-    #loudspeaker-popup::before {
-        display: none;
-    }
-
-    #loudspeaker-popup.open {
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-
-/* =================================================================
    SECTION SEPARATOR
    Subtle horizontal rule between major sections
    ================================================================= */
@@ -851,7 +509,7 @@ header {
 }
 
 .kompetenz-toggle.active::before {
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
 }
 
 /* Hidden state for expandable content */

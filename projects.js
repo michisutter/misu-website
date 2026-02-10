@@ -104,9 +104,9 @@ const projects = [
         title: "Pfahlbaumuseum Unteruhldingen",
         image: "assets/img/projects/project-pfahlbaumuseum.avif",
         description: `Für das Pfahlbaumuseum Unteruhldingen wurde ein Erlebnisrundgang durch drei Räume mit mehrsprachigen Shows, 360°-Projektion sowie Show- und Lichtsteuerung technisch erneuert und auf den aktuellen Stand gebracht.`,
-        more: `Die Arbeiten umfassten die Erneuerung und Aktualisierung der Technik sowie die Inbetriebnahme, Mediensteuerung, Konfiguration der Medienplayer und Teile der Fachplanung. Ziel war ein stabiler, zeitgemässer Betrieb und ein zuverlässig abgestimmtes Zusammenspiel aller Medienkomponenten.`,
+        more: `Die Arbeiten erfolgten im angestellten Verhältnis bei Tingo und umfassten die Erneuerung und Aktualisierung der Technik sowie die Inbetriebnahme, Mediensteuerung, Konfiguration der Medienplayer und Teile der Fachplanung. Ziel war ein stabiler, zeitgemässer Betrieb und ein zuverlässig abgestimmtes Zusammenspiel aller Medienkomponenten.`,
         tags: [
-            { text: "Partner: Museum Tech", link: "https://museum-tech.example" },
+            { text: "Partner: Tingo GmbH", link: "https://www.tingo.ch" },
             { text: "Kunde: Pfahlbaumuseum Unteruhldingen", link: "https://www.pfahlbauten.de" },
             "Leistungen: Mediensteuerung, Show- und Lichtsteuerung, Inbetriebnahme, Medienplayer-Konfiguration"
         ]

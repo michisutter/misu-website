@@ -1,70 +1,8 @@
-// === Preload project images (returns a Promise).
-// Preloads up to `count` images (default: all). Resolves early on timeout.
-function preloadProjectImages(count = Infinity, timeoutMs = 3000) {
-    return new Promise((resolve) => {
-        if (!window.projects || !Array.isArray(window.projects)) return resolve([]);
-        const list = window.projects.slice(0, count === Infinity ? window.projects.length : count);
-        const urls = list.map(p => p.image).filter(Boolean);
-        if (urls.length === 0) return resolve([]);
-
-        const loaders = urls.map(src => new Promise(res => {
-            const img = new Image();
-            img.onload = () => res({ src, status: 'ok' });
-            img.onerror = () => res({ src, status: 'error' });
-            img.src = src;
-        }));
-
-        const all = Promise.all(loaders);
-        const timer = new Promise(res => setTimeout(res, timeoutMs, 'timeout'));
-
-        Promise.race([all, timer]).then(result => {
-            // If timer won, still resolve (we don't want to block); otherwise resolve when done.
-            resolve(urls);
-        }).catch(() => resolve(urls));
-    });
-}
-
-// Simplified deferred loads - just swap network images
-let __deferredStarted = false;
-function startDeferredLoads() {
-    if (__deferredStarted) return;
-    __deferredStarted = true;
-
-    // Swap network partner images (data-src -> src)
-    try {
-        const deferredImgs = document.querySelectorAll('img[data-src]');
-        deferredImgs.forEach(img => {
-            const src = img.getAttribute('data-src');
-            if (src) {
-                img.setAttribute('src', src);
-                img.setAttribute('loading', 'lazy');
-                img.setAttribute('decoding', 'async');
-                img.removeAttribute('data-src');
-            }
-        });
-    } catch (e) {
-        // ignore
-    }
-}
-
+// Build project stack cards once DOM is ready
 window.addEventListener('DOMContentLoaded', () => {
-    // Build projects stack immediately - images will lazy load as they scroll into view
     if (typeof buildProjectsStack === 'function') {
         buildProjectsStack();
     }
-
-    // Install one-time interaction listeners for network partner images
-    const events = ['scroll', 'wheel', 'touchstart', 'keydown'];
-    const handler = (e) => {
-        startDeferredLoads();
-        events.forEach(ev => window.removeEventListener(ev, handler, { passive: true }));
-        clearTimeout(fallbackTimer);
-    };
-
-    events.forEach(ev => window.addEventListener(ev, handler, { passive: true }));
-
-    // Fallback: if no interaction within 3s, start loads
-    const fallbackTimer = setTimeout(() => startDeferredLoads(), 3000);
 });
 
 // ============================================
@@ -111,7 +49,7 @@ if (!isTouchDevice) {
         // Check if cursor is over clickable element
         const elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
         if (elementUnderCursor) {
-            const clickable = elementUnderCursor.closest('a, button, .project-card, .project-stack-card, .kompetenz-toggle, [onclick], #crestron-badge, #loudspeaker-badge, #scroll-circle, .carousel-item, .cursor-pointer, #prev-btn, #next-btn');
+            const clickable = elementUnderCursor.closest('a, button, .project-card, .project-stack-card, .kompetenz-toggle, [onclick], #scroll-circle, .carousel-item, .cursor-pointer, #prev-btn, #next-btn');
             if (clickable) {
                 customCursor.classList.add('cursor-hover');
             } else {
@@ -575,16 +513,6 @@ document.addEventListener('keydown', (e) => {
             datenschutzModal.classList.add('hidden');
             unlockScroll();
         }
-        // Crestron badge popup
-        if (typeof isPopupOpen !== 'undefined' && isPopupOpen && crestronPopup && crestronPopup.classList.contains('open')) {
-            isPopupOpen = false;
-            crestronPopup.classList.remove('open');
-        }
-        // Loudspeaker badge popup
-        if (typeof isLoudspeakerPopupOpen !== 'undefined' && isLoudspeakerPopupOpen && loudspeakerPopup && loudspeakerPopup.classList.contains('open')) {
-            isLoudspeakerPopupOpen = false;
-            loudspeakerPopup.classList.remove('open');
-        }
     }
 });
 
@@ -817,168 +745,6 @@ function setupKompetenzenLayout() {
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', setupKompetenzenLayout);
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', setupKompetenzenLayout);
-
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', setupKompetenzenLayout);
-
-// Crestron Badge - Position in Programmierung section
-const crestronBadge = document.getElementById('crestron-badge');
-const crestronPopup = document.getElementById('crestron-popup');
-const closeCrestronPopup = document.getElementById('close-crestron-popup');
-let isPopupOpen = false;
-
-// Ensure element is visible in viewport when opened
-function ensureInView(el) {
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    if (rect.top < 0 || rect.bottom > window.innerHeight) {
-        const target = window.scrollY + rect.top - (window.innerHeight / 2) + (rect.height / 2);
-        window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
-    }
-}
-
-// Find the Programmierung wrapper and move badge and popup into it
-const programmierungWrapper = document.querySelector('.programmierung-wrapper');
-if (programmierungWrapper && crestronBadge) {
-    // Insert badge at the beginning of the wrapper (before the h3)
-    programmierungWrapper.insertBefore(crestronBadge, programmierungWrapper.firstChild);
-    // Also append popup to wrapper so it's positioned relative to it
-    if (crestronPopup) {
-        programmierungWrapper.appendChild(crestronPopup);
-    }
-}
-
-// Find the Programmierung section (4th kompetenz-item) to monitor scrolling
-const programmierungSection = document.querySelectorAll('.kompetenz-item')[3]; // Index 3 = 4th item
-
-if (programmierungSection) {
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Start wiggling animation when section comes into view
-                crestronBadge.classList.add('wiggling');
-            } else {
-                // Stop wiggling when out of view
-                crestronBadge.classList.remove('wiggling');
-                // Close popup when scrolling away from section
-                if (isPopupOpen) {
-                    isPopupOpen = false;
-                    crestronPopup.classList.remove('open');
-                }
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    sectionObserver.observe(programmierungSection);
-}
-
-// Toggle popup on badge click
-crestronBadge.addEventListener('click', () => {
-    isPopupOpen = !isPopupOpen;
-
-    if (isPopupOpen) {
-        crestronPopup.classList.add('open');
-        // Make sure popup is visible in viewport
-        ensureInView(crestronPopup);
-    } else {
-        crestronPopup.classList.remove('open');
-    }
-});
-
-// Close popup button
-closeCrestronPopup.addEventListener('click', (e) => {
-    e.stopPropagation();
-    isPopupOpen = false;
-    crestronPopup.classList.remove('open');
-});
-
-// Close popup when clicking outside
-document.addEventListener('click', (e) => {
-    if (isPopupOpen &&
-        !crestronPopup.contains(e.target) &&
-        !crestronBadge.contains(e.target)) {
-        isPopupOpen = false;
-        crestronPopup.classList.remove('open');
-    }
-});
-
-// Loudspeaker Badge - Position in Inbetriebnahme section
-const loudspeakerBadge = document.getElementById('loudspeaker-badge');
-const loudspeakerPopup = document.getElementById('loudspeaker-popup');
-const closeLoudspeakerPopup = document.getElementById('close-loudspeaker-popup');
-let isLoudspeakerPopupOpen = false;
-
-// Find the Inbetriebnahme wrapper and move badge and popup into it
-const inbetriebnahmeWrapper = document.querySelector('.inbetriebnahme-wrapper');
-if (inbetriebnahmeWrapper && loudspeakerBadge) {
-    // Append badge after the h3
-    inbetriebnahmeWrapper.appendChild(loudspeakerBadge);
-    // Also append popup to wrapper so it's positioned relative to it
-    if (loudspeakerPopup) {
-        inbetriebnahmeWrapper.appendChild(loudspeakerPopup);
-    }
-}
-
-// Find the Inbetriebnahme section (3rd kompetenz-item) to monitor scrolling
-const inbetriebnahmeSection = document.querySelectorAll('.kompetenz-item')[2]; // Index 2 = 3rd item
-
-if (inbetriebnahmeSection) {
-    const loudspeakerObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Start wiggling animation when section comes into view
-                loudspeakerBadge.classList.add('wiggling');
-            } else {
-                // Stop wiggling when out of view
-                loudspeakerBadge.classList.remove('wiggling');
-                // Close popup when scrolling away from section
-                if (isLoudspeakerPopupOpen) {
-                    isLoudspeakerPopupOpen = false;
-                    loudspeakerPopup.classList.remove('open');
-                }
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    loudspeakerObserver.observe(inbetriebnahmeSection);
-}
-
-// Toggle popup on badge click
-loudspeakerBadge.addEventListener('click', () => {
-    isLoudspeakerPopupOpen = !isLoudspeakerPopupOpen;
-
-    if (isLoudspeakerPopupOpen) {
-        loudspeakerPopup.classList.add('open');
-        // Make sure popup is visible in viewport
-        ensureInView(loudspeakerPopup);
-    } else {
-        loudspeakerPopup.classList.remove('open');
-    }
-});
-
-// Close popup button
-closeLoudspeakerPopup.addEventListener('click', (e) => {
-    e.stopPropagation();
-    isLoudspeakerPopupOpen = false;
-    loudspeakerPopup.classList.remove('open');
-});
-
-// Close popup when clicking outside
-document.addEventListener('click', (e) => {
-    if (isLoudspeakerPopupOpen &&
-        !loudspeakerPopup.contains(e.target) &&
-        !loudspeakerBadge.contains(e.target)) {
-        isLoudspeakerPopupOpen = false;
-        loudspeakerPopup.classList.remove('open');
-    }
-});
-
 // ============================================
 // SCROLL TRACKING - Section View Analytics
 // ============================================
@@ -996,8 +762,6 @@ if (typeof gtag !== 'undefined') {
                     'event_category': 'engagement',
                     'event_label': sectionId
                 });
-
-                console.log('Section viewed:', sectionId); // For debugging
             }
         });
     }, {
@@ -1031,7 +795,6 @@ if (typeof gtag !== 'undefined') {
                     'percent_scrolled': mark,
                     'event_category': 'engagement'
                 });
-                console.log('Scroll depth:', mark + '%');
             }
         });
     }), { passive: true });
