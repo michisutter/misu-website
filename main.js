@@ -335,7 +335,7 @@ if (typeof projects !== 'undefined' && carousel && modal && modalContent && clos
         projectCard.className = 'w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3';
         projectCard.innerHTML = `
         <div class="cursor-pointer group">
-            <div class="relative aspect-square overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+            <div class="relative aspect-square overflow-hidden">
                  <img src="${project.image}" alt="${project.title}" loading="lazy" decoding="async" width="600" height="600"
                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
@@ -708,7 +708,7 @@ function setupKompetenzenLayout() {
             cards.forEach(card => container.appendChild(card));
         } else {
             // Desktop: create two-column layout
-            container.className = 'flex gap-20 items-start';
+            container.className = 'flex gap-8 items-start';
             container.innerHTML = '';
 
             // Create left and right columns
